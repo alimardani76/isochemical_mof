@@ -1,0 +1,15 @@
+metric,value
+frozen_primary_pairs,11072.0
+complete_primary_outcome_pairs,11072.0
+incomplete_primary_outcome_pairs,0.0
+median_delta_q_mmol_g,0.5835544999999991
+bootstrap_95ci_low_median_delta_q_mmol_g,0.5545650000000002
+bootstrap_95ci_high_median_delta_q_mmol_g,0.6149215000000003
+mean_delta_q_mmol_g,2.4274682388005777
+positive_effect_fraction,0.705021676300578
+zero_effect_fraction,0.0
+negative_effect_fraction,0.29497832369942195
+median_symmetric_relative_effect,0.048960753371872605
+mean_symmetric_relative_effect,0.22693461499708406
+positive_log_ratio_pairs,11050.0
+median_log_uptake_ratio_positive_pairs,0.04879241326578845

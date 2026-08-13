@@ -1,0 +1,6 @@
+metric,reference_value,observed_value,matches_project7_source_release
+geometry_rows,521316,521316,True
+arc_mof_geometry_rows,279019,279019,True
+archive_cif_files,242517,242517,True
+adsorption_union_overlap,279010,279010,True
+adsorption_union_outside_registry,600,600,True

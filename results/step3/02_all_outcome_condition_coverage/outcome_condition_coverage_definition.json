@@ -1,0 +1,34 @@
+{
+  "definition_version": "all_outcome_condition_pair_coverage_v1",
+  "frozen_pair_source": "Step 2 results\\03_geometry_pairs\\primary_geometry_pairs.parquet",
+  "frozen_primary_pairs": 11072,
+  "frozen_pair_members": 22144,
+  "adsorption_sources": [
+    "methane.csv",
+    "landfill-CH4.csv",
+    "landfill-CO2.csv",
+    "methane_purification-CH4.csv",
+    "methane_purification-CO2.csv",
+    "post_comb_vsa-CO2.csv",
+    "post_comb_vsa-N2.csv",
+    "pre_comb_4040-CO2.csv",
+    "pre_comb_4040-H2.csv"
+  ],
+  "process_source": "overall_process.csv",
+  "columns_read": {
+    "adsorption": [
+      "filename",
+      "T/K",
+      "p/bar"
+    ],
+    "process": [
+      "filename",
+      "process"
+    ]
+  },
+  "id_canonicalization": "strip whitespace and repeated terminal .cif, _repeat, _sqe; preserve case and internal text",
+  "outcome_values_read": false,
+  "endpoint_selected": false,
+  "pair_membership_modified": false,
+  "purpose": "freeze endpoint choice from scientific relevance and frozen-pair support before inspecting any adsorption/process values"
+}

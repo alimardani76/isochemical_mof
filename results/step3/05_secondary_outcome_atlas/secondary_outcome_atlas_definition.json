@@ -1,0 +1,75 @@
+{
+  "definition_version": "secondary_outcome_atlas_v1",
+  "analysis_status": "secondary_exploratory",
+  "frozen_pair_orientation": "driver_low_mof_id -> driver_high_mof_id",
+  "pair_effect": "value_geometry_high - value_geometry_low",
+  "symmetric_relative_effect": "2*(high-low)/(abs(high)+abs(low)); 0 when both are zero",
+  "adsorption_sources": {
+    "methane.csv": {
+      "context": "methane-storage",
+      "guest": "CH4"
+    },
+    "landfill-CH4.csv": {
+      "context": "landfill-gas",
+      "guest": "CH4"
+    },
+    "landfill-CO2.csv": {
+      "context": "landfill-gas",
+      "guest": "CO2"
+    },
+    "methane_purification-CH4.csv": {
+      "context": "natural-gas-purification",
+      "guest": "CH4"
+    },
+    "methane_purification-CO2.csv": {
+      "context": "natural-gas-purification",
+      "guest": "CO2"
+    },
+    "post_comb_vsa-CO2.csv": {
+      "context": "post-combustion-vsa",
+      "guest": "CO2"
+    },
+    "post_comb_vsa-N2.csv": {
+      "context": "post-combustion-vsa",
+      "guest": "N2"
+    },
+    "pre_comb_4040-CO2.csv": {
+      "context": "pre-combustion-40-40",
+      "guest": "CO2"
+    },
+    "pre_comb_4040-H2.csv": {
+      "context": "pre-combustion-40-40",
+      "guest": "H2"
+    }
+  },
+  "adsorption_metrics": {
+    "mmol/g": "mmol/g",
+    "v/v": "v/v",
+    "wt%": "wt%",
+    "hoa/kcal/mol": "kcal/mol",
+    "S(g1)": "dimensionless"
+  },
+  "process_source": "overall_process.csv",
+  "process_metrics": {
+    "mmol/g_uptake": "mmol/g",
+    "mmol/g_working_capacity": "mmol/g",
+    "v/v_uptake": "v/v",
+    "v/v_working_capacity": "v/v",
+    "wt%_uptake": "wt%",
+    "wt%_working_capacity": "wt%",
+    "selectivity": "dimensionless",
+    "purity": "dimensionless",
+    "ssp": "source-defined",
+    "afm": "source-defined"
+  },
+  "primary_endpoint_preserved": {
+    "source": "methane.csv",
+    "temperature_K": 298.0,
+    "pressure_bar": 65.0,
+    "metric": "mmol/g"
+  },
+  "no_secondary_endpoint_promoted_to_primary": true,
+  "pair_membership_modified": false,
+  "pair_orientation_modified": false,
+  "geometry_threshold_modified": false
+}

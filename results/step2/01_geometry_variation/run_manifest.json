@@ -1,0 +1,28 @@
+{
+  "script": "01_measure_geometry_variation.py",
+  "script_version": "1.0.0",
+  "definition_version": "within_family_geometry_variation_v1",
+  "started_at_utc": "2026-08-12T14:31:19.723678+00:00",
+  "completed_at_utc": "2026-08-12T14:31:46.008451+00:00",
+  "stage14_frameworks_sha256": "b89fccc691600b8c3f759a38eb8f7e0f8e87393ef005e149c9e54cf7fd14d7bf",
+  "source_stage14_definition_version": "recorded_topology_dimensionality_architecture_v1",
+  "stage14_validated_only": true,
+  "geometry_descriptors": [
+    "UC_volume",
+    "Density",
+    "ASA",
+    "AVA",
+    "AVAf",
+    "POAVA",
+    "POAVAf",
+    "Di",
+    "Df",
+    "Dif"
+  ],
+  "scientific_contrast_threshold_defined": false,
+  "pairs_constructed": false,
+  "outcome_values_read": false,
+  "raw_directory_modified": false,
+  "completed_successfully": true,
+  "output_directory": "Step 2 results\\01_geometry_variation"
+}

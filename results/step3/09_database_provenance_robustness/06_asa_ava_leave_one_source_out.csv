@@ -1,0 +1,3 @@
+population,median_delta_q_mmol_g,mean_delta_q_mmol_g,positive_effect_fraction,median_symmetric_relative_effect,excluded_source,source_kind,ASA_AVA_pairs_touching_source,pairs_retained,fraction_of_ASA_AVA_retained,median_change_vs_ASA_AVA_full_mmol_g
+ASA_AVA_exclude_DB0,10.097582000000001,9.262179430834859,0.967702620353443,0.9116835943679797,DB0,hypothetical,4328,1641,0.2749204221812699,8.380282000000001
+ASA_AVA_exclude_DB5,0.9842229999999992,1.4809654221138935,0.8329270994903611,0.09412995048019021,DB5,hypothetical,1456,4513,0.7560730440609817,-0.7330770000000011

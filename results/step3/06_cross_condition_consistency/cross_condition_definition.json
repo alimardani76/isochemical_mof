@@ -1,0 +1,28 @@
+{
+  "definition_version": "mmolg_cross_condition_consistency_v1",
+  "source": "Step 3 results\\05_secondary_outcome_atlas\\secondary_adsorption_pair_effects.parquet",
+  "metric": "mmol/g",
+  "raw_outcome_files_read": false,
+  "process_metrics_used": false,
+  "primary_endpoint": {
+    "source": "methane.csv",
+    "context": "methane-storage",
+    "guest": "CH4",
+    "temperature_K": 298.0,
+    "pressure_bar": 65.0,
+    "endpoint_id": "methane-storage|CH4|298K|65bar"
+  },
+  "concordance_metrics": [
+    "Spearman rho",
+    "exact sign agreement",
+    "positive fractions",
+    "negative-to-positive fraction",
+    "positive-to-negative fraction"
+  ],
+  "low_high_transition_rule": "within each source+guest series having exactly two pressures, lower pressure is compared with higher pressure using the same frozen pair orientation",
+  "pair_membership_modified": false,
+  "pair_orientation_modified": false,
+  "geometry_threshold_modified": false,
+  "primary_endpoint_modified": false,
+  "secondary_endpoint_promoted_to_primary": false
+}

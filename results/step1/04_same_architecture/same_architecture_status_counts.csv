@@ -1,0 +1,6 @@
+architecture_status,frameworks
+validated_same_architecture,44511
+ambiguous_missing_topology,2429
+architecture_singleton,1406
+ambiguous_missing_dimensionality,19
+ambiguous_missing_topology_and_dimensionality,1

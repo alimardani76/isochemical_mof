@@ -1,0 +1,23 @@
+{
+  "definition_version": "recorded_topology_dimensionality_architecture_v1",
+  "scientific_target": "refine Stage 1.3 same-recorded-chemistry candidate families into a simple same-recorded-architecture baseline",
+  "chemistry_source": "Stage 1.3 chemistry_group_id is accepted as the chemistry grouping and is not recomputed in Stage 1.4",
+  "architecture_key": [
+    "Stage 1.3 chemistry_group_id",
+    "recorded topology",
+    "recorded dimensionality"
+  ],
+  "matching_rule": "two frameworks are in the same Stage 1.4 architecture group only when chemistry_group_id, topology, and dimensionality all match exactly",
+  "missing_label_policy": "missing topology or dimensionality is ambiguous and is excluded from validated same-architecture groups",
+  "geometry_policy": "measured geometry is excluded from the architecture key and is evaluated only after architecture groups are defined",
+  "bond_policy": "no bond connectivity is inferred",
+  "topology_policy": "recorded topology is used as a practical architecture label; it is not claimed to be perfect ground truth",
+  "pair_policy": "no framework pairs are constructed in Stage 1.4",
+  "outcome_policy": "no adsorption or process outcomes are read",
+  "known_limitations": [
+    "Stage 1.3 chemistry is a recorded-chemistry candidate definition, not proof of molecular identity",
+    "recorded topology may be missing or imperfect",
+    "same topology plus dimensionality is a practical architecture proxy, not an atom-level graph proof",
+    "missing architecture labels are conservatively treated as ambiguous"
+  ]
+}

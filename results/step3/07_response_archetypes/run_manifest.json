@@ -1,0 +1,15 @@
+{
+  "script": "09_analyze_response_archetypes.py",
+  "script_version": "1.0.0",
+  "definition_version": "low_high_pressure_response_archetypes_v1",
+  "completed_at_utc": "2026-08-13T03:29:29.343585+00:00",
+  "completed_successfully": true,
+  "raw_outcome_files_read": false,
+  "frozen_pairs": 11072,
+  "low_pressure_endpoint_count": 9,
+  "high_pressure_endpoint_count": 9,
+  "pair_membership_modified": false,
+  "pair_orientation_modified": false,
+  "geometry_threshold_modified": false,
+  "primary_endpoint_modified": false
+}

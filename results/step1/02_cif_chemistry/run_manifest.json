@@ -1,0 +1,32 @@
+{
+  "script": "02_extract_cif_chemistry.py",
+  "script_version": "1.0.0",
+  "mode": "full",
+  "sample_seed": null,
+  "target_count": 242363,
+  "target_sha256": "d6262fdeadf8705d9f361df9376995aea59dd52f92d86cce687ee6dfa613f47b",
+  "registry_sha256": "c3fe1c27ad611b08775af7de258d3218972a196ad87ecea7fdc9069360e5caee",
+  "archive_name": "ARCMOF_20241004.tar.gz",
+  "archive_reference_cif_count": 242517,
+  "workers": 6,
+  "checkpoint_size": 2000,
+  "package_versions": {
+    "numpy": "1.26.4",
+    "pandas": "2.3.2",
+    "pyarrow": "21.0.0",
+    "pymatgen": "installed"
+  },
+  "started_at_utc": "2026-08-12T07:48:58.189493+00:00",
+  "completed_at_utc": "2026-08-12T08:25:05.217000+00:00",
+  "outcome_values_read": false,
+  "pairs_constructed": false,
+  "same_chemistry_defined": false,
+  "bond_connectivity_inferred": false,
+  "framework_node_metals_identified": false,
+  "raw_archive_extracted": false,
+  "raw_directory_modified": false,
+  "completed_successfully": true,
+  "metal_definition": "all parsed elements for which pymatgen Element.is_metal is true; structural role is intentionally unresolved",
+  "structure_selection": "first parsed structure; multiplicity explicitly flagged",
+  "output_directory": "Step 1 results\\02_cif_chemistry"
+}

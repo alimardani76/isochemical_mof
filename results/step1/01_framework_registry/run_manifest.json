@@ -1,0 +1,12 @@
+{
+  "script": "01_build_framework_registry.py",
+  "script_version": "1.0.0",
+  "registry_grain": "one row per canonical ARC-MOF geometry identifier",
+  "canonicalization": "strip whitespace and repeated terminal .cif, _repeat, _sqe; preserve case",
+  "outcome_values_read": false,
+  "pairs_constructed": false,
+  "eligibility_defined": false,
+  "raw_directory_modified": false,
+  "completed_successfully": true,
+  "output_directory": "Step 1 results\\01_framework_registry"
+}

@@ -1,0 +1,32 @@
+{
+  "definition_version": "arcmof_database_provenance_robustness_v1",
+  "analysis_status": "final secondary database-provenance robustness",
+  "provenance_source": "DBx- filename/framework identifier prefix as defined in ARC-MOF Table 1",
+  "experimental_sources": [
+    "DB12",
+    "DB14"
+  ],
+  "hypothetical_sources": [
+    "DB0",
+    "DB1",
+    "DB10",
+    "DB13",
+    "DB15",
+    "DB2",
+    "DB3",
+    "DB4",
+    "DB5",
+    "DB6",
+    "DB7",
+    "DB8"
+  ],
+  "leave_one_source_rule": "remove every frozen pair for which either member belongs to the excluded DB source",
+  "major_source_min_touched_pairs": 100,
+  "asa_ava_focus": "secondary stress test because Step 3.8 showed the 10% pooled primary signal is concentrated in ASA- and AVA-driven pairs",
+  "raw_outcome_files_read": false,
+  "pair_membership_modified": false,
+  "pair_orientation_modified": false,
+  "geometry_threshold_modified": false,
+  "primary_endpoint_modified": false,
+  "primary_estimand_modified": false
+}

@@ -1,0 +1,75 @@
+{
+  "definition_version": "primary_adsorption_endpoint_v1",
+  "frozen_before_outcome_values": true,
+  "primary_endpoint": {
+    "source": "methane.csv",
+    "guest": "CH4",
+    "temperature_K": 298.0,
+    "pressure_bar": 65.0,
+    "uptake_column": "mmol/g",
+    "uptake_unit": "mmol/g"
+  },
+  "scientific_rationale": "high-pressure methane uptake is selected as the confirmatory geometry-dominant regime; endpoint choice was made before reading uptake values and not from observed effect size",
+  "pair_orientation": {
+    "rule": "use the already-frozen Step 2.3 driver descriptor; orient each pair from the lower driver-descriptor value to the higher value",
+    "uses_outcome_values": false
+  },
+  "primary_pair_effect": {
+    "name": "signed_absolute_uptake_difference",
+    "formula": "q_geometry_high - q_geometry_low",
+    "unit": "mmol/g"
+  },
+  "primary_population_summary": {
+    "estimator": "median",
+    "dependence_unit": "one frozen architecture family / primary pair",
+    "confidence_interval": "nonparametric percentile bootstrap",
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 17,
+    "confidence_level": 0.95
+  },
+  "supporting_same_endpoint_metrics": [
+    "mean signed absolute uptake difference",
+    "fraction of pairs with positive signed uptake difference",
+    "signed symmetric relative difference: 2*(q_high-q_low)/(abs(q_high)+abs(q_low)); 0 when both are zero",
+    "signed log uptake ratio log(q_high/q_low), reported only when both values are strictly positive"
+  ],
+  "prespecified_geometry_sensitivity_tiers": [
+    {
+      "name": "primary",
+      "minimum_max_pore_fractional_difference": 0.1
+    },
+    {
+      "name": "stronger_20pct",
+      "minimum_max_pore_fractional_difference": 0.2
+    },
+    {
+      "name": "stronger_30pct",
+      "minimum_max_pore_fractional_difference": 0.3
+    }
+  ],
+  "secondary_program": {
+    "status": "secondary_not_confirmatory",
+    "conditions": "all remaining adsorption gas/T/p conditions including CH4 at 5.8 bar",
+    "uptake_bases": [
+      "v/v",
+      "wt%"
+    ],
+    "energetic_endpoint": "hoa/kcal/mol",
+    "process_endpoints": [
+      "mmol/g_uptake",
+      "mmol/g_working_capacity",
+      "v/v_uptake",
+      "v/v_working_capacity",
+      "wt%_uptake",
+      "wt%_working_capacity",
+      "selectivity",
+      "purity",
+      "ssp",
+      "afm"
+    ]
+  },
+  "missing_data_rule": "no imputation; a pair contributes to an endpoint only when both frozen members have observed values for that endpoint",
+  "endpoint_switching_after_value_access_allowed": false,
+  "pair_membership_modification_allowed": false,
+  "geometry_threshold_modification_allowed": false
+}

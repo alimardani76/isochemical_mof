@@ -1,0 +1,30 @@
+{
+  "definition_version": "primary_ch4_298K_65bar_mmolg_v1",
+  "primary_endpoint": {
+    "source": "methane.csv",
+    "temperature_K": 298.0,
+    "pressure_bar": 65.0,
+    "outcome_column": "mmol/g"
+  },
+  "outcome_columns_read": [
+    "filename",
+    "T/K",
+    "p/bar",
+    "mmol/g"
+  ],
+  "other_outcome_tables_read": false,
+  "other_outcome_columns_read": false,
+  "pair_orientation": "driver_low_mof_id -> driver_high_mof_id from frozen Step 2.3 pairs",
+  "primary_effect": "q_geometry_high - q_geometry_low",
+  "primary_estimator": "median",
+  "bootstrap": {
+    "method": "nonparametric resampling of whole frozen families",
+    "replicates": 10000,
+    "seed": 17,
+    "interval": "percentile 95%"
+  },
+  "missing_data_rule": "no imputation; pair included only when both primary outcome values exist",
+  "pair_membership_modified": false,
+  "geometry_threshold_modified": false,
+  "primary_endpoint_modified": false
+}

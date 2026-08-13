@@ -1,0 +1,9 @@
+metric,value
+validated_stage14_frameworks,44511.0
+geometry_complete_validated_frameworks,44511.0
+validated_architecture_groups_with_geometry,19068.0
+groups_with_geometry_variation,18390.0
+groups_without_geometry_variation,678.0
+frameworks_in_geometry_varying_groups,41796.0
+median_varying_descriptors_per_varying_group,10.0
+median_max_fractional_span_per_varying_group,0.13534621291011892

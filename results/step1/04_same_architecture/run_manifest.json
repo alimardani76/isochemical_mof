@@ -1,0 +1,30 @@
+{
+  "script": "04_define_same_architecture.py",
+  "script_version": "1.0.0",
+  "definition_version": "recorded_topology_dimensionality_architecture_v1",
+  "started_at_utc": "2026-08-12T14:01:40.873317+00:00",
+  "completed_at_utc": "2026-08-12T14:02:55.499502+00:00",
+  "registry_sha256": "c3fe1c27ad611b08775af7de258d3218972a196ad87ecea7fdc9069360e5caee",
+  "same_chemistry_frameworks_sha256": "46934eeed75f5fac07f80dd2f9d886bcb3df315fbbbe699dae2ede7c4e6fd3e6",
+  "source_registry_script_version": "1.0.0",
+  "source_stage13_script_version": "1.0.0",
+  "source_stage13_definition_version": "recorded_component_chemistry_v1",
+  "chemistry_frozen_from_stage13": true,
+  "architecture_key": [
+    "chemistry_group_id",
+    "topology",
+    "dimensionality"
+  ],
+  "topology_used_in_architecture_key": true,
+  "dimensionality_used_in_architecture_key": true,
+  "geometry_used_in_architecture_key": false,
+  "geometry_evaluated_after_architecture_grouping": true,
+  "cif_archive_read": false,
+  "bond_connectivity_inferred": false,
+  "crystalnn_used": false,
+  "outcome_values_read": false,
+  "pairs_constructed": false,
+  "raw_directory_modified": false,
+  "completed_successfully": true,
+  "output_directory": "Step 1 results\\04_same_architecture"
+}

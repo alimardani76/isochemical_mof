@@ -1,0 +1,28 @@
+{
+  "definition_version": "outcome_blind_primary_geometry_pairs_v1",
+  "primary_threshold": 0.1,
+  "sensitivity_thresholds": [
+    0.2,
+    0.3
+  ],
+  "pore_descriptors": [
+    "ASA",
+    "AVA",
+    "AVAf",
+    "POAVA",
+    "POAVAf",
+    "Di",
+    "Df",
+    "Dif"
+  ],
+  "eligible_family_rule": "Step 2.2 family has at least one pore descriptor with within-family fractional span >= 10%",
+  "pair_difference": "abs(x_i - x_j) / max(abs(x_i), abs(x_j)); zero when both are zero",
+  "pair_score": "maximum fractional difference across the eight pore descriptors",
+  "tie_break_1": "larger mean fractional difference across the eight pore descriptors",
+  "tie_break_2": "lexicographically smallest sorted pair of mof_id values",
+  "pairs_per_family": 1,
+  "unit_cell_volume_used": false,
+  "density_used": false,
+  "outcome_values_read": false,
+  "pair_selection_outcome_blind": true
+}

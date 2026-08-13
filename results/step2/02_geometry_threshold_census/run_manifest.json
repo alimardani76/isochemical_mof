@@ -1,0 +1,31 @@
+{
+  "script": "02_geometry_threshold_census.py",
+  "script_version": "1.0.0",
+  "definition_version": "geometry_threshold_census_v1",
+  "started_at_utc": "2026-08-12T14:36:45.081363+00:00",
+  "completed_at_utc": "2026-08-12T14:36:45.206723+00:00",
+  "step21_groups_sha256": "7f310f0f8ac2c8dda705bd4a2bcac1ffa53787565dc9cf4bdd114c01991e1804",
+  "source_step21_definition_version": "within_family_geometry_variation_v1",
+  "pore_descriptors": [
+    "ASA",
+    "AVA",
+    "AVAf",
+    "POAVA",
+    "POAVAf",
+    "Di",
+    "Df",
+    "Dif"
+  ],
+  "candidate_thresholds": [
+    0.05,
+    0.1,
+    0.2,
+    0.3
+  ],
+  "final_threshold_selected": false,
+  "pairs_constructed": false,
+  "outcome_values_read": false,
+  "raw_directory_modified": false,
+  "completed_successfully": true,
+  "output_directory": "Step 2 results\\02_geometry_threshold_census"
+}

@@ -1,0 +1,64 @@
+{
+  "definition_version": "recorded_component_chemistry_v1",
+  "scientific_target": "candidate families with the same recorded chemical representation while topology and measured geometry remain free to vary",
+  "signature_components": [
+    "canonical_whole_cif_composition_json",
+    "canonical_metal_fraction_json",
+    "metal_cluster_key",
+    "linker_cluster_key",
+    "functional_cluster_key"
+  ],
+  "composition_normalization": {
+    "scope": "all elements in the parsed CIF structure",
+    "cell_scale_invariant": true,
+    "decimal_places": 12,
+    "element_order_invariant": true
+  },
+  "required_evidence": [
+    "successful CIF parse",
+    "successful raw-CIF audit and raw/parsed element-set agreement",
+    "exactly one parsed structure",
+    "no disordered or partial-occupancy sites",
+    "at least one metal element",
+    "complete RAC descriptors",
+    "valid nonnegative metal, linker, and functional cluster labels"
+  ],
+  "excluded_from_signature": {
+    "geometry": [
+      "UC_volume",
+      "Density",
+      "ASA",
+      "AVA",
+      "AVAf",
+      "POAVA",
+      "POAVAf",
+      "Di",
+      "Df",
+      "Dif",
+      "geo_cluster"
+    ],
+    "structure_context": [
+      "topology",
+      "dimensionality"
+    ],
+    "simulation_electrostatics": [
+      "partial charges",
+      "occupancy-weighted charge sum"
+    ],
+    "outcomes": [
+      "adsorption values",
+      "process values"
+    ]
+  },
+  "negative_cluster_policy": "ARC-MOF negative cluster labels mean unclustered/assumed unique; they never place two frameworks in one chemistry family",
+  "mixed_metal_policy": "mixed-metal frameworks are not automatically excluded; they require the same normalized whole-CIF and metal-element compositions",
+  "oxidation_state_policy": "oxidation state is unavailable in Stage 1.2 and is not inferred",
+  "pair_policy": "family membership is not pair acceptance; connectivity and linker/node identity must be checked later for proposed comparisons",
+  "known_limitations": [
+    "whole-CIF composition is not a framework-only composition",
+    "RAC/DBSCAN cluster agreement is similarity evidence, not identity proof",
+    "bond connectivity and framework membership are not inferred here",
+    "oxidation states are unavailable",
+    "no geometry contrast or adsorption effect is accepted at this stage"
+  ]
+}

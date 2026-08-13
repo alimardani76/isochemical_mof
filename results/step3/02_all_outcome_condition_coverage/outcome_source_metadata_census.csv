@@ -1,0 +1,11 @@
+source,source_type,rows_read,unique_source_ids,frozen_member_ids_present,unique_conditions_or_processes,duplicate_id_condition_rows
+landfill-CH4.csv,adsorption,559220,279610,22144,2,0
+landfill-CO2.csv,adsorption,559220,279610,22144,2,0
+methane.csv,adsorption,559220,279610,22144,2,0
+methane_purification-CH4.csv,adsorption,559219,279610,22144,2,0
+methane_purification-CO2.csv,adsorption,559219,279610,22144,2,0
+post_comb_vsa-CO2.csv,adsorption,559220,279610,22144,2,0
+post_comb_vsa-N2.csv,adsorption,559220,279610,22144,2,0
+pre_comb_4040-CO2.csv,adsorption,559095,279610,22144,2,0
+pre_comb_4040-H2.csv,adsorption,559095,279610,22144,2,0
+overall_process.csv,process,1395025,279005,22080,5,0

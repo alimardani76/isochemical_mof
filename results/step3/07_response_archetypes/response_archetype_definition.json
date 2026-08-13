@@ -1,0 +1,41 @@
+{
+  "definition_version": "low_high_pressure_response_archetypes_v1",
+  "source_pair_endpoint_matrix": "Step 3 results\\06_cross_condition_consistency\\mmolg_pair_endpoint_matrix.parquet",
+  "source_endpoint_metadata": "Step 3 results\\06_cross_condition_consistency\\mmolg_endpoint_metadata.csv",
+  "raw_outcome_files_read": false,
+  "low_pressure_endpoints": [
+    "landfill-gas|CH4|338K|0.01bar",
+    "landfill-gas|CO2|338K|0.26bar",
+    "methane-storage|CH4|298K|5.8bar",
+    "natural-gas-purification|CH4|298K|0.9bar",
+    "natural-gas-purification|CO2|298K|0.1bar",
+    "post-combustion-vsa|CO2|298K|0.015bar",
+    "post-combustion-vsa|N2|298K|0.075bar",
+    "pre-combustion-40-40|CO2|313K|0.4bar",
+    "pre-combustion-40-40|H2|313K|0.6bar"
+  ],
+  "high_pressure_endpoints": [
+    "landfill-gas|CH4|338K|4.4bar",
+    "landfill-gas|CO2|338K|3.2bar",
+    "methane-storage|CH4|298K|65bar",
+    "natural-gas-purification|CH4|298K|9bar",
+    "natural-gas-purification|CO2|298K|1bar",
+    "post-combustion-vsa|CO2|298K|0.15bar",
+    "post-combustion-vsa|N2|298K|0.75bar",
+    "pre-combustion-40-40|CO2|313K|16bar",
+    "pre-combustion-40-40|H2|313K|24bar"
+  ],
+  "majority_rule": "strictly more than half of observed endpoint effects are positive",
+  "archetypes": {
+    "positive_both": "majority positive at both low and high pressure",
+    "pressure_activated": "not majority positive at low pressure; majority positive at high pressure",
+    "pressure_suppressed": "majority positive at low pressure; not majority positive at high pressure",
+    "negative_both": "not majority positive at either pressure regime"
+  },
+  "activation_score": "positive_fraction_high_pressure - positive_fraction_low_pressure",
+  "exemplar_rule": "within each archetype, top 25 by absolute activation score; then larger frozen geometry contrast; then architecture_group_id",
+  "pair_membership_modified": false,
+  "pair_orientation_modified": false,
+  "geometry_threshold_modified": false,
+  "primary_endpoint_modified": false
+}

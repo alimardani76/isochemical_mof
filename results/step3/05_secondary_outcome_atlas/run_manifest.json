@@ -1,0 +1,16 @@
+{
+  "script": "06_analyze_secondary_outcomes.py",
+  "script_version": "1.0.0",
+  "definition_version": "secondary_outcome_atlas_v1",
+  "completed_at_utc": "2026-08-12T16:38:50.965618+00:00",
+  "completed_successfully": true,
+  "pair_source_sha256": "83d4d6f4d937b6d6c57cdea43121748450d27f1af76016d0232ce8e3f006bb75",
+  "primary_freeze_sha256": "805896ecbcaceda320482e199f1f8b80b1a812ea99b1ca2e5a442c94309113b6",
+  "primary_analysis_manifest_sha256": "d9fc42a9df0c2f5bb1aa77b7a404c34c45737083d6263461d82d3c9ad1c548f9",
+  "secondary_outcomes_read": true,
+  "primary_endpoint_modified": false,
+  "pair_membership_modified": false,
+  "pair_orientation_modified": false,
+  "geometry_threshold_modified": false,
+  "no_secondary_endpoint_promoted_to_primary": true
+}

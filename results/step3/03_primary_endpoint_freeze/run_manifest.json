@@ -1,0 +1,13 @@
+{
+  "completed_at_utc": "2026-08-12T16:07:46.246849+00:00",
+  "completed_successfully": true,
+  "definition_version": "primary_adsorption_endpoint_v1",
+  "outcome_values_read": false,
+  "primary_endpoint_frozen": true,
+  "primary_source": "methane.csv",
+  "primary_temperature_K": 298.0,
+  "primary_pressure_bar": 65.0,
+  "primary_uptake_column": "mmol/g",
+  "pair_membership_modified": false,
+  "geometry_threshold_modified": false
+}

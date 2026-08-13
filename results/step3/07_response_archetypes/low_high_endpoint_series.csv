@@ -1,0 +1,10 @@
+source,context,guest,temperature_K,low_endpoint_id,low_pressure_bar,high_endpoint_id,high_pressure_bar
+landfill-CH4.csv,landfill-gas,CH4,338.0,landfill-gas|CH4|338K|0.01bar,0.01,landfill-gas|CH4|338K|4.4bar,4.4
+landfill-CO2.csv,landfill-gas,CO2,338.0,landfill-gas|CO2|338K|0.26bar,0.26,landfill-gas|CO2|338K|3.2bar,3.2
+methane.csv,methane-storage,CH4,298.0,methane-storage|CH4|298K|5.8bar,5.8,methane-storage|CH4|298K|65bar,65.0
+methane_purification-CH4.csv,natural-gas-purification,CH4,298.0,natural-gas-purification|CH4|298K|0.9bar,0.9,natural-gas-purification|CH4|298K|9bar,9.0
+methane_purification-CO2.csv,natural-gas-purification,CO2,298.0,natural-gas-purification|CO2|298K|0.1bar,0.1,natural-gas-purification|CO2|298K|1bar,1.0
+post_comb_vsa-CO2.csv,post-combustion-vsa,CO2,298.0,post-combustion-vsa|CO2|298K|0.015bar,0.015,post-combustion-vsa|CO2|298K|0.15bar,0.15
+post_comb_vsa-N2.csv,post-combustion-vsa,N2,298.0,post-combustion-vsa|N2|298K|0.075bar,0.075,post-combustion-vsa|N2|298K|0.75bar,0.75
+pre_comb_4040-CO2.csv,pre-combustion-40-40,CO2,313.0,pre-combustion-40-40|CO2|313K|0.4bar,0.4,pre-combustion-40-40|CO2|313K|16bar,16.0
+pre_comb_4040-H2.csv,pre-combustion-40-40,H2,313.0,pre-combustion-40-40|H2|313K|0.6bar,0.6,pre-combustion-40-40|H2|313K|24bar,24.0

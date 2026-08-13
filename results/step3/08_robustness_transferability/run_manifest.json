@@ -1,0 +1,31 @@
+{
+  "script": "12_analyze_robustness_transferability.py",
+  "script_version": "1.0.0",
+  "definition_version": "dominant_context_robustness_v1",
+  "completed_at_utc": "2026-08-13T04:52:45.513375+00:00",
+  "completed_successfully": true,
+  "raw_outcome_files_read": false,
+  "source_primary_pairs": 11072,
+  "major_topologies_tested": [
+    "pcu",
+    "fsc",
+    "nbo",
+    "sra"
+  ],
+  "drivers_tested": [
+    "AVA",
+    "Df",
+    "ASA",
+    "AVAf",
+    "Di",
+    "Dif",
+    "POAVA",
+    "POAVAf"
+  ],
+  "bootstrap_replicates_for_aggressive_tests": 10000,
+  "pair_membership_modified": false,
+  "pair_orientation_modified": false,
+  "geometry_threshold_modified": false,
+  "primary_endpoint_modified": false,
+  "primary_estimand_modified": false
+}

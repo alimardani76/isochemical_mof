@@ -1,0 +1,27 @@
+{
+  "definition_version": "geometry_threshold_census_v1",
+  "input": "Step 2.1 validated architecture-group geometry variation table",
+  "pore_descriptors": [
+    "ASA",
+    "AVA",
+    "AVAf",
+    "POAVA",
+    "POAVAf",
+    "Di",
+    "Df",
+    "Dif"
+  ],
+  "candidate_thresholds": [
+    0.05,
+    0.1,
+    0.2,
+    0.3
+  ],
+  "eligibility_rule": "family meets a candidate threshold when at least one pore-geometry descriptor has within-family fractional span >= threshold",
+  "fractional_span_definition": "(family maximum - family minimum) / max(abs(minimum), abs(maximum))",
+  "unit_cell_volume_used": false,
+  "density_used": false,
+  "final_threshold_selected": false,
+  "pairs_constructed": false,
+  "outcome_values_read": false
+}

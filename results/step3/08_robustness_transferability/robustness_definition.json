@@ -1,0 +1,36 @@
+{
+  "definition_version": "dominant_context_robustness_v1",
+  "source": "Step 3 results\\04_primary_ch4_analysis\\primary_ch4_pair_effects.parquet",
+  "analysis_status": "secondary robustness analysis",
+  "major_topology_rule": "topologies with at least 100 frozen primary pairs",
+  "leave_one_topology_out": true,
+  "leave_one_driver_out": true,
+  "aggressive_topology_stress_test": "exclude pcu + fsc",
+  "aggressive_driver_stress_test": "exclude ASA + AVA",
+  "tier_stress_tests": [
+    "primary_10pct",
+    "stronger_20pct",
+    "stronger_30pct"
+  ],
+  "bootstrap": {
+    "applied_only_to": [
+      "exclude_pcu_fsc",
+      "exclude_ASA_AVA"
+    ],
+    "replicates": 10000,
+    "seed": 17,
+    "interval": "percentile 95%",
+    "role": "secondary/descriptive robustness interval; does not replace confirmatory CI"
+  },
+  "frozen_confirmatory_reference": {
+    "median_delta_q_mmol_g": 0.5835544999999991,
+    "bootstrap_95ci_low_median_delta_q_mmol_g": 0.5545650000000002,
+    "bootstrap_95ci_high_median_delta_q_mmol_g": 0.6149215000000003
+  },
+  "raw_outcome_files_read": false,
+  "pair_membership_modified": false,
+  "pair_orientation_modified": false,
+  "geometry_threshold_modified": false,
+  "primary_endpoint_modified": false,
+  "primary_estimand_modified": false
+}

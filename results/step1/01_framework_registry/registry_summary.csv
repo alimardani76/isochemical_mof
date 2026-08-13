@@ -1,0 +1,16 @@
+metric,value
+registry_rows,279019
+unique_mof_ids,279019
+excluded_non_arc_mof_geometry_rows,242297
+geometry_descriptor_count,10
+rac_descriptor_count,176
+has_dimensionality,278708
+has_topology,263744
+has_all_cluster_labels,224814
+has_cif,242363
+has_any_adsorption_source,279010
+has_all_adsorption_sources,279010
+has_process_source,278407
+geometry_descriptors_complete,279010
+positive_Df,279019
+rac_descriptors_complete,268854

@@ -1,0 +1,19 @@
+{
+  "script": "04_analyze_primary_ch4.py",
+  "script_version": "1.0.0",
+  "definition_version": "primary_ch4_298K_65bar_mmolg_v1",
+  "completed_at_utc": "2026-08-12T16:10:32.809900+00:00",
+  "completed_successfully": true,
+  "pair_source_sha256": "83d4d6f4d937b6d6c57cdea43121748450d27f1af76016d0232ce8e3f006bb75",
+  "freeze_definition_sha256": "805896ecbcaceda320482e199f1f8b80b1a812ea99b1ca2e5a442c94309113b6",
+  "methane_source_sha256": "ee26a805ad30bbd76d48ab27b74e25db0cacf0a7b29b648ec4ce206fe51b26b2",
+  "primary_endpoint_only": true,
+  "outcome_values_read": true,
+  "other_outcome_tables_read": false,
+  "other_outcome_columns_read": false,
+  "pair_membership_modified": false,
+  "geometry_threshold_modified": false,
+  "primary_endpoint_modified": false,
+  "bootstrap_replicates": 10000,
+  "bootstrap_seed": 17
+}

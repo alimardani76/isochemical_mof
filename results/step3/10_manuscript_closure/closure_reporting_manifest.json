@@ -1,0 +1,36 @@
+{
+  "script": "14_finalize_si_reporting.py",
+  "script_version": "1.0.0",
+  "definition_version": "manuscript_closure_reporting_v1",
+  "completed_at_utc": "2026-08-13T05:32:33.648753+00:00",
+  "completed_successfully": true,
+  "new_scientific_analysis_performed": false,
+  "adsorption_source": "Step 3 results\\05_secondary_outcome_atlas\\secondary_adsorption_summary.csv",
+  "process_source": "Step 3 results\\05_secondary_outcome_atlas\\secondary_process_summary.csv",
+  "adsorption_source_rows": 88,
+  "adsorption_reported_rows": 88,
+  "process_source_rows": 50,
+  "process_reported_rows": 50,
+  "adsorption_metrics": [
+    "S(g1)",
+    "hoa/kcal/mol",
+    "mmol/g",
+    "v/v",
+    "wt%"
+  ],
+  "process_metrics": [
+    "afm",
+    "mmol/g_uptake",
+    "mmol/g_working_capacity",
+    "purity",
+    "selectivity",
+    "ssp",
+    "v/v_uptake",
+    "v/v_working_capacity",
+    "wt%_uptake",
+    "wt%_working_capacity"
+  ],
+  "output_tex": "Project17_SI_closure_tables.tex",
+  "arc_mof_release": "v7",
+  "arc_mof_zenodo_record": "16802743"
+}

@@ -1,0 +1,12 @@
+metric,value
+primary_threshold,0.1
+eligible_families,11072.0
+available_frameworks,26146.0
+selected_primary_pairs,11072.0
+unique_frameworks_in_primary_pairs,22144.0
+selected_pairs_meeting_20pct,6948.0
+selected_pairs_meeting_30pct,5115.0
+median_selected_pair_max_fractional_difference,0.2722667180297281
+median_selected_pair_mean_fractional_difference,0.1279234066014775
+median_family_size,2.0
+families_with_more_than_two_members,2628.0

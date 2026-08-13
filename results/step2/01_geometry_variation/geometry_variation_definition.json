@@ -1,0 +1,25 @@
+{
+  "definition_version": "within_family_geometry_variation_v1",
+  "input_population": "Stage 1.4 validated same-recorded-chemistry + same-recorded-architecture families",
+  "geometry_descriptors": [
+    "UC_volume",
+    "Density",
+    "ASA",
+    "AVA",
+    "AVAf",
+    "POAVA",
+    "POAVAf",
+    "Di",
+    "Df",
+    "Dif"
+  ],
+  "measurement": {
+    "absolute_span": "family maximum minus family minimum",
+    "fractional_span": "(maximum - minimum) / max(abs(minimum), abs(maximum)); descriptive only",
+    "variation_flag": "descriptor range exceeds only numerical-noise tolerance"
+  },
+  "scientific_threshold_defined": false,
+  "framework_pairs_constructed": false,
+  "outcome_values_read": false,
+  "purpose": "measure the empirical within-family geometry variation distribution before choosing any meaningful contrast threshold"
+}

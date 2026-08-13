@@ -1,0 +1,14 @@
+{
+  "script": "02_inventory_all_outcome_coverage.py",
+  "script_version": "1.0.0",
+  "definition_version": "all_outcome_condition_pair_coverage_v1",
+  "completed_at_utc": "2026-08-12T15:48:58.477421+00:00",
+  "completed_successfully": true,
+  "metadata_only": true,
+  "outcome_values_read": false,
+  "endpoint_selected": false,
+  "pair_membership_modified": false,
+  "frozen_primary_pairs": 11072,
+  "frozen_pair_members": 22144,
+  "output_directory": "Step 3 results\\02_all_outcome_condition_coverage"
+}

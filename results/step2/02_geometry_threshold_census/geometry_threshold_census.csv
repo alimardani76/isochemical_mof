@@ -1,0 +1,5 @@
+threshold,threshold_percent,eligible_families,fraction_of_all_families,eligible_frameworks,median_family_size_among_eligible,median_number_of_descriptors_meeting_threshold
+0.05,5,14739,0.7729704216488358,33949,2.0,5.0
+0.1,10,11072,0.5806586951961401,26146,2.0,5.0
+0.2,20,6948,0.3643801132787917,17126,2.0,5.0
+0.3,30,5115,0.2682504719949654,12793,2.0,5.0

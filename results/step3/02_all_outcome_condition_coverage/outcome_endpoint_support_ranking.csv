@@ -1,0 +1,24 @@
+source,source_type,condition_label,temperature_K,pressure_bar,process,frozen_member_ids_present,complete_pairs,complete_pair_fraction,exactly_one_member_pairs,neither_member_pairs
+landfill-CH4.csv,adsorption,T=338 K; p=0.01 bar,338.0,0.01,,22144,11072,1.0,0,0
+landfill-CH4.csv,adsorption,T=338 K; p=4.4 bar,338.0,4.4,,22144,11072,1.0,0,0
+landfill-CO2.csv,adsorption,T=338 K; p=0.26 bar,338.0,0.26,,22144,11072,1.0,0,0
+landfill-CO2.csv,adsorption,T=338 K; p=3.2 bar,338.0,3.2,,22144,11072,1.0,0,0
+methane.csv,adsorption,T=298 K; p=5.8 bar,298.0,5.8,,22144,11072,1.0,0,0
+methane.csv,adsorption,T=298 K; p=65 bar,298.0,65.0,,22144,11072,1.0,0,0
+methane_purification-CH4.csv,adsorption,T=298 K; p=0.9 bar,298.0,0.9,,22144,11072,1.0,0,0
+methane_purification-CH4.csv,adsorption,T=298 K; p=9 bar,298.0,9.0,,22144,11072,1.0,0,0
+methane_purification-CO2.csv,adsorption,T=298 K; p=0.1 bar,298.0,0.1,,22144,11072,1.0,0,0
+methane_purification-CO2.csv,adsorption,T=298 K; p=1 bar,298.0,1.0,,22144,11072,1.0,0,0
+post_comb_vsa-CO2.csv,adsorption,T=298 K; p=0.015 bar,298.0,0.015,,22144,11072,1.0,0,0
+post_comb_vsa-CO2.csv,adsorption,T=298 K; p=0.15 bar,298.0,0.15,,22144,11072,1.0,0,0
+post_comb_vsa-N2.csv,adsorption,T=298 K; p=0.075 bar,298.0,0.075,,22144,11072,1.0,0,0
+post_comb_vsa-N2.csv,adsorption,T=298 K; p=0.75 bar,298.0,0.75,,22144,11072,1.0,0,0
+pre_comb_4040-CO2.csv,adsorption,T=313 K; p=0.4 bar,313.0,0.4,,22144,11072,1.0,0,0
+pre_comb_4040-H2.csv,adsorption,T=313 K; p=0.6 bar,313.0,0.6,,22144,11072,1.0,0,0
+pre_comb_4040-CO2.csv,adsorption,T=313 K; p=16 bar,313.0,16.0,,22143,11071,0.9999096820809249,1,0
+pre_comb_4040-H2.csv,adsorption,T=313 K; p=24 bar,313.0,24.0,,22143,11071,0.9999096820809249,1,0
+overall_process.csv,process,landfill-gas-vpsa,,,landfill-gas-vpsa,22080,11008,0.9942196531791907,64,0
+overall_process.csv,process,methane-storage-psa,,,methane-storage-psa,22080,11008,0.9942196531791907,64,0
+overall_process.csv,process,natural-gas-purification,,,natural-gas-purification,22080,11008,0.9942196531791907,64,0
+overall_process.csv,process,post-combustion-vsa,,,post-combustion-vsa,22080,11008,0.9942196531791907,64,0
+overall_process.csv,process,pre-combustion-40-40,,,pre-combustion-40-40,22080,11008,0.9942196531791907,64,0

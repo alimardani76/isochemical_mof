@@ -1,0 +1,9 @@
+{
+  "script_version": "1.0.0",
+  "mode": "full",
+  "sample_size": null,
+  "sample_seed": null,
+  "target_sha256": "d6262fdeadf8705d9f361df9376995aea59dd52f92d86cce687ee6dfa613f47b",
+  "registry_sha256": "c3fe1c27ad611b08775af7de258d3218972a196ad87ecea7fdc9069360e5caee",
+  "canonicalization": "strip whitespace and repeated terminal .cif, _repeat, _sqe; preserve case"
+}
