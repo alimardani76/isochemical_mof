@@ -2,7 +2,7 @@ severity,category,item,status,detail
 GREEN,repository_file,README.md,PASS,present
 GREEN,repository_file,HANDOVER.md,PASS,present
 GREEN,repository_file,.gitignore,PASS,present
-RED,repository_file,data_manifest/RAW_DATA_REQUIRED.md,FAIL,missing
+GREEN,repository_file,data_manifest/RAW_DATA_REQUIRED.md,PASS,present
 GREEN,repository_file,data_manifest/RAW_DATA_INVENTORY.csv,PASS,present
 GREEN,repository_file,data_manifest/REPO_FILE_MANIFEST.csv,PASS,present
 GREEN,repository_file,environment/python-version.txt,PASS,present

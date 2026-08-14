@@ -6,8 +6,7 @@ Root: `C:\Users\KaraPardazesh\Desktop\Project17_handover`
 
 | severity   | status   |   count |
 |:-----------|:---------|--------:|
-| GREEN      | PASS     |      25 |
-| RED        | FAIL     |       1 |
+| GREEN      | PASS     |      26 |
 | YELLOW     | PENDING  |       1 |
 | YELLOW     | REVIEW   |       6 |
 
@@ -18,7 +17,7 @@ Root: `C:\Users\KaraPardazesh\Desktop\Project17_handover`
 | GREEN      | repository_file    | README.md                                  | PASS     | present                                                                      |
 | GREEN      | repository_file    | HANDOVER.md                                | PASS     | present                                                                      |
 | GREEN      | repository_file    | .gitignore                                 | PASS     | present                                                                      |
-| RED        | repository_file    | data_manifest/RAW_DATA_REQUIRED.md         | FAIL     | missing                                                                      |
+| GREEN      | repository_file    | data_manifest/RAW_DATA_REQUIRED.md         | PASS     | present                                                                      |
 | GREEN      | repository_file    | data_manifest/RAW_DATA_INVENTORY.csv       | PASS     | present                                                                      |
 | GREEN      | repository_file    | data_manifest/REPO_FILE_MANIFEST.csv       | PASS     | present                                                                      |
 | GREEN      | repository_file    | environment/python-version.txt             | PASS     | present                                                                      |
