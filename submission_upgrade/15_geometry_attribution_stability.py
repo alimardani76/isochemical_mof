@@ -87,6 +87,8 @@ def main():
         top2_desc = str(others.loc[0, "descriptor"])
         top2 = float(others.loc[0, "fractional_difference"])
 
+        # The stored driver must attain the pair maximum.  Equal maxima are allowed;
+        # the frozen driver label is retained rather than re-resolved post-freeze.
         numeric_max = float(g["fractional_difference"].max())
         if not np.isclose(top1, numeric_max, rtol=1e-12, atol=1e-12):
             raise RuntimeError(
@@ -162,6 +164,7 @@ def main():
     corr = piv.corr(method="spearman")
     corr.to_csv(out/"descriptor_difference_correlation.csv")
 
+    # Figure S4
     if apply_style is not None:
         apply_style(7.0)
         fig = plt.figure(figsize=(7.15,5.6))

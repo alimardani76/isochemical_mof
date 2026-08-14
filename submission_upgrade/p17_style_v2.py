@@ -1,25 +1,38 @@
 #!/usr/bin/env python3
 """Project 17 publication style v2.
 
-Appearance only: Arial/Helvetica-compatible sans serif, bold typography, white
-background, no gridlines, editable vector text, and the established Project 17
-colorblind-safe palette. This module must not change plotted data.
+Design goals:
+- Arial/Helvetica-compatible sans serif.
+- Bold scientific typography.
+- Editable PDF/SVG text.
+- White background; no gridlines.
+- Limited, accessible, non-default palette.
+- Uppercase panel labels for Project 17 internal consistency.
+- Vector-first export.
+
+This module changes appearance only. It must not change plotted data.
 """
+
 from __future__ import annotations
+
 from pathlib import Path
 import matplotlib as mpl
+import matplotlib.pyplot as plt
 
 PALETTE = {
-    "primary": "#0072B2",
-    "secondary": "#56B4E9",
-    "validated": "#009E73",
-    "accent": "#E69F00",
-    "sensitivity": "#CC79A7",
-    "warning": "#D55E00",
+    # Established Project 17 palette.
+    "primary": "#0072B2",      # dark blue
+    "secondary": "#56B4E9",    # sky
+    "validated": "#009E73",    # green
+    "accent": "#E69F00",       # orange
+    "sensitivity": "#CC79A7",  # purple
+    "warning": "#D55E00",      # vermillion
     "neutral": "#4D4D4D",
     "lightgray": "#BDBDBD",
     "black": "#111111",
     "white": "#FFFFFF",
+
+    # Backward-compatible aliases used by the supplied sprint scripts.
     "ink": "#111111",
     "navy": "#0072B2",
     "blue": "#56B4E9",
@@ -32,6 +45,7 @@ PALETTE = {
     "pale": "#F2F2F2",
 }
 
+# Semantic aliases. Do not use red/green alone to communicate sign.
 SEMANTIC = {
     "frozen": PALETTE["primary"],
     "primary": PALETTE["primary"],
@@ -92,8 +106,15 @@ def clean_axis(ax, left: bool = True, bottom: bool = True) -> None:
 
 def panel_label(ax, label: str, x: float = -0.12, y: float = 1.05,
                 fontsize: float = 10.0) -> None:
-    ax.text(x, y, str(label).upper(), transform=ax.transAxes, ha="left", va="bottom",
-            fontsize=fontsize, fontweight="bold", color=PALETTE["ink"], clip_on=False)
+    ax.text(
+        x, y, str(label).upper(),
+        transform=ax.transAxes,
+        ha="left", va="bottom",
+        fontsize=fontsize,
+        fontweight="bold",
+        color=PALETTE["ink"],
+        clip_on=False,
+    )
 
 def export_figure(fig, stem: str | Path, dpi: int = 600) -> None:
     stem = Path(stem)

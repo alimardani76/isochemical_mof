@@ -22,22 +22,25 @@ def main():
     rows=[]
 
     required=[
-        "README.md","HANDOVER.md",
+        "README.md","HANDOVER.md",".gitignore",
         "data_manifest/RAW_DATA_REQUIRED.md","data_manifest/RAW_DATA_INVENTORY.csv",
         "data_manifest/REPO_FILE_MANIFEST.csv","environment/python-version.txt",
         "manuscript/main.tex","manuscript/SI.tex","manuscript/Project17_References.bib",
-        "manuscript/Project17_SI_closure_tables.tex","provenance/SHA256SUMS.txt",
-        "reproduce/README.md","reproduce/build_legacy_workspace.py","submission_upgrade/README.md"]
+        "manuscript/Project17_SI_closure_tables.tex",
+        "provenance/SHA256SUMS.txt","reproduce/README.md",
+        "reproduce/build_legacy_workspace.py","submission_upgrade/README.md"]
     for r in required:
         ok=(root/r).is_file()
         add(rows,"RED" if not ok else "GREEN","repository_file",r,"PASS" if ok else "FAIL",
             "present" if ok else "missing")
 
+    # Code-license choice is a coauthor/public-release decision, not a scientific blocker.
     lic=(root/"LICENSE").is_file()
     add(rows,"GREEN" if lic else "YELLOW","repository_file","LICENSE",
         "PASS" if lic else "REVIEW",
         "present" if lic else "choose code license before archival/public release")
 
+    # Main figures 1-4 are required. Figure 5 is optional pending structural rendering.
     for i in range(1,5):
         f=f"Figure_{i}.pdf"; p=root/"figures"/"final"/f
         add(rows,"GREEN" if p.is_file() else "RED","figure",f,"PASS" if p.is_file() else "FAIL",str(p))
@@ -45,6 +48,7 @@ def main():
     add(rows,"GREEN" if p.is_file() else "YELLOW","figure",f,"PASS" if p.is_file() else "PENDING",
         "structural-case figure present" if p.is_file() else "optional structural rendering not yet committed")
 
+    # Placeholders / risky wording.
     text_files=[root/"README.md",root/"HANDOVER.md",root/"manuscript"/"main.tex",root/"manuscript"/"SI.tex"]
     for p in text_files:
         if not p.is_file(): continue
@@ -62,6 +66,8 @@ def main():
             if s.lower() in t.lower():
                 add(rows,"YELLOW","wording_risk",s,"REVIEW",f"found in {p.relative_to(root)}")
 
+    # Reorganized historical scripts are expected to retain legacy path assumptions;
+    # the compatibility workspace is the supported execution route.
     compatibility=(root/"reproduce"/"build_legacy_workspace.py").is_file()
     legacy_hits=0
     for p in root.glob("scripts/**/*.py"):
@@ -72,6 +78,7 @@ def main():
         "PASS" if compatibility else "FAIL",
         f"{legacy_hits} legacy path-dependent scripts; compatibility workspace {'present' if compatibility else 'missing'}")
 
+    # Submission-upgrade scripts expected.
     for name in [
         "15_geometry_attribution_stability.py","16_uptake_basis_density_robustness.py",
         "17_select_structural_case_studies.py","18_source_stratified_effects.py",

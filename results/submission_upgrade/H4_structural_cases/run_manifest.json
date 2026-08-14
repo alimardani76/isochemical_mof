@@ -1,0 +1,18 @@
+{
+  "script": "17_select_structural_case_studies.py",
+  "completed_at_utc": "2026-08-14T11:32:54.346525+00:00",
+  "post_freeze": true,
+  "pair_membership_modified": false,
+  "selection_method": "predeclared strata + robust median/MAD representativeness distance",
+  "panels": {
+    "A": "pressure_activated_ASA",
+    "B": "pressure_activated_AVA",
+    "C": "positive_both_accessible_space",
+    "D": "negative_both_diameter",
+    "E": "pressure_suppressed",
+    "F": "experimental_source_pair"
+  },
+  "selected_pairs": 6,
+  "selected_pairs_unique": true,
+  "cifs_requested": 12
+}

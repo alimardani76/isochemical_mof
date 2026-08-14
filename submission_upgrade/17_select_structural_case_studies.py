@@ -92,6 +92,7 @@ def main():
                                      "provenance_class","same_source_pair"] if c in prov.columns]],
                     on="architecture_group_id",how="left",validate="one_to_one")
 
+    # top1/top2 ratio
     rr=[]
     for gid,g in diffs.groupby("architecture_group_id"):
         g=g.sort_values(["fractional_difference","descriptor"],ascending=[False,True]).reset_index(drop=True)
@@ -132,6 +133,10 @@ def main():
         c["panel"]=panel; c["case_definition"]=name; c["rank_in_stratum"]=np.arange(1,len(c)+1)
         ranked_blocks.append(c.head(args.top_k))
 
+        # A pair may satisfy more than one predeclared stratum.  Figure panels must
+        # nevertheless be six distinct frozen pairs, so take the highest-ranked
+        # candidate not already used by an earlier panel.  This is deterministic
+        # and does not inspect visual attractiveness.
         available=c[~c["architecture_group_id"].isin(used_groups)]
         if available.empty:
             raise RuntimeError(f"Panel {panel} stratum {name} has no unused candidate")
@@ -150,6 +155,7 @@ def main():
     ranked.to_csv(out/"case_study_candidates_ranked.csv",index=False)
     ledger.to_csv(out/"case_study_selection_ledger.csv",index=False)
 
+    # Per-framework geometry values for drawing/labels.
     if geom_path:
         geom=pd.read_parquet(geom_path)
         idcol="mof_id"

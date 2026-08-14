@@ -103,6 +103,8 @@ def main():
     if len(x) != 11072:
         raise RuntimeError(f"expected 11,072 frozen pairs, found {len(x):,}")
 
+    # Guard the frozen core: the secondary-atlas mmol/g value at the primary
+    # condition must reproduce the already frozen primary pair effect exactly.
     atlas_primary = pd.to_numeric(x["delta__mmol/g"], errors="raise").to_numpy(float)
     frozen_primary = pd.to_numeric(x["delta_q_mmol_g"], errors="raise").to_numpy(float)
     max_abs_primary_mismatch = float(np.max(np.abs(atlas_primary - frozen_primary)))
@@ -183,6 +185,7 @@ def main():
         corr_rows.append({"metric":metric,"pairs":int(m.sum()),"spearman_rho":float(rho),"p_value":float(p)})
     pd.DataFrame(corr_rows).to_csv(out/"density_effect_correlations.csv",index=False)
 
+    # Optional process working capacity.
     if process_path:
         proc=pd.read_parquet(process_path)
         if {"process","metric","delta"}.issubset(proc.columns):
