@@ -1,0 +1,34 @@
+severity,category,item,status,detail
+GREEN,repository_file,README.md,PASS,present
+GREEN,repository_file,HANDOVER.md,PASS,present
+GREEN,repository_file,.gitignore,PASS,present
+GREEN,repository_file,data_manifest/RAW_DATA_REQUIRED.md,PASS,present
+GREEN,repository_file,data_manifest/RAW_DATA_INVENTORY.csv,PASS,present
+GREEN,repository_file,data_manifest/REPO_FILE_MANIFEST.csv,PASS,present
+GREEN,repository_file,environment/python-version.txt,PASS,present
+GREEN,repository_file,manuscript/main.tex,PASS,present
+GREEN,repository_file,manuscript/SI.tex,PASS,present
+GREEN,repository_file,manuscript/Project17_References.bib,PASS,present
+GREEN,repository_file,manuscript/Project17_SI_closure_tables.tex,PASS,present
+GREEN,repository_file,provenance/SHA256SUMS.txt,PASS,present
+GREEN,repository_file,reproduce/README.md,PASS,present
+GREEN,repository_file,reproduce/build_legacy_workspace.py,PASS,present
+GREEN,repository_file,submission_upgrade/README.md,PASS,present
+YELLOW,repository_file,LICENSE,REVIEW,choose code license before archival/public release
+GREEN,figure,Figure_1.pdf,PASS,C:\Users\KaraPardazesh\Desktop\Project17_handover\figures\final\Figure_1.pdf
+GREEN,figure,Figure_2.pdf,PASS,C:\Users\KaraPardazesh\Desktop\Project17_handover\figures\final\Figure_2.pdf
+GREEN,figure,Figure_3.pdf,PASS,C:\Users\KaraPardazesh\Desktop\Project17_handover\figures\final\Figure_3.pdf
+GREEN,figure,Figure_4.pdf,PASS,C:\Users\KaraPardazesh\Desktop\Project17_handover\figures\final\Figure_4.pdf
+YELLOW,figure,Figure_5.pdf,PENDING,optional structural rendering not yet committed
+YELLOW,wording_risk,causal deformation,REVIEW,found in manuscript\main.tex
+YELLOW,wording_risk,experimental validation,REVIEW,found in manuscript\main.tex
+YELLOW,wording_risk,transition pressure,REVIEW,found in manuscript\main.tex
+YELLOW,wording_risk,causal deformation,REVIEW,found in manuscript\SI.tex
+YELLOW,wording_risk,transition pressure,REVIEW,found in manuscript\SI.tex
+GREEN,path_compatibility,historical relocated scripts,PASS,17 legacy path-dependent scripts; compatibility workspace present
+GREEN,submission_upgrade,15_geometry_attribution_stability.py,PASS,present
+GREEN,submission_upgrade,16_uptake_basis_density_robustness.py,PASS,present
+GREEN,submission_upgrade,17_select_structural_case_studies.py,PASS,present
+GREEN,submission_upgrade,18_source_stratified_effects.py,PASS,present
+GREEN,submission_upgrade,19_submission_sanity_check.py,PASS,present
+GREEN,submission_upgrade,p17_style_v2.py,PASS,present
