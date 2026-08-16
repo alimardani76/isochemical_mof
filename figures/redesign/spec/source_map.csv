@@ -1,0 +1,11 @@
+figure,variant_or_script,primary_source_paths,scientific_status
+Figure 1,conservative + concept,"results/step2/02_geometry_threshold_census/*; results/step2/03_geometry_pairs/primary_geometry_pairs.parquet; primary_pair_driver_census.csv",Frozen Stage 2 / outcome blind
+Figure 2,conservative + concept,"results/step3/04_primary_ch4_analysis/*",Primary confirmatory endpoint + prespecified sensitivity tiers
+Figure 3,conservative + concept,"results/step3/05_secondary_outcome_atlas/secondary_adsorption_mmolg_summary.csv; secondary_process_summary.csv",Secondary/post-freeze
+Figure 4,conservative + concept,"results/step3/07_response_archetypes/*",Secondary/post-freeze archetypes
+Figure S1,RS1_figureS1.py,results/step3/05_secondary_outcome_atlas/secondary_adsorption_mmolg_summary.csv,Secondary
+Figure S2,RS2_figureS2.py,results/step3/05_secondary_outcome_atlas/secondary_process_summary.csv,Secondary
+Figure S3,RS3_figureS3.py,"results/step3/06_cross_condition_consistency/mmolg_endpoint_metadata.csv; mmolg_endpoint_spearman.csv; mmolg_endpoint_sign_agreement.csv",Secondary
+Figure S4,RS4_figureS4.py,results/submission_upgrade/H2_geometry_attribution/*,Secondary/post-freeze robustness
+Figure S5,RS5_figureS5.py,results/submission_upgrade/H3_uptake_basis_density/*,Secondary/post-freeze robustness
+Figure S6,RS6_figureS6.py,results/submission_upgrade/H6_source_stratified/source_stratified_primary.csv,Provenance/applicability diagnostic

@@ -1,0 +1,17 @@
+{
+  "pinned_commit": "1e81b1961f3853417b4a5b63eee19e3aefbe07a4",
+  "primary_pairs": 11072,
+  "unique_frameworks": 22144,
+  "primary_endpoint": "CH4, 298 K, 65 bar, mmol g^-1",
+  "primary_median_delta_q": 0.5835545,
+  "primary_bootstrap_95ci": [0.5545650, 0.6149215],
+  "primary_positive_fraction": 0.70502,
+  "tier_20_pairs": 6948,
+  "tier_30_pairs": 5115,
+  "ASA_median_delta_q": 2.9964,
+  "AVA_median_delta_q": 1.2201,
+  "Df_median_delta_q": -0.1457,
+  "pressure_activated_pairs": 3100,
+  "pressure_suppressed_pairs": 687,
+  "H3_vv_median_delta": 3.7971925
+}
