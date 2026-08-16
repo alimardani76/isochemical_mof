@@ -1,0 +1,10 @@
+name: isochemical-mof-figure5
+channels:
+  - https://conda.ovito.org
+  - conda-forge
+channel_priority: strict
+dependencies:
+  - python=3.11
+  - ovito=3.15.5
+  - numpy
+  - pillow
