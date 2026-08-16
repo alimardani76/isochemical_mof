@@ -36,13 +36,13 @@ LICENSE_NOTE.md
 
 data_manifest/       raw-data inventory and repository manifests
 environment/         Python/environment records
-figures/             plotting sources and final figures
+figures/             plotting/rendering sources and final figures
 manuscript/          manuscript/SI source
 provenance/          SHA256 provenance
 reproduce/           compatibility-workspace instructions
 results/             frozen analysis outputs
 scripts/             historical stage scripts and audits
-submission_upgrade/  post-freeze coauthor robustness work
+submission_upgrade/  post-freeze coauthor robustness and structural-audit work
 ```
 
 ## Raw data
@@ -87,6 +87,9 @@ Do not silently change these when reproducing the reported paper:
 - **Figure 2** — confirmatory high-pressure methane response.
 - **Figure 3** — pressure, adsorbate, and process dependence.
 - **Figure 4** — response archetypes and geometry/topology heterogeneity.
+- **Figure 5** — six deterministically selected matched structural pairs spanning accessible-space, diameter, pressure-response, and provenance regimes.
+
+Figure 5 is generated from the 12 frozen H4 CIFs using `figures/source/12_make_figure5_structural_assets.py`. The deterministic case-selection and rendering protocol is documented in `submission_upgrade/H4_STRUCTURAL_FIGURE_METHOD.md`.
 
 Supporting figures S1–S3 cover N2/H2 responses, AFM–SSP trade-offs, and cross-condition concordance. Post-freeze scripts H2/H3/H6 also generate candidate Figures S4–S6 locally.
 
@@ -98,9 +101,9 @@ The frozen `driver_descriptor` is the descriptor with the largest observed geome
 
 The final cohort is overwhelmingly hypothetical: **99.2% of frozen pairs are hypothetical–hypothetical**.
 
-## Submission-upgrade branch
+## Submission-upgrade work
 
-The `submission-upgrade` branch contains post-freeze checks requested during coauthor handover. They do **not** redefine the frozen cohort, orientation, geometry threshold, endpoint, or estimator.
+The `submission_upgrade/` folder contains post-freeze checks requested during coauthor handover. They do **not** redefine the frozen cohort, orientation, geometry threshold, endpoint, or estimator.
 
 ### H2 — geometry-attribution stability
 
@@ -122,9 +125,13 @@ The positive 65-bar methane response persists on a volumetric basis:
 
 The v/v comparison is the meaningful density-related robustness check; wt% is closely tied to the mass-basis molar uptake for fixed CH4.
 
-### H4 — structural case studies
+### H4 — structural case studies and Figure 5
 
-Six mutually exclusive frozen pairs were selected deterministically across pressure-activated ASA/AVA, positive-both accessible-space, negative diameter, pressure-suppressed, and experimental-source strata. The 12 corresponding CIFs were extracted locally with checksums for structural rendering.
+Six mutually exclusive frozen pairs are selected deterministically across pressure-activated ASA/AVA, positive-both accessible-space, negative diameter, pressure-suppressed, and experimental-source strata. The selector ranks candidates by robust distance to the stratum median and never uses visual attractiveness or maximum adsorption effect as a selection criterion.
+
+The 12 corresponding CIFs are rendered with locked orthographic views and matched inset crops. LOW/HIGH is geometry ordering, not adsorption-performance ordering; insets are structural context only and are not adsorption-site assignments.
+
+See `submission_upgrade/H4_STRUCTURAL_FIGURE_METHOD.md` for the full selection and rendering protocol.
 
 ### H6 — source-stratified effects
 
