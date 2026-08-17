@@ -1,144 +1,113 @@
-# Project 17 — Pressure-Dependent Pore-Geometry Effects in Chemistry- and Topology-Matched MOFs
+# Matched MOF Families Reveal Regime-Dependent Pore-Geometry Effects on Adsorption
 
-This repository contains the reproducible analysis workflow for **Project 17**, a matched-family study of pore-geometry effects in the ARC–MOF database.
+This repository contains the analysis, audited intermediate results, figure-generation workflows, and manuscript source for a matched-family study of pore geometry in the ARC–MOF database.
 
-The central design is outcome-blind:
+The study asks a deliberately controlled question: **when major recorded chemistry and broad architecture differences are fixed before adsorption outcomes are inspected, what geometry-associated response remains?**
 
-1. define same-recorded-chemistry families;
-2. refine them by recorded topology and dimensionality;
-3. quantify within-family pore-geometry variation;
-4. freeze a 10% geometry-contrast threshold;
-5. select exactly one deterministic maximum-separation pair per eligible family;
-6. freeze the confirmatory adsorption endpoint;
-7. only then read adsorption/process outcomes.
+## Paper at a glance
 
-The confirmatory endpoint is **CH4 uptake at 298 K and 65 bar in mmol/g**.
+The frozen primary catalogue contains **11,072 matched pairs** (22,144 unique frameworks). Pair identity, pair orientation, the 10% geometry criterion, and the primary endpoint were fixed before adsorption values were opened.
 
-## Main scientific result
+At the primary endpoint—CH4 uptake at 298 K and 65 bar in mmol g^-1—the median geometry-high minus geometry-low response is **+0.5836 mmol g^-1** (95% family-bootstrap interval **0.5546–0.6149 mmol g^-1**; **70.5%** positive pairs).
 
-The frozen cohort contains **11,072 geometry pairs** comprising **22,144 unique frameworks**.
+The central materials conclusion is not a universal “larger pore is better” rule. Accessible-space-labelled pairs (especially ASA/AVA) are strongly enriched in favorable high-pressure methane responses, whereas diameter-labelled populations have slightly negative median responses. The same structural direction is then re-ordered by adsorbate, loading condition, framework density, and process objective.
 
-- median geometry-high minus geometry-low response: **+0.5836 mmol/g**
-- family-bootstrap 95% CI: **[0.5546, 0.6149] mmol/g**
-- positive pairs: **70.5%**
-- >=20% geometry tier: **+1.6980 mmol/g**, 78.3% positive
-- >=30% geometry tier: **+3.1645 mmol/g**, 85.2% positive
-
-The response is not universal across geometry classes. Pairs labelled by ASA/AVA as their largest geometry contrast are strongly enriched in favorable responses, while diameter-labelled pairs have slightly negative median responses. Pressure, adsorbate, topology, and process objective all modify the response.
-
-## Repository layout
+## Repository map
 
 ```text
-README.md
-HANDOVER.md
-LICENSE_NOTE.md
-.gitignore
-
-data_manifest/       raw-data inventory and repository manifests
-environment/         Python/environment records
-figures/             plotting/rendering sources and final figures
-manuscript/          manuscript/SI source
-provenance/          SHA256 provenance
-reproduce/           compatibility-workspace instructions
-results/             frozen analysis outputs
-scripts/             historical stage scripts and audits
-submission_upgrade/  post-freeze coauthor robustness and structural-audit work
+manuscript/          current manuscript and Supporting Information source
+figures/redesign/    reproducible publication-figure generators (Figures 1–4, S1–S6)
+figures/source/      historical plotting source + Figure 5 structural renderer/provenance
+figures/archive/     earlier artwork retained for provenance, not current submission art
+results/             canonical frozen analysis outputs and post-freeze robustness outputs
+scripts/             original staged analysis and independent audits
+submission_upgrade/  post-freeze robustness/structural scripts (historical directory name)
+reproduce/           reproduction instructions and compatibility workspace
+data_manifest/       ARC–MOF input inventory and raw-data requirements
+environment/         recorded Python environment
+provenance/          historical checksum records
 ```
 
-## Raw data
+The directory name `submission_upgrade/` is retained because it is embedded in historical manifests and script paths. In publication-facing terms it contains **secondary/post-freeze robustness and structural-analysis modules**; it is not a separate scientific project.
 
-Raw ARC–MOF files are **not redistributed here**. The analysis used **ARC–MOF release v7, Zenodo record 16802743**. Required filenames and recorded hashes are documented under `data_manifest/` and `provenance/`.
+## Frozen analysis contract
 
-## Reproducing the historical workflow
+The reported paper depends on the following frozen definitions:
 
-The repository is organized for handover (`scripts/step1`, `scripts/step2`, `scripts/step3`, `results/step1`, etc.), whereas many historical scripts were originally written against the local folders:
-
-```text
-Step 1 preparation/
-Step 1 results/
-Step 2 calculation/
-Step 2 results/
-Step 3 production/
-Step 3 results/
-```
-
-Therefore, do **not** assume that executing a relocated historical script directly from `scripts/` reproduces its original path environment. Use `reproduce/build_legacy_workspace.py` and the instructions in `reproduce/README.md` to reconstruct a compatible workspace, then restore the external ARC–MOF raw data in `workspace/raw/` before rerunning source-dependent stages.
-
-Each scientific stage has an independent audit. A stage should not be considered complete unless its audit passes.
-
-## Frozen definitions
-
-Do not silently change these when reproducing the reported paper:
-
-- chemistry key: scale-invariant whole-CIF composition + scale-invariant metal composition + metal/linker/functional ARC–MOF cluster assignments;
+- chemistry key: scale-invariant whole-CIF composition, scale-invariant metal composition, and ARC–MOF metal/linker/functional cluster assignments;
 - architecture key: frozen chemistry group + recorded topology + recorded dimensionality;
-- scientific pore descriptors: ASA, AVA, AVAf, POAVA, POAVAf, Di, Df, Dif;
-- primary geometry threshold: **10%**;
-- stronger prespecified tiers: **20% and 30%**;
+- pore descriptors: ASA, AVA, AVAf, POAVA, POAVAf, Di, Df, Dif;
+- primary geometry criterion: **10%**;
+- stronger prespecified contrast tiers: **20% and 30%**;
 - one deterministic pair per eligible family;
-- pair orientation: lower to higher value of the frozen largest-contrast descriptor;
-- confirmatory endpoint: **CH4, 298 K, 65 bar, mmol/g**;
+- pair orientation: lower → higher value of the frozen largest-contrast descriptor;
+- primary endpoint: **CH4, 298 K, 65 bar, mmol g^-1**;
 - primary estimator: median family-level signed difference;
-- bootstrap: 10,000 family resamples, seed 17.
+- uncertainty: 10,000 family-bootstrap resamples, seed 17.
 
-## Main figures
+Changing any item above defines a new analysis and should not overwrite the frozen outputs used by the manuscript.
 
-- **Figure 1** — outcome-blind cohort construction and geometry support.
-- **Figure 2** — confirmatory high-pressure methane response.
-- **Figure 3** — pressure, adsorbate, and process dependence.
-- **Figure 4** — response archetypes and geometry/topology heterogeneity.
-- **Figure 5** — six deterministically selected matched structural pairs spanning accessible-space, diameter, pressure-response, and provenance regimes.
+## Data
 
-Figure 5 is generated from the 12 frozen H4 CIFs using `figures/source/12_make_figure5_structural_assets.py`. The deterministic case-selection and rendering protocol is documented in `submission_upgrade/H4_STRUCTURAL_FIGURE_METHOD.md`.
+Raw ARC–MOF files are **not redistributed** in this repository. The analysis used **ARC–MOF release v7, Zenodo record 16802743**. Required source filenames and the recorded input hashes are documented in `data_manifest/` and `provenance/`.
 
-Supporting figures S1–S3 cover N2/H2 responses, AFM–SSP trade-offs, and cross-condition concordance. Post-freeze scripts H2/H3/H6 also generate candidate Figures S4–S6 locally.
+The repository contains the compact/frozen outputs needed to audit the reported results. Large upstream source files remain under the ARC–MOF release terms.
+
+## Reproduce the publication figures
+
+The current quantitative figure workflow is under `figures/redesign/`.
+
+```bash
+python -m pip install -r figures/redesign/requirements.txt
+python figures/redesign/validate_redesign_values.py
+python figures/redesign/run_all.py
+```
+
+The validator runs before figure generation and aborts if frozen numerical anchors do not match the reported analysis. Outputs are written under `figures/redesign/outputs/` and are intentionally not versioned as generated build products.
+
+Figure 5 has a separate structural workflow because it depends on deterministic case selection, the 12 frozen H4 CIFs, locked OVITO rendering, and a manually assembled publication composite. See:
+
+- `submission_upgrade/H4_STRUCTURAL_FIGURE_METHOD.md`
+- `figures/source/12_make_figure5_structural_assets.py`
+- `figures/source/Figure_5_FINAL_ARTIFACTS.md`
+- `PUBLICATION_ARTIFACTS.md`
+
+## Reproduce the scientific workflow
+
+Historical scripts retain their original path assumptions. Do not run relocated `scripts/step1`, `scripts/step2`, or `scripts/step3` files blindly from the repository tree.
+
+Use:
+
+```bash
+python reproduce/build_legacy_workspace.py
+```
+
+and follow `reproduce/README.md` to recreate the expected directory layout and restore the external ARC–MOF inputs before running source-dependent stages.
+
+Every scientific stage has an independent audit. A regenerated stage should not be accepted unless the corresponding audit passes.
+
+## Manuscript
+
+The publication-facing manuscript source is under `manuscript/`.
+
+The manuscript and SI currently correspond to the post-PASS-E writing checkpoint: the main text references all Supporting Information Figures S1–S6 and Tables S1–S33, and the generated SI closure tables remain unchanged.
+
+See `manuscript/README.md` for compilation and figure-bundle details.
 
 ## Interpretation boundary
 
-This analysis supports **geometry-associated differences within tightly matched recorded chemistry and architecture families**. It does not establish atom-by-atom structural identity, causal framework deformation, a universal larger-pore rule, universal process improvement, or experimental transferability across MOF space.
+This is a matched observational analysis of recorded structures. It supports **geometry-associated differences within recorded-chemistry- and architecture-matched families**. It does not establish atom-by-atom identity, causal mechanical framework deformation, isolated single-descriptor perturbations, a continuous transition pressure from the discrete endpoint grid, device-level volumetric performance from crystallographic v/v, source-database causality, or broad experimental transferability.
 
-The frozen `driver_descriptor` is the descriptor with the largest observed geometry contrast in a pair. It is an attribution label, not proof that this descriptor changed in isolation or caused the adsorption response.
+The internal field `driver_descriptor` is publication-facing as **largest-contrast descriptor/class**. Pore descriptors co-vary; the label is an attribution class, not proof of an isolated causal variable.
 
-The final cohort is overwhelmingly hypothetical: **99.2% of frozen pairs are hypothetical–hypothetical**.
+The frozen cohort is overwhelmingly hypothetical (99.2% hypothetical–hypothetical pairs).
 
-## Submission-upgrade work
+## Publication and archival status
 
-The `submission_upgrade/` folder contains post-freeze checks requested during coauthor handover. They do **not** redefine the frozen cohort, orientation, geometry threshold, endpoint, or estimator.
+The scientific analysis is frozen; manuscript and repository packaging are still being finalized for journal submission. Outstanding release-level items are listed in `PUBLICATION_STATUS.md`.
 
-### H2 — geometry-attribution stability
+In particular, a permanent article/code-data archive DOI and an explicit license for the authors' original analysis code have **not yet been finalized**. No license is implied by public visibility; see `LICENSE_NOTE.md`.
 
-As the largest geometry contrast is required to dominate the second-largest more strongly, the pooled primary response attenuates:
+## Historical provenance
 
-- top1/top2 >=1.10: 4,603 pairs, median **+0.4135 mmol/g**, 66.3% positive;
-- >=1.25: 2,866 pairs, median **+0.1873 mmol/g**, 60.2% positive;
-- >=1.50: 1,715 pairs, median **+0.0383 mmol/g**, 53.1% positive.
-
-This supports a multidimensional pore-change interpretation rather than an isolated single-descriptor causal rule.
-
-### H3 — uptake-basis/density robustness
-
-The positive 65-bar methane response persists on a volumetric basis:
-
-- mmol/g: median +0.5836, 70.5% positive, 95% CI [0.5546, 0.6149];
-- v/v: median +3.7972, 60.9% positive, 95% CI [3.4385, 4.1851];
-- wt%: median +0.9337, 70.5% positive, 95% CI [0.8873, 0.9839].
-
-The v/v comparison is the meaningful density-related robustness check; wt% is closely tied to the mass-basis molar uptake for fixed CH4.
-
-### H4 — structural case studies and Figure 5
-
-Six mutually exclusive frozen pairs are selected deterministically across pressure-activated ASA/AVA, positive-both accessible-space, negative diameter, pressure-suppressed, and experimental-source strata. The selector ranks candidates by robust distance to the stratum median and never uses visual attractiveness or maximum adsorption effect as a selection criterion.
-
-The 12 corresponding CIFs are rendered with locked orthographic views and matched inset crops. LOW/HIGH is geometry ordering, not adsorption-performance ordering; insets are structural context only and are not adsorption-site assignments.
-
-See `submission_upgrade/H4_STRUCTURAL_FIGURE_METHOD.md` for the full selection and rendering protocol.
-
-### H6 — source-stratified effects
-
-Same-source responses are heterogeneous: DB0 median +0.342, DB5 +10.437, DB6 -0.244, and DB13 +0.466 mmol/g. These strata also differ sharply in geometry magnitude and ASA/AVA composition, so source identity is treated as an applicability variable rather than a causal factor.
-
-See `HANDOVER.md`, `submission_upgrade/RESULTS_SUMMARY.md`, and `submission_upgrade/LOCAL_ARTIFACTS_TO_ADD.md`.
-
-## Coauthor handover
-
-Start with [`HANDOVER.md`](HANDOVER.md). It records the frozen design, key results, post-freeze sprint, interpretation boundaries, and what must be rerun if a frozen definition is changed.
+`ANALYSIS_PROVENANCE.md` records the frozen design, bounded post-freeze analyses, and prior repository milestones. `HANDOVER.md` remains only as a compatibility pointer for older links.

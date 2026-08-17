@@ -1,45 +1,17 @@
-# Project 17 submission-upgrade results summary
+# Post-freeze result summary
 
-These are console-verified headline values from completed local runs. Canonical machine-readable CSV/Parquet/JSON/figure/CIF outputs remain the source of record and should be copied from the local Project17 working tree before this branch is merged.
+This document is a compact index to the bounded H2/H3/H4/H6 analyses. Canonical machine-readable outputs are under `results/submission_upgrade/`; manuscript claims should be checked against those tables rather than this summary.
 
 ## H2 — geometry-attribution stability
+Pooled top-1/top-2 dominance subsets: ≥1.10 n=4,603, median +0.413537 mmol g^-1, 66.26% positive; ≥1.25 n=2,866, +0.187258, 60.15%; ≥1.50 n=1,715, +0.038287, 53.12%. The pooled attenuation is partly a class-composition shift; at ≥1.50, Df contributes 1,265/1,715 pairs. ASA/AVA remain strongly favorable in cleaner subsets while Df remains slightly negative.
 
-| criterion | pairs | cohort fraction | median top1/top2 | median delta_q (mmol/g) | positive fraction |
-|---|---:|---:|---:|---:|---:|
-| top1/top2 >= 1.10 | 4,603 | 0.415733 | 1.344062 | 0.413537 | 0.662611 |
-| top1/top2 >= 1.25 | 2,866 | 0.258851 | 1.638244 | 0.187258 | 0.601535 |
-| top1/top2 >= 1.50 | 1,715 | 0.154895 | 2.118525 | 0.038287 | 0.531195 |
-
-Increasing isolation of the nominal driver attenuates the primary signal. The frozen driver is therefore a largest-contrast attribution label within correlated pore changes, not a causal one-descriptor perturbation.
-
-## H3 — 65-bar CH4 uptake basis
-
-| metric | pairs | median delta | mean delta | positive fraction | bootstrap 95% CI |
-|---|---:|---:|---:|---:|---:|
-| mmol/g | 11,072 | 0.583554 | 2.427468 | 0.705022 | [0.554565, 0.614922] |
-| v/v | 11,072 | 3.797193 | 13.825888 | 0.608833 | [3.438461, 4.185063] |
-| wt% | 11,072 | 0.933689 | 3.883949 | 0.705022 | [0.887304, 0.983874] |
-
-The positive median survives volumetric normalization; density moderates pair-level sign consistency but does not reverse the population result.
+## H3 — uptake basis and density
+At 65-bar methane: mmol/g median +0.5835545 (70.50% positive); v/v median +3.7971925 (60.88%); wt% median +0.9336885 (70.50%). Density-change correlations are rho=-0.7720 for gravimetric and -0.3254 for volumetric response. This is not merely a gravimetric-unit artifact, but it is strongly density-coupled; crystallographic v/v is not device-level storage.
 
 ## H4 — structural cases
+Six deterministic pairs span broad accessible-space/pressure-activated, AVA-led/pressure-activated, ASA–diameter mismatch, Df negative-both, Di/Dif pressure-suppressed, and experimental-source structural-anchor contexts. The 12 CIFs are visualization inputs only; Panel F is not experimental adsorption validation.
 
-A pressure_activated_ASA: +9.096988 mmol/g
-B pressure_activated_AVA: +2.994237 mmol/g
-C positive_both_accessible_space: +2.667362 mmol/g
-D negative_both_diameter: -0.459752 mmol/g
-E pressure_suppressed: -0.187601 mmol/g
-F experimental_source_pair: +0.082596 mmol/g
+## H6 — same-source heterogeneity
+Same-source medians are DB0 +0.3420, DB5 +10.4372, DB6 -0.2445, DB13 +0.4664 mmol g^-1. Geometry magnitude and ASA/AVA composition also differ sharply, so source is an applicability/provenance variable rather than a causal explanation.
 
-Twelve CIFs were extracted locally with a checksum/extraction manifest.
-
-## H6 — same-source primary effects
-
-| source | pairs | median delta_q (mmol/g) | mean delta_q | positive fraction | median max geometry diff | ASA/AVA fraction |
-|---|---:|---:|---:|---:|---:|---:|
-| DB0 | 8,053 | 0.342040 | 0.704850 | 0.652800 | 0.225298 | 0.518068 |
-| DB5 | 1,808 | 10.437185 | 10.665019 | 0.994469 | 0.958033 | 0.721792 |
-| DB6 | 476 | -0.244486 | -0.214923 | 0.342437 | 0.180201 | 0.079832 |
-| DB13 | 225 | 0.466370 | 0.659570 | 0.702222 | 0.172244 | 0.391111 |
-
-Source identity is confounded with geometry magnitude and driver composition and is treated as an applicability variable rather than a causal factor.
+None of these modules may redefine the frozen primary analysis.

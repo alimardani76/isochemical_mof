@@ -1,22 +1,12 @@
-# Reproducing the historical Project 17 workflow
+# Reproducing the frozen analysis
 
-The handover repository is reorganized under `scripts/` and `results/`, but many historical analysis scripts were originally written against this local layout:
+Several historical scripts preserve paths from the original analysis workspace. Do not execute relocated historical scripts blindly from the repository tree.
 
-```text
-Project17/
-├── raw/
-├── Step 1 preparation/
-├── Step 1 results/
-├── Step 2 calculation/
-├── Step 2 results/
-├── Step 3 production/
-├── Step 3 results/
-├── figures/
-└── test_*.py
-```
+1. Use the recorded dependencies under `environment/`.
+2. Run `python reproduce/build_legacy_workspace.py` from repository root.
+3. Restore the exact ARC–MOF release-v7 inputs listed in `data_manifest/RAW_DATA_REQUIRED.md` and verify the recorded inventory/hashes.
+4. Run staged scripts in order (`scripts/step1/`, `scripts/step2/`, `scripts/step3/`) and require the corresponding audits under `scripts/audits/` to pass.
+5. Run post-freeze H2/H3/H4/H6 scripts from `submission_upgrade/`; canonical outputs belong under `results/submission_upgrade/`.
+6. Generate current quantitative publication figures with `figures/redesign/validate_redesign_values.py` followed by `figures/redesign/run_all.py`. Structural Figure 5 follows `submission_upgrade/H4_STRUCTURAL_FIGURE_METHOD.md`.
 
-Do not assume a relocated historical script can be run directly from `scripts/` with identical path resolution. Build a compatibility workspace first, restore ARC-MOF v7 raw data in `workspace/raw/`, then run the original stages and audits from that workspace root.
-
-The post-freeze `submission_upgrade` scripts are newer and use explicit `--project-root` and `--output-dir` arguments, so they are portable once the frozen upstream results exist.
-
-This repository-path compatibility layer fixes organization only; it does not bundle ARC-MOF raw source data or replace stage-specific reconstruction audits.
+Do not substitute a newer ARC–MOF release or change the chemistry key, architecture key, pair rule, thresholds, orientation, endpoint, estimator, or bootstrap without treating it as a new analysis.
