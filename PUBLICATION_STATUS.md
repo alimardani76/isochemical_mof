@@ -1,32 +1,53 @@
-# Publication and archival status
+# Publication status
 
-## Current scientific state
+## Current state
 
-- Frozen primary analysis: complete.
-- Post-freeze H2/H3/H4/H6 analyses: complete and bounded as secondary/post-freeze.
-- Publication figure redesign workflow: complete.
-- Figure 5 deterministic selection/rendering workflow: complete.
-- Current manuscript/SI/bibliography/closure-table sources: synchronized to the 2026-08-17 Overleaf publication-finalization checkpoint on `shayan-final-edit`.
-- Main ↔ SI evidence navigation: complete (Figures S1–S6 and Tables S1–S33 are called from the main manuscript).
-- Current compiled checkpoint supplied with the synchronized source: main manuscript 24 pages; SI 27 pages.
+The scientific analysis for **Matched MOF Families Reveal Regime-Dependent Pore-Geometry Effects on Adsorption** is frozen. The current coauthor-review manuscript checkpoint is the **Materials Horizons G2 candidate (2026-08-18)**.
 
-## Current manuscript title
+Completed journal-facing work:
 
-**Matched MOF Families Reveal Regime-Dependent Pore-Geometry Effects on Adsorption**
+- PASS B-final — forensic reference audit and bounded self-citation integration; 40-entry bibliography, all entries used;
+- PASS G1 — Communication-level editorial compression while preserving the central chemistry and robustness discussion;
+- PASS G2 — 156-word New Concepts statement, Materials Horizons cover letter, title decision, submission checklist, positioning memo, and graphical-abstract/TOC brief.
 
-## Pull-request state
+The journal-facing package is under `manuscript/` and `manuscript/submission/`.
 
-PR #4 is the publication-hardening and source-synchronization pull request from `shayan-final-edit` to `main`. The previously stale manuscript-source warning has been resolved by synchronizing the current Overleaf source. The branch is ready for coauthor review of the publication-side repository changes; merging remains a coauthor/owner action.
+## Scientific contract — frozen
 
-## Items intentionally still open before immutable submission release
+Do not silently change the recorded-chemistry/architecture definitions, frozen pair catalogue, pair orientation, 10% primary criterion, 20%/30% stronger tiers, CH4 298 K / 65 bar primary endpoint, family-median estimator, 10,000-replicate bootstrap with seed 17, or the bounded post-freeze analyses.
 
-1. **Permanent archive / DOI** — after coauthor review, create the exact submission release and, if chosen, archive it in a DOI-minting repository. Record that immutable identifier in manuscript/repository metadata.
-2. **Code license** — coauthors must select an explicit license; see `LICENSE_NOTE.md`.
-3. **Author declarations** — finalize CRediT, competing interests, and funding/acknowledgements/computing-resource statements; see `manuscript/PASS_F_AUTHOR_CONFIRMATION.md`.
-4. **Repository visibility** — the repository is currently public; changing visibility requires repository owner/admin permission.
-5. **Publication release bundle** — include the exact manuscript/SI source and PDFs, Figure 1–5 and S1–S6 publication binaries, compact frozen outputs, environment/provenance records, and hashes in the immutable release.
-6. **Data Availability version identifier** — the current manuscript contains an interim Git checkpoint. Replace that interim identifier with the final tagged/archived submission release once it exists.
+## Coauthor review / PR #4
 
-## Frozen boundary
+PR #4 is the publication-hardening and manuscript-synchronization PR into `main`. The G2 candidate is intended for Hosein's review before merge. `main` should remain unchanged until that review is complete.
 
-See `ANALYSIS_PROVENANCE.md` and the manuscript/SI methods. The chemistry key, architecture key, pair catalogue, orientation, 10/20/30% criteria, primary endpoint, primary estimator, bootstrap definition, and structural case selection are frozen for the reported paper. Publication editing must not silently change them.
+## Items still requiring author/owner confirmation
+
+1. final CRediT roles;
+2. competing-interests statement;
+3. funding / acknowledgements / computing resources;
+4. repository code license;
+5. final tagged submission release;
+6. DOI-bearing archive if the authors choose one;
+7. final Data Availability release/version identifier;
+8. optional repository-visibility change (owner/admin only).
+
+These are publication declarations/release decisions, not reasons to reopen the frozen analysis.
+
+## Important Data Availability note
+
+The current manuscript still cites an **interim Git checkpoint** in its Data Availability section. That identifier is acceptable for coauthor review but is **not the final journal-release identifier**. PASS H must replace it with the final tagged/released version after coauthor approval and verify every repository/data URL.
+
+## Next gate
+
+After coauthor review and the author declarations above, run **PASS H** against one common Overleaf/GitHub source:
+
+- final native main/SI/bibliography/closure sources;
+- exact Figure 1–5 and S1–S6 bundle;
+- zero undefined references/citations;
+- numerical-anchor and caption checks;
+- DOI/link verification;
+- final RSC/Materials Horizons template/portal check;
+- immutable release/DOI update if chosen;
+- final source/PDF ZIP and SHA-256 manifest.
+
+No repository version should be described as the final journal release until that gate is complete.
