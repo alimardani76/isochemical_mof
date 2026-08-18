@@ -1,5 +1,5 @@
-% Supporting Information for Project 17
-% Updated through audited response-archetype analysis.
+% Supporting Information
+% Scientific definitions, generated closure-table values, and numerical results remain unchanged.
 
 \documentclass[11pt,a4paper]{article}
 
@@ -10,6 +10,7 @@
 \usepackage{microtype}
 \usepackage{amsmath,amssymb}
 \usepackage{siunitx}
+\DeclareSIUnit{\calorie}{cal}
 \usepackage{booktabs,tabularx,longtable}
 \usepackage{array}
 \usepackage{graphicx}
@@ -20,26 +21,40 @@
 \usepackage[numbers,sort&compress]{natbib}
 \usepackage[colorlinks=true,linkcolor=blue!45!black,
             citecolor=green!35!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\crefname{figure}{Fig.}{Figs.}
+\Crefname{figure}{Figure}{Figures}
+\crefname{table}{Table}{Tables}
+\Crefname{table}{Table}{Tables}
+\crefname{section}{Section}{Sections}
+\Crefname{section}{Section}{Sections}
 
-\graphicspath{{figures/}}
+\graphicspath{{figures/}{figures/final/}}
 \setlength{\emergencystretch}{2em}
+\newcommand{\papertitle}{Matched MOF Families Reveal Regime-Dependent Pore-Geometry Effects on Adsorption}
 
-\newcommand{\sifigure}[4]{%
+\newcommand{\sifigure}[5]{%
   \begin{figure}[H]
     \centering
     \IfFileExists{figures/#1}{%
-      \includegraphics[width=0.96\linewidth]{#1}%
+      \includegraphics[width=0.96\linewidth]{figures/#1}%
     }{%
-      \fbox{\parbox[c][6.0cm][c]{0.92\linewidth}{%
-        \centering\textbf{#2}\\[0.7em]
-        \small #3\\[0.7em]
-        \textit{Expected file: \texttt{\detokenize{figures/#1}}}}}%
+      \IfFileExists{figures/final/#1}{%
+        \includegraphics[width=0.96\linewidth]{figures/final/#1}%
+      }{%
+        \fbox{\parbox[c][6.0cm][c]{0.92\linewidth}{%
+          \centering\textbf{#3}\\[0.7em]
+          \small #4\\[0.7em]
+          \textit{Expected file:}\\[0.2em]
+          \nolinkurl{figures/#1}\\[-0.1em]
+          \textit{or}\\[-0.1em]
+          \nolinkurl{figures/final/#1}}}%
+      }%
     }
-    \caption{\textbf{#2.} #4}
-    \label{fig:#1}
+    \caption{\textbf{#3.} #5}
+    \label{#2}
   \end{figure}%
 }
-
 
 % Supporting Information numbering
 \renewcommand{\thetable}{S\arabic{table}}
@@ -49,8 +64,7 @@
 
 \begin{center}
 {\LARGE \textbf{Supporting Information}}\\[0.5em]
-{\Large \textbf{Pressure-Dependent Pore-Geometry Effects in Chemistry- and Topology-Matched}\\[0.2em]
- \Large \textbf{Metal--Organic Frameworks}}\\[1.2em]
+{\Large \textbf{\papertitle}}\\[1.2em]
 
 {\large \textbf{Hosein Alimardani}$^{1,\dagger}$, \textbf{Shayan Abaei}$^{2,\dagger}$,
 \textbf{Mehrdad Asgari}$^{3,*}$}\\[0.9em]
@@ -69,36 +83,56 @@
 \clearpage
 
 \section{Purpose and analysis hierarchy}
+\label{sec:purpose}
 
-This Supporting Information documents the full staged workflow used to construct
-and analyze chemistry-matched, architecture-matched MOF geometry contrasts. The
-ARC--MOF resource supplies charged CIFs, chemistry-aware representations, topology
-labels, geometric descriptors, adsorption records, and process metrics
-\cite{burner2023arcmof}. REPEAT is the underlying periodic charge methodology
-associated with the charged structures \cite{campana2009repeat}; high-throughput
-pore geometry follows established porous-material analysis methodology
-\cite{willems2012zeopp}. CIF parsing used pymatgen \cite{ong2013pymatgen}, and RAC
-descriptors originate from the revised autocorrelation framework
-\cite{janet2017rac}. Recorded topology was treated as a coarse architecture label;
-automated topology identification is discussed by Zoubritzky and Coudert
+This Supporting Information (SI) provides the complete evidence trail for the
+matched-family analysis while keeping the inferential hierarchy explicit. The
+outcome-blind construction and frozen primary comparison are documented in
+\cref{sec:cohort,sec:geometry-support,sec:frozen-pairs,sec:primary};
+secondary adsorption, process, concordance, pressure-transition, and archetype
+results follow in
+\cref{sec:secondary-adsorption,sec:secondary-process,sec:concordance,sec:transitions,sec:archetypes}. Dominant-context and database-provenance robustness
+are reported in \cref{sec:robustness,sec:provenance}. The generated complete
+secondary-result closure and source/code map are retained as Sections 14--15 and
+\cref{tab:S23,tab:S24,tab:S25}. Post-freeze attribution, uptake-basis/density, and
+same-source checks are reported in
+\cref{sec:attribution,sec:basis-density,sec:source-heterogeneity}; the structural
+case ledger is \cref{sec:structures}. The document closes with database-specific
+limitations, the audit trail, and the interpretive boundary in
+\cref{sec:limitations,sec:audit,sec:boundary}.
+
+ARC--MOF supplies the charged CIFs, chemistry-aware representations, recorded
+topology and dimensionality, pore descriptors, adsorption records, and process
+metrics used here \cite{burner2023arcmof}. REPEAT is the periodic charge
+methodology associated with the charged structures \cite{campana2009repeat};
+high-throughput pore geometry follows established porous-material analysis
+methodology \cite{willems2012zeopp}. CIF parsing used pymatgen
+\cite{ong2013pymatgen}, RAC descriptors originate from the revised autocorrelation
+framework \cite{janet2017rac}, and recorded topology was treated as a coarse
+architecture label consistent with automated topology identification
 \cite{zoubritzky2022crystalnets}.
 
-The analysis hierarchy was frozen sequentially before the corresponding outcome values were inspected. Chemistry and recorded
-architecture were fixed before geometry thresholding. The 10\% geometry threshold
-was frozen before pair construction. Pair identities and orientation were frozen
-before outcome values were read. CH$_4$ uptake at 298 K and 65 bar in
-\si{\milli\mole\per\gram} was frozen as the confirmatory endpoint before opening
-adsorption values. All remaining gases, pressures, uptake bases, energetic
-quantities, and process metrics were subsequently treated as secondary or
-exploratory. No minimum practically meaningful confirmatory effect size was
-prespecified. The confirmatory family bootstrap resampled matched families and did
-not propagate per-framework Monte Carlo sampling uncertainty. Secondary analyses
-were descriptive; no multiplicity-adjusted confirmatory testing was applied and no
-secondary endpoint was promoted after value inspection.
+The inferential sequence is fixed throughout this document. Recorded chemistry and
+broad architecture were fixed before geometry thresholding; the 10\% geometry
+criterion was frozen before deterministic pair construction; pair identity and
+orientation were frozen before outcome values were read; and CH$_4$ uptake at
+298 K and 65 bar in \si{\milli\mole\per\gram} was frozen as the primary endpoint
+before its values were opened. All other gases, pressures, uptake bases, energetic
+quantities, process metrics, concordance summaries, archetypes, source strata, and
+structural case studies are secondary or post-freeze analyses. No minimum
+practically meaningful primary effect was prespecified. The family bootstrap
+resamples matched families and does not propagate per-framework Monte Carlo
+sampling uncertainty. Secondary analyses remain descriptive; none is promoted to
+primary status after value inspection.
+
 
 \section{Outcome-blind cohort construction}
+\label{sec:cohort}
 
 \subsection{Stage-level census}
+
+The outcome-blind population flow is summarized in \cref{tab:S1}. This census is the numerical basis for main-text Figure 1A; chemistry/architecture definitions are kept separate from geometry support so that the order of information access remains explicit.
+
 
 \begin{table}[H]
 \centering
@@ -121,6 +155,9 @@ Frozen primary geometry pairs & 11,072 & 22,144 unique \\
 \end{table}
 
 \subsection{Chemistry and architecture definitions}
+
+Architecture-status outcomes are reported in \cref{tab:S2}. The architecture filter is deliberately conservative: missing labels are treated as ambiguous rather than reconstructed, and geometry remains excluded from the architecture key.
+
 
 The Stage 1.3 chemistry key used five components: scale-invariant whole-CIF
 elemental composition, scale-invariant metal-element composition, and ARC--MOF
@@ -156,6 +193,10 @@ Ambiguous: missing topology and dimensionality & 1 \\
 Only 27 source chemistry families split into more than one validated architecture.
 
 \section{Within-family geometry variation and threshold support}
+\label{sec:geometry-support}
+
+Descriptor-level variation and threshold support are reported in \cref{tab:S3,tab:S4,tab:S5}. These tables provide the numerical support behind main-text Figure 1B--C and document that the 10\% threshold was selected from outcome-blind structural support rather than adsorption performance.
+
 
 All 44,511 frameworks retained after Stage 1.4 had complete values for the ten
 geometry descriptors carried forward. Geometry variation was first measured
@@ -228,6 +269,10 @@ $D_{\mathrm{if}}$ & 9,779 & 6,207 & 3,022 & 2,055 \\
 \end{longtable}
 
 \section{Frozen geometry-pair cohort}
+\label{sec:frozen-pairs}
+
+The frozen cohort size and largest-contrast class composition are summarized in \cref{tab:S6,tab:S7}. Together with main-text Figure 1D--F, these tables show that the frozen pairs span multiple geometry modes and recorded topologies while remaining intrinsically multidimensional.
+
 
 \begin{table}[H]
 \centering
@@ -257,7 +302,7 @@ selected primary pair.}
 \label{tab:S7}
 \begin{tabular}{lrr}
 \toprule
-Driver descriptor & Selected pairs & Median driver difference \\
+Largest-contrast descriptor & Selected pairs & Median largest contrast \\
 \midrule
 AVA & 3,933 & 0.3953 \\
 $D_f$ & 2,211 & 0.1810 \\
@@ -272,11 +317,15 @@ POAVAf & 60 & 0.1855 \\
 \end{table}
 
 \section{Confirmatory endpoint and primary adsorption result}
+\label{sec:primary}
+
+The primary estimate, prespecified contrast tiers, and class-resolved response are reported in \cref{tab:S8,tab:S9}. These are the complete numerical anchors for main-text Figure 2: \cref{tab:S8} reports the frozen population and stronger prespecified tiers, whereas \cref{tab:S9} separates accessible-space and diameter-labelled response classes.
+
 
 Before outcome values were opened, CH$_4$ uptake at 298 K and 65 bar in
 \si{\milli\mole\per\gram} was frozen as the confirmatory endpoint. The pair
-orientation was frozen from lower to higher value of the selected driver
-descriptor. The primary effect was
+orientation was frozen from lower to higher value of the already-selected
+largest-contrast descriptor. The primary effect was
 $\Delta q=q_{\mathrm{geometry\mbox{-}high}}-
 q_{\mathrm{geometry\mbox{-}low}}$ and the population estimator was the median
 across frozen families. A 10,000-replicate family bootstrap with seed 17 supplied
@@ -305,11 +354,11 @@ effect was 0.0490.
 
 \begin{table}[H]
 \centering
-\caption{Primary CH$_4$ response by frozen geometry driver.}
+\caption{Primary CH$_4$ response by frozen largest-contrast geometry descriptor.}
 \label{tab:S9}
 \begin{tabular}{lrrr}
 \toprule
-Driver & Pairs & Median $\Delta q$ (\si{\milli\mole\per\gram}) &
+Largest-contrast class & Pairs & Median $\Delta q$ (\si{\milli\mole\per\gram}) &
 Positive fraction \\
 \midrule
 ASA & 2,036 & 2.9964 & 0.9288 \\
@@ -325,6 +374,10 @@ $D_f$ & 2,211 & -0.1457 & 0.4120 \\
 \end{table}
 
 \section{Secondary adsorption atlas}
+\label{sec:secondary-adsorption}
+
+The complete audited \si{\milli\mole\per\gram} adsorption endpoints are listed in \cref{tab:S10}; the secondary N$_2$/H$_2$ endpoint comparison is visualized in \cref{figS:secondary-pressure}. \Cref{tab:S10} supplies the endpoint values plotted for CH$_4$/CO$_2$ in main-text Figure 3A--B and keeps the lower- and higher-pressure conditions explicit.
+
 
 \begin{longtable}{llrrrr}
 \caption{Secondary \si{\milli\mole\per\gram} adsorption responses using the frozen
@@ -362,16 +415,34 @@ Pre-combustion & H$_2$ & 24 & 11,071 & 0.0218 & 0.7054 \\
 \bottomrule
 \end{longtable}
 
-\sifigure{Figure_S1.pdf}
+\sifigure{Figure_S1.pdf}{figS:secondary-pressure}
   {Secondary N$_2$ and H$_2$ pressure responses}
-  {Post-combustion N$_2$ and pre-combustion H$_2$ low/high pressure responses.}
-  {N$_2$ and H$_2$ were retained as secondary outcomes. Both show modest positive
-   median geometry-associated uptake responses, with substantially smaller absolute
-   changes than high-pressure CH$_4$ or CO$_2$.}
+  {Discrete lower- and higher-pressure median relative uptake responses for
+   post-combustion N$_2$ and pre-combustion H$_2$.}
+  {N$_2$ and H$_2$ were retained as secondary outcomes. Open and filled markers
+   denote the available lower- and higher-pressure endpoints, respectively; the
+   connecting segment is a visual link between those endpoints rather than a fitted
+   pressure trajectory. Both gases show modest positive median geometry-associated
+   responses, substantially smaller in absolute uptake than high-pressure CH$_4$ or
+   CO$_2$.}
+
+The full endpoint table shows that pressure response is not guest-independent.
+CH$_4$ becomes more favorable at the higher stored pressure in all three methane
+contexts, whereas several CO$_2$ contexts remain negative and pre-combustion
+CO$_2$ changes sign. \Cref{figS:secondary-pressure} adds N$_2$ and H$_2$ without
+changing that interpretation: their median responses are positive but comparatively
+small. These are discrete database state points, not interpolated isotherms.
 
 \section{Secondary process outcomes}
+\label{sec:secondary-process}
 
-\begin{longtable}{llrrr}
+Selected process metrics are summarized in \cref{tab:S11}, with the AFM--SSP trade-off shown in \cref{figS:process-tradeoff}. \Cref{tab:S11} is the numerical basis for main-text Figure 3C--D and distinguishes capacity-type objectives from separation selectivity rather than collapsing them into one performance score.
+
+
+\begingroup
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{p{0.17\textwidth}p{0.30\textwidth}rrr}
 \caption{Selected process-level secondary outcomes.}\label{tab:S11}\\
 \toprule
 Process & Metric & Complete pairs & Median change & Positive fraction \\
@@ -404,15 +475,27 @@ Pre-combustion & SSP & 11,008 & -155.3865 & 0.4276 \\
 Pre-combustion & AFM & 11,008 & 417.4724 & 0.6578 \\
 \bottomrule
 \end{longtable}
+\endgroup
 
-\sifigure{Figure_S2.pdf}
+\sifigure{Figure_S2.pdf}{figS:process-tradeoff}
   {AFM--SSP trade-offs across separation processes}
   {Median symmetric relative AFM effect versus median symmetric relative SSP effect
    for the four processes with both metrics.}
   {Process-level metrics need not respond in the same direction. The AFM--SSP
    comparison summarizes this trade-off on a common symmetric relative scale.}
 
+The disagreement among process metrics is substantive rather than graphical.
+Methane-storage and pre-combustion working capacity increase on median, while
+selectivity decreases in every separation context with available values. AFM and
+SSP can also occupy different response quadrants. The SI therefore reports these
+metrics separately and treats them as screening objectives, not interchangeable
+measures of one latent ``separation performance'' variable.
+
 \section{Cross-condition concordance}
+\label{sec:concordance}
+
+Primary-endpoint concordance is tabulated in \cref{tab:S12}; the full endpoint-by-endpoint rank-correlation and sign-agreement matrices are shown in \cref{figS:concordance}. The fixed condition-based ordering is retained so that the matrices can be read by guest and loading regime rather than outcome-clustered after inspection.
+
 
 \begin{longtable}{llrrr}
 \caption{Concordance of each secondary \si{\milli\mole\per\gram} adsorption
@@ -445,7 +528,7 @@ Post-combustion & CO$_2$ & 0.15 & -0.318 & 0.424 \\
 \bottomrule
 \end{longtable}
 
-\sifigure{Figure_S3.pdf}
+\sifigure{Figure_S3.pdf}{figS:concordance}
   {Cross-condition effect concordance}
   {Full 18-by-18 Spearman correlation matrix and 18-by-18 sign-agreement matrix
    for the frozen pair-level \si{\milli\mole\per\gram} effects.}
@@ -454,20 +537,33 @@ Post-combustion & CO$_2$ & 0.15 & -0.318 & 0.424 \\
    whereas several low-pressure CO$_2$ conditions show weak or negative
    concordance.}
 
-\section{Low-to-high pressure sign transitions}
+\Cref{tab:S12,figS:concordance} show that rank concordance and sign concordance are
+related but not identical. Several higher-loading endpoints align strongly with the
+primary methane response, whereas multiple low-pressure CO$_2$ endpoints have
+negative rank correlation and below-half sign agreement. This is the pair-level
+evidence underlying the operating-regime interpretation in the main text.
 
-\begin{longtable}{llrrrrr}
+\section{Low-to-high pressure sign transitions}
+\label{sec:transitions}
+
+Discrete lower-to-higher-pressure sign transitions are reported in \cref{tab:S13}.
+
+
+\begingroup
+\small
+\setlength{\tabcolsep}{3.5pt}
+\begin{longtable}{p{0.20\textwidth}lrrrrr}
 \caption{Pair-level sign transitions from the lower to the higher pressure in each
 source/guest series.}\label{tab:S13}\\
 \toprule
-Context & Guest & Low $p$ & High $p$ & Negative$\rightarrow$positive &
-Positive$\rightarrow$negative & Low/high $\rho$ \\
+Context & Guest & Low $p$ & High $p$ & Neg.$\rightarrow$pos. &
+Pos.$\rightarrow$neg. & Low/high $\rho$ \\
  & & (bar) & (bar) & fraction & fraction & \\
 \midrule
 \endfirsthead
 \toprule
-Context & Guest & Low $p$ & High $p$ & Negative$\rightarrow$positive &
-Positive$\rightarrow$negative & Low/high $\rho$ \\
+Context & Guest & Low $p$ & High $p$ & Neg.$\rightarrow$pos. &
+Pos.$\rightarrow$neg. & Low/high $\rho$ \\
 \midrule
 \endhead
 Landfill gas & CH$_4$ & 0.01 & 4.4 & 0.266 & 0.098 & 0.349 \\
@@ -481,11 +577,21 @@ Pre-combustion & CO$_2$ & 0.4 & 16 & 0.435 & 0.098 & -0.253 \\
 Pre-combustion & H$_2$ & 0.6 & 24 & 0.150 & 0.179 & 0.585 \\
 \bottomrule
 \end{longtable}
+\endgroup
 
 Across individual pairs, the median fraction of positive endpoints was 0.444 at
-lower pressure and 0.556 at higher pressure.
+lower pressure and 0.556 at higher pressure. Negative-to-positive transitions
+substantially exceed the reverse transition for methane storage, landfill CH$_4$,
+natural-gas-purification CH$_4$, and especially pre-combustion CO$_2$. These
+fractions motivate the archetype analysis in \cref{sec:archetypes} but do not
+identify a continuous crossover pressure or kinetic transition.
 
 \section{Response archetypes}
+\label{sec:archetypes}
+
+Overall archetype counts and their geometry/topology composition are reported in
+\cref{tab:S14,tab:S15,tab:S16}.
+
 
 A pair was classified as majority positive within a pressure regime when strictly
 more than half of its observed endpoint effects were positive. This generated four
@@ -507,17 +613,18 @@ Negative both & 3,667 & 0.3312 \\
 \end{tabular}
 \end{table}
 
+\begingroup
+\small
+\setlength{\tabcolsep}{3pt}
 \begin{longtable}{lrrrrr}
-\caption{Response-archetype composition by frozen geometry driver.}
+\caption{Response-archetype composition by frozen largest-contrast geometry descriptor.}
 \label{tab:S15}\\
 \toprule
-Driver & Pairs & Positive both & Pressure activated & Pressure suppressed &
-Negative both \\
+Class & Pairs & Positive both & Activated & Suppressed & Negative both \\
 \midrule
 \endfirsthead
 \toprule
-Driver & Pairs & Positive both & Pressure activated & Pressure suppressed &
-Negative both \\
+Class & Pairs & Positive both & Activated & Suppressed & Negative both \\
 \midrule
 \endhead
 AVA & 3,933 & 0.2929 & 0.4038 & 0.0290 & 0.2743 \\
@@ -530,6 +637,7 @@ POAVA & 156 & 0.5577 & 0.2115 & 0.0577 & 0.1731 \\
 POAVAf & 60 & 0.4833 & 0.0833 & 0.0667 & 0.3667 \\
 \bottomrule
 \end{longtable}
+\endgroup
 
 \begin{table}[H]
 \centering
@@ -549,7 +657,19 @@ sra & 653 & 0.4686 & 0.1853 & 0.0536 & 0.2925 \\
 \end{table}
 
 
+The four regions in main-text Figure 4A are direct visualizations of the
+deterministic majority-sign definition in \cref{tab:S14}. \Cref{tab:S15} shows that
+ASA/AVA-labelled pairs are enriched in positive-both or pressure-activated regimes,
+whereas diameter-labelled classes are enriched in negative-both behavior.
+\Cref{tab:S16} shows that topology changes the prevalence of activation without
+identifying one topology as a universal mechanism.
+
 \section{Dominant-context robustness}
+\label{sec:robustness}
+
+Class/topology removal and non-ASA/AVA contrast-tier checks are summarized in
+\cref{tab:S17,tab:S18}.
+
 
 Robustness analyses were performed only after completion of the confirmatory
 analysis. They preserved the frozen pair identities, pair orientation, 10\%
@@ -569,24 +689,24 @@ Full cohort & 11,072 & 0.5836 & 0.7050 \\
 Exclude pcu & 6,410 & 0.4778 & 0.7092 \\
 Exclude fsc & 6,853 & 0.5841 & 0.6822 \\
 Exclude pcu + fsc & 2,191 & 0.2953 & 0.6458 \\
-Exclude ASA driver & 9,036 & 0.3642 & 0.6546 \\
-Exclude AVA driver & 7,139 & 0.3120 & 0.6296 \\
-Exclude ASA + AVA drivers & 5,103 & 0.0185 & 0.5103 \\
+Exclude ASA-labelled pairs & 9,036 & 0.3642 & 0.6546 \\
+Exclude AVA-labelled pairs & 7,139 & 0.3120 & 0.6296 \\
+Exclude ASA + AVA-labelled pairs & 5,103 & 0.0185 & 0.5103 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 For the aggressive topology stress test excluding both pcu and fsc, a descriptive
 10,000-replicate family bootstrap gave a 95\% interval of
-\SIrange{0.2491}{0.3505}{\milli\mole\per\gram}. For the aggressive driver stress
-test excluding both ASA and AVA, the corresponding interval was
+\SIrange{0.2491}{0.3505}{\milli\mole\per\gram}. For the aggressive descriptor-class stress
+test excluding both ASA and AVA labels, the corresponding interval was
 \SIrange{-0.0080}{0.0415}{\milli\mole\per\gram}. These intervals are secondary
 robustness summaries and do not replace the frozen confirmatory interval.
 
 \begin{table}[H]
 \centering
 \caption{Stronger-contrast robustness after simultaneous removal of ASA- and
-AVA-driven pairs.}
+AVA-labelled pairs.}
 \label{tab:S18}
 \begin{tabular}{lrrr}
 \toprule
@@ -601,15 +721,26 @@ $\geq30\%$ & 1,353 & 0.7182 & 0.6526 \\
 \end{table}
 
 The topology stress tests show that the pooled positive high-pressure response is
-not created solely by pcu or fsc. The driver stress tests are more restrictive:
+not created solely by pcu or fsc. The largest-contrast-class stress tests are more restrictive:
 the near-zero response after simultaneous removal of ASA and AVA demonstrates that
 the primary 10\% effect is concentrated in accessible-area and accessible-volume
 changes. The recovery of a positive response at the 20 and 30\% tiers shows,
 however, that sufficiently large changes in other geometry descriptors can still
 produce favorable high-pressure methane responses.
 
+These two stress tests answer different questions. Removing pcu/fsc tests whether
+the primary sign depends on the dominant recorded topologies; removing ASA/AVA
+tests how much of the 10\% pooled signal is compositionally concentrated in
+accessible-space classes. Neither operation changes the frozen pair catalogue or
+replaces the primary estimate.
+
 
 \section{Database-provenance robustness}
+\label{sec:provenance}
+
+Broad provenance, leave-source-out, and ASA/AVA provenance results are reported in
+\cref{tab:S19,tab:S20,tab:S21}.
+
 
 Source provenance was recovered from the ARC--MOF \texttt{DBx-} framework prefix.
 DB12 and DB14 were classified as experimental-source collections; the remaining
@@ -669,7 +800,7 @@ leave-one-major-source-out population retains a positive median primary response
 
 \begin{table}[H]
 \centering
-\caption{Database-provenance robustness of the ASA/AVA-driven population.}
+\caption{Database-provenance robustness of the ASA/AVA-labelled population.}
 \label{tab:S21}
 \begin{tabular}{lrrr}
 \toprule
@@ -689,9 +820,21 @@ Exclude DB5 & 4,513 & 0.9842 & 0.8329 \\
 Thus the accessible-area/accessible-volume signal remains strongly positive after
 removal of either dominant source contribution.
 
-\section{Claim--evidence matrix}
+The leave-source-out analysis therefore addresses whether one major source is
+required for the pooled sign; it does not explain why same-source medians differ.
+That second question is treated separately in the post-freeze sampled-space
+comparison in \cref{sec:source-heterogeneity,tab:S32,figS:source}.
 
-\begin{longtable}{p{0.26\textwidth}p{0.30\textwidth}p{0.36\textwidth}}
+\section{Claim--evidence matrix}
+\label{sec:claim-evidence}
+
+The manuscript claim--evidence map is given in \cref{tab:S22}.
+
+
+\begingroup
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{p{0.24\textwidth}p{0.29\textwidth}p{0.34\textwidth}}
 \caption{Final claim--evidence matrix and explicit boundary conditions.}
 \label{tab:S22}\\
 \toprule
@@ -716,7 +859,7 @@ continuous dose--response mechanism. \\
 \addlinespace
 ASA/AVA are the dominant favorable geometry classes &
 ASA/AVA removal leaves median 0.0185
-\si{\milli\mole\per\gram}; ASA- and AVA-driven pairs are strongly positive &
+\si{\milli\mole\per\gram}; ASA- and AVA-labelled pairs are strongly positive &
 Other geometry classes are not uniformly inactive; the non-ASA/AVA 30\% tier has
 median 0.7182 \si{\milli\mole\per\gram}. \\
 \addlinespace
@@ -742,27 +885,66 @@ Every leave-one-major-source-out primary population remains positive; ASA/AVA
 remains positive after DB0 or DB5 removal &
 99.2\% of frozen pairs are hypothetical--hypothetical; experimental transfer is
 weakly sampled. \\
+\addlinespace
+Accessible-space/diameter separation survives cleaner attribution &
+At top-1/top-2 $\geq1.50$, ASA remains 90.7\% positive with median 1.0699
+\si{\milli\mole\per\gram}, while $D_f$ remains slightly negative &
+The strict pooled cohort changes composition and becomes strongly $D_f$-weighted;
+the label remains an attribution class, not an isolated causal variable. \\
+\addlinespace
+Positive high-pressure response survives a change of uptake basis but is density
+coupled &
+v/v median $+3.7972$; density-change correlations are $\rho=-0.7720$ for
+\si{\milli\mole\per\gram} and $-0.3254$ for v/v &
+Crystallographic v/v is not packed-bed/device performance, and density is a coupled
+structural variable rather than an independent causal knob. \\
+\addlinespace
+Structural exemplars support a regime interpretation without mechanistic
+localization &
+Deterministic Figure 5 cases span favorable accessible-space, unfavorable or
+pressure-suppressed diameter, and experimental-source structural contexts &
+Renderings do not identify adsorption sites, measured bottlenecks, or experimental
+adsorption validation. \\
 \bottomrule
 \end{longtable}
+\endgroup
 
+
+The complete frozen secondary adsorption and process outputs, together with the
+source/code map, are provided in \cref{tab:S23,tab:S24,tab:S25}.
 
 % Generated from the complete audited Step 3.5 secondary-summary CSVs.
-% Project17_SI_closure_tables.tex is a frozen generated include retained with the handover.
+% Project17_SI_closure_tables.tex is the frozen generated closure-table include.
+% Values in that generated file are not edited here; only page orientation and
+% typography are adjusted so the complete tables remain readable.
+\clearpage
+\begin{landscape}
+\begingroup
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
 \input{Project17_SI_closure_tables}
+\endgroup
+\end{landscape}
+\clearpage
 
 
 \section{Post-freeze geometry-attribution stability}
+\label{sec:attribution}
 
-The frozen pair driver is the descriptor with the largest symmetric relative
-geometry difference in a selected pair. Because the eight pore descriptors can
-change simultaneously, an additional post-freeze analysis quantified how clearly
-the largest difference exceeded the second largest. No pair was reselected and no
-outcome informed the dominance criterion.
+The pooled and descriptor-resolved dominance checks are tabulated in
+\cref{tab:S26,tab:S27} and summarized graphically in \cref{figS:attribution}.
+
+
+The frozen pair label is the descriptor with the largest symmetric relative geometry
+difference in a selected pair. Because the eight pore descriptors can change
+simultaneously, a post-freeze analysis quantified how clearly the largest difference
+exceeded the second largest. No pair was reselected and no outcome informed the
+dominance criterion.
 
 \begin{table}[H]
 \centering
-\caption{Primary CH$_4$ response after progressively requiring the largest pairwise
-geometry difference to dominate the second-largest difference.}
+\caption{Pooled primary CH$_4$ response after progressively requiring the largest
+pairwise geometry difference to dominate the second-largest difference.}
 \label{tab:S26}
 \begin{tabular}{lrrrr}
 \toprule
@@ -776,21 +958,85 @@ $\geq1.50$ & 1,715 & 0.1549 & 0.0383 & 0.5312 \\
 \end{tabular}
 \end{table}
 
-The attenuation with increasingly dominant top-1 contrasts indicates that the
-largest-difference descriptor is an attribution label rather than evidence of an
-isolated one-descriptor perturbation. Strong responses are commonly embedded in
-multidimensional geometry changes.
+The pooled attenuation should not be read as a uniform loss of descriptor-specific
+response because the retained class composition changes strongly as the dominance
+criterion tightens. \Cref{tab:S27} therefore reports the major classes separately.
+
+\begin{table}[H]
+\centering
+\caption{Descriptor-resolved primary response in increasingly clean
+largest-contrast subsets. Values use the frozen pair orientation and endpoint.}
+\label{tab:S27}
+\begin{tabular}{llrrr}
+\toprule
+Class & Top-1/top-2 criterion & Pairs & Median $\Delta q$ & Positive fraction \\
+ & & & (\si{\milli\mole\per\gram}) & \\
+\midrule
+ASA & $\geq1.00$ & 2,036 & 2.9964 & 0.9288 \\
+ASA & $\geq1.10$ & 883 & 1.3745 & 0.9060 \\
+ASA & $\geq1.25$ & 582 & 1.3514 & 0.9038 \\
+ASA & $\geq1.50$ & 311 & 1.0699 & 0.9068 \\
+\addlinespace
+AVA & $\geq1.00$ & 3,933 & 1.2201 & 0.8419 \\
+AVA & $\geq1.10$ & 1,236 & 2.2861 & 0.9547 \\
+AVA & $\geq1.25$ & 379 & 2.2727 & 0.9815 \\
+AVA & $\geq1.50$ & 23 & 1.6166 & 0.9565 \\
+\addlinespace
+$D_f$ & $\geq1.00$ & 2,211 & -0.1457 & 0.4120 \\
+$D_f$ & $\geq1.10$ & 1,975 & -0.1193 & 0.4233 \\
+$D_f$ & $\geq1.25$ & 1,666 & -0.1041 & 0.4292 \\
+$D_f$ & $\geq1.50$ & 1,265 & -0.0867 & 0.4364 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Taken together, \cref{tab:S26,tab:S27,figS:attribution} show that the loss of pooled
+support under stricter dominance is accompanied by a major shift in class composition.
+Clean ASA-dominant and AVA-dominant subsets remain strongly favorable while
+clean $D_f$-dominant subsets remain slightly unfavorable. At the 1.50 pooled cut,
+$D_f$ contributes 1,265 of 1,715 retained pairs. The shrinking pooled median is
+therefore partly a descriptor-mixture effect. The largest-contrast label remains
+noncausal because descriptors co-vary, but the accessible-space/diameter
+heterogeneity survives increasingly strict dominance filtering.
+
+\sifigure{Figure_S4_geometry_attribution_stability.pdf}{figS:attribution}
+  {Geometry-attribution stability in the frozen pair catalogue}
+  {Panel A, top-1/top-2 contrast-ratio distribution; panel B, Spearman correlation
+   among the eight pairwise geometry contrasts; panel C, descriptor-resolved median
+   primary response across increasingly strict dominance cuts; panel D, median
+   primary response versus the number of descriptors changing by at least 10\%.}
+  {The post-freeze attribution analysis does not reselect any pair or alter its
+   orientation. The pooled response attenuates as increasingly dominant single
+   contrasts are required, but descriptor-resolved behavior remains heterogeneous:
+   accessible-space classes remain favorable while $D_f$ remains slightly negative.
+   Descriptor correlations and the multiplicity panel emphasize that the frozen
+   largest-contrast label is an attribution class within multidimensional pore
+   changes, not an isolated causal perturbation.}
+
+The central point of \cref{figS:attribution} is class-resolved stability rather than
+the pooled attenuation alone. Tightening top-1/top-2 dominance changes which
+descriptor classes remain in the cohort; at the strictest cut, $D_f$ accounts for
+1,265 of 1,715 retained pairs. ASA and AVA nevertheless retain strongly favorable
+medians in their clean-dominance subsets while $D_f$ remains slightly negative.
+This is the SI evidence used to bound the largest-contrast terminology in main-text
+Section 2.3 and the structural interpretation of Figure 5.
 
 \section{Post-freeze uptake-basis and density robustness}
+\label{sec:basis-density}
+
+Uptake-basis, density-correlation, density-quintile, and descriptor-group results are
+reported in \cref{tab:S28,tab:S29,tab:S30,tab:S31} and visualized in
+\cref{figS:basis-density}.
+
 
 The 65-bar methane analysis was repeated on the same frozen pairs using the source
-v/v and wt\% fields after exact reproduction of the frozen \si{\milli\mole\per\gram}
-pair effects.
+v/v and wt\% fields after exact reproduction of the frozen
+\si{\milli\mole\per\gram} pair effects.
 
 \begin{table}[H]
 \centering
 \caption{Primary 298 K, 65 bar CH$_4$ response across uptake bases.}
-\label{tab:S27}
+\label{tab:S28}
 \begin{tabular}{lrrrrr}
 \toprule
 Metric & Pairs & Median $\Delta$ & Mean $\Delta$ & Positive fraction & 95\% bootstrap CI \\
@@ -802,25 +1048,103 @@ wt\% & 11,072 & 0.9337 & 3.8839 & 0.7050 & 0.8873--0.9839 \\
 \end{tabular}
 \end{table}
 
-The volumetric result is the informative basis-robustness test because it introduces
-density into the uptake representation. The positive median remains well separated
-from zero, although the lower positive-pair fraction shows that density moderates
-pair-level consistency. The wt\% result is expected to preserve ordering closely
-for a fixed adsorbate because it is a mass-basis conversion of molar uptake.
-
-\section{Post-freeze same-source heterogeneity}
-
-Same-source frozen pairs were summarized separately for ARC--MOF sources containing
-at least 100 such pairs.
+\begin{table}[H]
+\centering
+\caption{Association between signed framework-density change and the primary
+methane response.}
+\label{tab:S29}
+\begin{tabular}{lrr}
+\toprule
+Uptake basis & Pairs & Spearman $\rho$ with signed density change \\
+\midrule
+\si{\milli\mole\per\gram} & 11,072 & -0.7720 \\
+v/v & 11,072 & -0.3254 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \begin{table}[H]
 \centering
-\caption{Same-source primary CH$_4$ response and geometry composition.}
-\label{tab:S28}
+\caption{Density-quintile robustness. Q1 contains the strongest density decreases
+from the geometry-low to geometry-high member; Q5 contains density increases.}
+\label{tab:S30}
 \begin{tabular}{lrrrrr}
 \toprule
-Source & Pairs & Median $\Delta q$ & Positive fraction & Median max geometry difference & ASA/AVA fraction \\
- & & (\si{\milli\mole\per\gram}) & & & \\
+Density quintile & Pairs & Median density change & Median $\Delta q$ & Positive $q$ & Median $\Delta$(v/v) \\
+\midrule
+Q1 & 2,215 & -0.6667 & 10.1770 & 1.0000 & 44.2788 \\
+Q2 & 2,214 & -- & 1.8568 & 0.935 & 9.4190 \\
+Q3 & 2,214 & -- & 0.2224 & 0.645 & 2.0099 \\
+Q4 & 2,214 & -- & 0.0314 & 0.523 & 0.4049 \\
+Q5 & 2,215 & $>0$ & -0.1598 & 0.422 & 0.0541 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Uptake-basis response by accessible-space versus other
+largest-contrast classes.}
+\label{tab:S31}
+\begin{tabular}{llrrr}
+\toprule
+Population & Basis & Pairs & Median $\Delta$ & Positive fraction \\
+\midrule
+ASA/AVA-labelled & \si{\milli\mole\per\gram} & 5,969 & 1.7173 & 0.8715 \\
+ASA/AVA-labelled & v/v & 5,969 & 11.3730 & 0.7291 \\
+Other labels & \si{\milli\mole\per\gram} & 5,103 & 0.0185 & 0.5103 \\
+Other labels & v/v & 5,103 & -0.7147 & 0.4682 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Across \cref{tab:S28,tab:S29,tab:S30,tab:S31,figS:basis-density}, the positive
+population-level v/v median demonstrates that the high-pressure sign
+is not only a gravimetric normalization artifact. At the same time, the strong
+negative density correlation and the descriptor-group split show that the effect
+magnitude is coupled to framework density. The v/v field is used here only as an
+internal uptake-basis robustness test; it does not establish packed-bed or
+system-level volumetric storage performance.
+
+\sifigure{Figure_S5_basis_density_robustness.pdf}{figS:basis-density}
+  {Uptake-basis and density robustness of the 65-bar methane response}
+  {Panel A, median change on the native gravimetric, volumetric, and wt\% source
+   bases; panel B, pair-level gravimetric versus volumetric methane response;
+   panel C, median volumetric response across ordered density-change quintiles;
+   panel D, positive-pair fraction for ASA/AVA-labelled versus other pairs on
+   gravimetric and volumetric bases.}
+  {The population-level response remains positive after volumetric normalization,
+   while pair-level consistency decreases. Density-change stratification and the
+   ASA/AVA split show that response magnitude is strongly coupled to framework
+   density and accessible-space class. The v/v comparison is an internal
+   crystallographic-basis robustness test and is not interpreted as packed-bed or
+   device-level volumetric storage performance.}
+
+\Cref{figS:basis-density} separates two statements that should not be conflated.
+First, the positive population sign survives when the same pair comparison is
+expressed on the source crystallographic volumetric basis. Second, effect magnitude
+remains strongly organized by density change and by whether the largest contrast is
+ASA/AVA. The H3 analysis therefore supports a coupled pore-space/density regime; it
+does not establish a density-independent geometry effect and does not justify
+retrospectively adding density to the matching key.
+
+\section{Post-freeze same-source heterogeneity}
+\label{sec:source-heterogeneity}
+
+The same-source effect, geometry magnitude, and descriptor composition are reported
+in \cref{tab:S32} and visualized jointly in \cref{figS:source}.
+
+
+\begin{table}[H]
+\centering
+\small
+\caption{Same-source primary CH$_4$ response and geometry composition for source
+populations containing at least 100 pairs.}
+\label{tab:S32}
+\begin{tabular}{lrrrrr}
+\toprule
+Source & Pairs & Median $\Delta q$ & Positive & Median max contrast & ASA/AVA \\
+ & & (\si{\milli\mole\per\gram}) & fraction & & fraction \\
 \midrule
 DB0 & 8,053 & 0.3420 & 0.6528 & 0.2253 & 0.5181 \\
 DB5 & 1,808 & 10.4372 & 0.9945 & 0.9580 & 0.7218 \\
@@ -830,43 +1154,84 @@ DB13 & 225 & 0.4664 & 0.7022 & 0.1722 & 0.3911 \\
 \end{tabular}
 \end{table}
 
-The source strata occupy very different geometry regimes. DB5 combines exceptionally
-large geometry contrasts with high ASA/AVA representation, whereas DB6 has small
-contrasts and few ASA/AVA-driven pairs. These differences explain why source-level
-response magnitude should be treated as an applicability diagnostic rather than a
-causal property of source identity.
+As shown jointly by \cref{tab:S32,figS:source}, the source strata occupy very
+different geometry regimes. This is an applicability
+diagnostic, not evidence that database provenance itself causes the adsorption
+response.
+
+\sifigure{Figure_S6_source_stratified.pdf}{figS:source}
+  {Same-source heterogeneity in the frozen primary methane response}
+  {Same-source populations containing at least 100 frozen pairs. Panel A, median
+   298 K, 65 bar CH$_4$ response; panel B, median maximum frozen geometry contrast;
+   panel C, fraction of pairs labelled by ASA or AVA as the largest-contrast class.}
+  {The source-specific medians differ strongly because the source populations occupy
+   different geometry regimes and descriptor compositions. The juxtaposition of
+   effect magnitude, geometry contrast, and ASA/AVA composition makes this sampling
+   difference explicit. Source is therefore treated as an applicability and
+   provenance diagnostic rather than as a causal explanation of adsorption response.}
+
+The juxtaposition matters quantitatively. DB5 combines a much larger median geometry
+contrast (0.9580) and a 72.2\% ASA/AVA composition with a strongly positive median
+response, whereas DB6 combines a smaller median contrast (0.1802) and only 8.0\%
+ASA/AVA with a negative median. These covarying differences prevent a causal
+database-source interpretation and explain why \cref{figS:source} is used as an
+applicability diagnostic in the main text.
 
 \section{Deterministic structural case-study set}
+\label{sec:structures}
+
+The six source cases used for main-text Figure 5 are reported in \cref{tab:S33}.
+
 
 Six frozen pairs were selected for structural rendering from predeclared response
 and geometry strata. Selection was deterministic, mutually exclusive across panels,
 and based on representativeness within each stratum rather than maximizing the
-adsorption response.
+adsorption response. These six rows are the source cases for main-text Figure 5,
+which places each frozen geometry-low/geometry-high pair side by side under one
+rendering convention.
 
+\begin{landscape}
 \begin{table}[H]
 \centering
-\caption{Frozen matched-pair examples supplied for structural visualization.}
-\label{tab:S29}
-\begin{tabular}{clllr}
+\scriptsize
+\caption{Frozen matched-pair examples used in main-text Figure 5. The Class column preserves the frozen ordering label while noting co-dominant geometry context where relevant.}
+\label{tab:S33}
+\begin{tabular}{cllllrr}
 \toprule
-Panel & Case & Driver & Response archetype & Primary $\Delta q$ \\
- & & & & (\si{\milli\mole\per\gram}) \\
+Panel & Case & Class & Topology & Archetype & Top1/Top2 & Primary $\Delta q$ \\
+ & & & & & & (\si{\milli\mole\per\gram}) \\
 \midrule
-A & Pressure-activated ASA & ASA & Pressure activated & 9.0970 \\
-B & Pressure-activated AVA & AVA & Pressure activated & 2.9942 \\
-C & Positive-both accessible space & ASA & Positive both & 2.6674 \\
-D & Negative-both diameter & $D_f$ & Negative both & -0.4598 \\
-E & Pressure suppressed & $D_i$ & Pressure suppressed & -0.1876 \\
-F & Experimental-source pair & AVA & Positive both & 0.0826 \\
+A & Broad accessible-space contrast & ASA label; accessibility co-dominant & pcu & Pressure activated & 1.000 & 9.0970 \\
+B & AVA-led accessible space & AVA & fsc & Pressure activated & 1.183 & 2.9942 \\
+C & ASA--diameter mismatch & ASA & fsc & Positive both & 1.642 & 2.6674 \\
+D & Diameter counterexample & $D_f$ & pcu & Negative both & 1.221 & -0.4598 \\
+E & Pressure-suppressed diameter & $D_i$/$D_{\mathrm{if}}$ co-dominant & pcu & Pressure suppressed & 1.010 & -0.1876 \\
+F & Experimental-source anchor & AVA/AVAf co-dominant & dia & Positive both & 1.026 & 0.0826 \\
 \bottomrule
 \end{tabular}
 \end{table}
+\end{landscape}
 
-The corresponding 12 CIFs were extracted from the ARC--MOF archive with a separate
-SHA256 extraction manifest. These cases are visualization aids and are not used to
-support population-level effect estimates.
+The case labels in \cref{tab:S33} are synchronized with the final main-text
+Figure 5 interpretation. Panel A retains ASA as the frozen ordering label but is
+described as a broad accessible-space contrast because multiple accessibility
+metrics are co-dominant. Panel B is AVA-led and multidimensional. Panel C is the
+ASA--diameter mismatch emphasized in the main discussion: its favorable response
+occurs without a parallel AVA increase and while $D_f$ decreases. Panels D and E
+are deliberately retained as diameter counter-regimes, showing that a larger
+characteristic diameter is not equivalent to a favorable adsorption response.
+Panel F is an experimental-source crystallographic record rather than experimental
+adsorption validation.
+
+The local insets in main-text Figure 5 provide representative pore, cavity, or
+framework context only; they are not adsorption-site, measured-bottleneck, or
+unique-mechanism assignments. The 12 CIFs were extracted with a checksum manifest
+and are used for visualization only. Their purpose is to translate the statistical
+descriptor regimes into crystallographic intuition without changing the evidential
+level of the analysis.
 
 \section{ARC--MOF-specific limitations}
+\label{sec:limitations}
 
 The present workflow inherits limitations of the ARC--MOF structural and simulation
 resource. Adsorption values represent equilibrium calculations for recorded
@@ -886,16 +1251,22 @@ process simulations.
 Finally, the frozen cohort is strongly dominated by hypothetical structures.
 Source leave-out tests protect against the narrow claim that one ARC--MOF source
 database creates the observed primary sign, but they cannot establish experimental
-realizability or synthesis robustness. Targeted validation in experimentally
-characterized matched families remains the main next step beyond the present
-database analysis.
+realizability, activation success, or synthesis robustness. The crystallographic
+v/v analysis is likewise an internal source-basis check rather than a packed-bed,
+pellet, monolith, or tank-level claim. Figure 5F provides experimental-source
+structural provenance but not experimental adsorption validation. The complete
+inferential boundary is summarized in \cref{sec:boundary}; targeted measurements in
+experimentally characterized matched families remain the decisive next test.
 
 \section{Audit trail and reproducibility}
+\label{sec:audit}
 
-The local analysis used ARC--MOF release v7 (Zenodo record 16802743), including
+The local analysis used ARC--MOF release v7 (Zenodo DOI \url{https://doi.org/10.5281/zenodo.16802743}), including
 the charged CIF archive; topology, dimensionality, geometry, RAC, and chemistry
 cluster tables; the nine adsorption tables; and \texttt{overall\_process.csv}.
-Every stage wrote a manifest, deterministic data tables, and an independent audit.
+The generated complete secondary-result tables and source/code map are retained in
+\cref{tab:S23,tab:S24,tab:S25}. Every stage wrote a manifest, deterministic data
+tables, and an independent audit.
 The audits reconstructed source hashes, target populations, chemistry and
 architecture grouping keys, exclusions, geometry ranges, threshold flags, all
 within-family pair candidates, deterministic pair optimality, endpoint coverage,
@@ -921,25 +1292,52 @@ The completed audit sequence verified that:
     \item all ARC--MOF database-source labels reconstructed exactly from frozen
           framework identifiers; and
     \item all leave-one-major-source-out primary and ASA/AVA robustness summaries
-          reproduced exactly.
+          reproduced exactly;
+    \item post-freeze top-1/top-2 attribution subsets preserved the frozen pair
+          catalogue and reproduced the descriptor-resolved clean-dominance summaries;
+    \item uptake-basis analysis exactly reproduced the frozen gravimetric primary
+          effects before calculating v/v, wt\%, and density-stratified summaries; and
+    \item the 12 structural-case CIFs were extracted from the frozen catalogue with
+          a checksum manifest and were used for visualization only.
 \end{itemize}
 
 \section{Interpretive boundary}
+\label{sec:boundary}
 
-The analysis supports geometry-associated differences within tightly matched
-recorded chemistry and architecture families. It does not prove atom-by-atom
-structural identity and does not represent a causal deformation experiment. The
-driver direction is defined from the geometry descriptor that maximizes separation
-within each frozen family; different drivers therefore represent different forms
-of pore change. Post-freeze checks further show that the positive high-pressure CH$_4$ median persists on a volumetric basis, while the effect attenuates when analysis is restricted to pairs with increasingly isolated single-descriptor contrasts. Accordingly, the frozen driver is interpreted as a largest-contrast attribution label rather than an isolated causal variable.
+The analysis supports geometry-associated differences within families matched on the
+recorded chemistry representation and broad recorded architecture. It does not
+prove atom-by-atom identity and is not a causal deformation experiment. The pair
+direction is defined by the frozen largest-contrast geometry label, but pore
+descriptors can co-vary; the post-freeze clean-dominance results
+(\cref{tab:S26,tab:S27,figS:attribution}) therefore treat that label as an
+attribution class rather than an isolated causal variable. Importantly, the pooled
+attenuation under stricter dominance cuts is not a uniform loss of class-specific
+response: ASA and AVA remain strongly positive in clean subsets, $D_f$ remains
+slightly negative, and the strict pooled population becomes heavily $D_f$-weighted.
 
-The positive high-pressure CH$_4$ result is robust to removal of
-the two dominant topology classes and every major ARC--MOF source database, but is
-concentrated in ASA- and AVA-driven contrasts at the 10\% tier. Because 99.2\% of
-the frozen pairs are hypothetical--hypothetical, this source robustness does not
-establish experimental transferability. Secondary gas, pressure, process,
-concordance, archetype, and robustness analyses are descriptive and were not
-promoted to confirmatory status after value inspection.
+The positive high-pressure CH$_4$ median persists on the crystallographic
+volumetric basis, but density change is strongly coupled to both gravimetric and
+volumetric response (\cref{tab:S28,tab:S29,tab:S30,tab:S31,figS:basis-density}).
+Density is therefore retained as coupled structural context rather than introduced
+post hoc as an independent nuisance variable. The v/v check is internal to the
+database representation and is not a packed-density or device-level storage claim.
+
+The primary sign survives removal of the dominant topology classes and every major
+ARC--MOF source, but the frozen cohort remains 99.2\%
+hypothetical--hypothetical (\cref{tab:S17,tab:S19,tab:S20,tab:S21}). Same-source
+effect heterogeneity is entangled with geometry magnitude and ASA/AVA composition
+(\cref{tab:S32,figS:source}), so source is an applicability label rather than a
+causal explanation. The structural cases in \cref{tab:S33} provide
+crystallographic intuition only; their insets are not adsorption-site or measured-
+bottleneck assignments, and the experimental-source case is not experimental
+adsorption validation.
+
+Finally, every gas, pressure, process, concordance, archetype, density,
+source-stratified, and structural-case analysis outside the frozen 65-bar CH$_4$
+primary endpoint remains secondary or post-freeze. The summary claim--evidence
+matrix in \cref{tab:S22} records the corresponding boundary for each major
+manuscript conclusion.
+
 
 \clearpage
 \bibliographystyle{unsrtnat}

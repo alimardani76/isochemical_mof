@@ -90,9 +90,9 @@ Every scientific stage has an independent audit. A regenerated stage should not 
 
 The publication-facing manuscript source is under `manuscript/`.
 
-The manuscript and SI currently correspond to the post-PASS-E writing checkpoint: the main text references all Supporting Information Figures S1–S6 and Tables S1–S33, and the generated SI closure tables remain unchanged.
+The repository copies of the main manuscript, Supporting Information, bibliography, and generated SI closure tables are synchronized to the current 2026-08-17 Overleaf publication-finalization checkpoint. The main text references all Supporting Information Figures S1–S6 and Tables S1–S33, and the generated SI closure tables remain protected as generated evidence.
 
-See `manuscript/README.md` for compilation and figure-bundle details.
+See `manuscript/README.md` for compilation, current checkpoint, and figure-bundle details.
 
 ## Interpretation boundary
 
@@ -104,9 +104,9 @@ The frozen cohort is overwhelmingly hypothetical (99.2% hypothetical–hypotheti
 
 ## Publication and archival status
 
-The scientific analysis is frozen; manuscript and repository packaging are still being finalized for journal submission. Outstanding release-level items are listed in `PUBLICATION_STATUS.md`.
+The scientific analysis is frozen and the current publication-facing manuscript source has been synchronized on `shayan-final-edit` for coauthor review. Outstanding release-level items are listed in `PUBLICATION_STATUS.md`.
 
-In particular, a permanent article/code-data archive DOI and an explicit license for the authors' original analysis code have **not yet been finalized**. No license is implied by public visibility; see `LICENSE_NOTE.md`.
+In particular, the final tagged/DOI-bearing submission release, an explicit license for the authors' original analysis code, and author declarations have **not yet been finalized**. No license is implied by public visibility; see `LICENSE_NOTE.md`.
 
 ## Historical provenance
 

@@ -1,5 +1,3 @@
-% Project 17 main manuscript
-% Updated through audited response-archetype analysis and Figures 1--4.
 
 \documentclass[11pt,a4paper]{article}
 
@@ -10,7 +8,8 @@
 \usepackage{microtype}
 \usepackage{amsmath,amssymb}
 \usepackage{siunitx}
-\usepackage{booktabs,tabularx}
+\DeclareSIUnit{\calorie}{cal}
+\usepackage{booktabs,tabularx,array}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{caption}
@@ -21,36 +20,67 @@
 \usepackage[colorlinks=true,linkcolor=blue!45!black,
             citecolor=green!35!black,urlcolor=blue!55!black]{hyperref}
 \usepackage[nameinlink,noabbrev]{cleveref}
+\crefname{figure}{Fig.}{Figs.}
+\Crefname{figure}{Figure}{Figures}
+\crefname{table}{Table}{Tables}
+\Crefname{table}{Table}{Tables}
 
 \graphicspath{{figures/}}
 \setlength{\emergencystretch}{2em}
 \setlist[itemize]{leftmargin=1.5em,itemsep=2pt,topsep=4pt}
 
-\newcommand{\mainfigure}[4]{%
+\newcommand{\mainfigure}[5]{%
   \begin{figure}[H]
     \centering
     \IfFileExists{figures/#1}{%
       \includegraphics[width=0.98\linewidth]{#1}%
     }{%
       \fbox{\parbox[c][6.2cm][c]{0.94\linewidth}{%
-        \centering\textbf{#2}\\[0.7em]
-        \small #3\\[0.7em]
+        \centering\textbf{#3}\\[0.7em]
+        \small #4\\[0.7em]
         \textit{Expected file: \texttt{\detokenize{figures/#1}}}}}%
     }
-    \caption{\textbf{#2.} #4}
-    \label{fig:#1}
+    \caption{\textbf{#3.} #5}
+    \label{#2}
   \end{figure}%
 }
 
-\title{Pressure-Dependent Pore-Geometry Effects in Chemistry- and Topology-Matched\\
-Metal--Organic Frameworks}
+
+% Dedicated wider placement for the dense six-panel structural plate.
+% The image is centered across 1.13\linewidth, extending modestly into the
+% page margins while the caption remains at normal manuscript text width.
+\newcommand{\mainfigurewide}[5]{%
+  \begin{figure}[H]
+    \centering
+    \IfFileExists{figures/#1}{%
+      \makebox[\linewidth][c]{\includegraphics[width=1.13\linewidth]{#1}}%
+    }{%
+      \fbox{\parbox[c][6.2cm][c]{0.94\linewidth}{%
+        \centering\textbf{#3}\\[0.7em]
+        \small #4\\[0.7em]
+        \textit{Expected file: \texttt{\detokenize{figures/#1}}}}}%
+    }
+    \caption{\textbf{#3.} #5}
+    \label{#2}
+  \end{figure}%
+}
+
+\newcommand{\SIfig}[1]{Fig.~S#1}
+\newcommand{\SIfigs}[1]{Figs.~S#1}
+\newcommand{\SItab}[1]{Table~S#1}
+\newcommand{\SItabs}[1]{Tables~S#1}
+\newcommand{\SIsec}[1]{SI Section~#1}
+\newcommand{\SIsecs}[1]{SI Sections~#1}
+
+\newcommand{\papertitle}{Matched MOF Families Reveal Regime-Dependent Pore-Geometry Effects on Adsorption}
+
+\title{\papertitle}
 \date{}
 
 \begin{document}
 
 \begin{center}
-{\LARGE \textbf{Pressure-Dependent Pore-Geometry Effects in Chemistry- and Topology-Matched}\\[0.25em]
- \LARGE \textbf{Metal--Organic Frameworks}}\\[1.2em]
+{\LARGE \textbf{\papertitle}}\\[1.2em]
 
 {\large \textbf{Hosein Alimardani}$^{1,\dagger}$, \textbf{Shayan Abaei}$^{2,\dagger}$,
 \textbf{Mehrdad Asgari}$^{3,*}$}\\[0.9em]
@@ -67,642 +97,974 @@ Metal--Organic Frameworks}
 \vspace{1em}
 
 \begin{abstract}
-Large metal--organic framework (MOF) screening databases vary simultaneously in
-chemistry, network architecture, and pore geometry, making geometry-specific
-adsorption effects difficult to isolate. Here, we construct outcome-blind
-comparisons in which recorded chemistry and broad framework architecture are fixed
-before geometry contrasts or adsorption outcomes are examined. Starting from
-279,019 ARC--MOF records, 242,363 charged CIFs were parsed successfully. Recorded-chemistry matching followed by topology and dimensionality refinement
-yielded 19,068 validated multi-member architecture groups containing 44,511
-frameworks. A geometry-only threshold census was then used to freeze a 10\%
-pore-geometry contrast criterion before outcome access, retaining 11,072 families.
-One deterministic maximum-separation pair was selected per family, producing 11,072
-frozen pairs comprising 22,144 unique frameworks.
-
-Before reading adsorption values, CH$_4$ uptake at 298 K and 65 bar in
-\si{\milli\mole\per\gram} was frozen as the confirmatory endpoint. Moving from the lower to the higher value of the prespecified pair-specific
-largest-contrast geometry descriptor produced a median uptake change of
-\SI{0.584}{\milli\mole\per\gram} (95\% family-bootstrap CI:
-\SIrange{0.555}{0.615}{\milli\mole\per\gram}), with 70.5\% of pairs positive.
-The effect strengthened with geometry contrast: median changes were
-\SI{1.70}{\milli\mole\per\gram} for the $\geq20\%$ tier and
-\SI{3.16}{\milli\mole\per\gram} for the $\geq30\%$ tier. Secondary analyses showed
-strong pressure dependence: CH$_4$ responses were near zero or negative at lower
-pressures but positive at higher loading, whereas several low-pressure CO$_2$
-responses were negative and anticorrelated with the primary endpoint. Across nine
-low/high-pressure endpoint pairs, 28.0\% of framework pairs were
-pressure-activated compared with 6.2\% pressure-suppressed. Geometry effects were
-also strongly descriptor-dependent, with pairs labelled ASA or AVA by their largest
-geometry contrast favoring positive responses and diameter-labelled pairs more often remaining negative.
-The primary response remained positive after simultaneously removing the two
-dominant topology classes (pcu and fsc; median
-\SI{0.295}{\milli\mole\per\gram}), but collapsed to near zero after removing
-ASA- and AVA-driven pairs (median \SI{0.019}{\milli\mole\per\gram}), showing
-that the favorable high-pressure response is topology-robust but not
-geometry-class universal. Leave-source-out tests retained a positive median
-response after removal of every major ARC--MOF source database, and the ASA/AVA
-signal likewise survived removal of the dominant sources. However, 99.2\% of the
-frozen pairs were hypothetical--hypothetical, so transferability to experimentally
-characterized MOFs remains insufficiently sampled. These results show that geometry-associated adsorption
-changes are substantial but regime- and descriptor-dependent rather than
-universally monotonic.
+Reticular chemistry makes both composition and pore architecture unusually tunable
+in metal--organic frameworks (MOFs), but those variables remain strongly coupled in
+large structural libraries. We therefore asked a controlled question: when major
+recorded chemistry and broad architecture differences are fixed before adsorption
+outcomes are inspected, what geometry-associated response remains? Using ARC--MOF,
+we constructed outcome-blind matched families and froze one deterministic geometry
+pair per eligible family, yielding 11,072 pairs comprising 22,144 unique
+frameworks. At the CH$_4$ endpoint frozen before outcome inspection
+(298 K, 65 bar), the geometry-high member showed a median uptake increase of
+\SI{0.584}{\milli\mole\per\gram}
+(95\% family-bootstrap interval
+\SIrange{0.555}{0.615}{\milli\mole\per\gram}); 70.5\% of pairs were positive.
+The response strengthened with geometry contrast, but it did not follow a universal
+``larger pore is better'' rule. Accessible-surface and accessible-volume classes
+were strongly favorable, whereas diameter-dominated classes had slightly negative
+medians, and this separation persisted when the largest descriptor contrast was
+required to dominate the remaining pore changes more clearly. The same frozen pairs
+also changed response regime with operating condition: pressure activation
+(28.0\%) was about 4.5 times as common as pressure suppression (6.2\%), while
+capacity gains frequently opposed selectivity changes. A positive population
+response survived crystallographic volumetric normalization, although strong
+coupling to framework density showed that pore space and density are not independent
+design knobs. Together, the matched comparisons support a chemistry-facing design
+picture in which pore geometry is a multidimensional, state-dependent structural
+regime rather than one scalar property to maximize. Because 99.2\% of the pairs are
+hypothetical--hypothetical, this conclusion is strongest within the sampled
+computational structure space and is not an experimental validation claim.
 \end{abstract}
 
 \noindent\textbf{Keywords:} metal--organic frameworks; adsorption; pore geometry;
-chemistry matching; topology; pressure dependence; ARC--MOF
+matched families; methane storage; pressure dependence; framework density
 
 \section{Introduction}
 
-Metal--organic frameworks (MOFs) offer unusually broad control over chemical
-composition, network structure, and pore geometry. The same flexibility that makes
-MOFs attractive for adsorption and separation also creates a basic interpretation
-problem: across a large screening database, pore diameter, accessible volume,
-surface area, density, topology, metal composition, linker chemistry, and operating
-conditions usually vary together. A global structure--property model can therefore
-predict adsorption accurately without establishing what changes when geometry
-varies within an otherwise chemically comparable framework family.
+Metal--organic frameworks (MOFs) are compelling adsorbents precisely because
+reticular chemistry allows inorganic nodes and organic linkers to be assembled into
+crystalline networks whose pore size, shape, surface chemistry, and connectivity can
+be varied over unusually broad ranges \cite{furukawa2013chemistry}. Isoreticular
+synthesis provided an early demonstration that framework metrics can be expanded
+while an underlying net is retained, with large consequences for methane adsorption
+\cite{eddaoudi2002isoreticular}. Subsequent experiments have shown that methane
+storage can also be altered by open metal sites, pore confinement, framework
+packing, and targeted pore engineering
+\cite{wu2009opensites,gandara2014al,liang2017poregeometry}. The same synthetic
+tunability that makes MOFs attractive, however, complicates structure--property
+interpretation: changing a linker, node, interpenetration state, or network
+realization can alter chemical interactions and several aspects of pore geometry at
+the same time \cite{ji2020porechemistry}.
 
-Deliberate control of pore size, accessible volume, and internal surface has long
-been central to reticular design. Isoreticular MOF series established that pore
-dimensions can be tuned systematically while preserving an underlying framework
-motif, with direct consequences for methane storage \cite{eddaoudi2002isoreticular}.
-More generally, pore chemistry and geometric confinement jointly determine where
-and how adsorbates are accommodated \cite{ji2020porechemistry}. This distinction is
-especially important at high loading, where pore filling, accessible volume, and
-the thermodynamics of adsorption in confined space become increasingly important
-\cite{myers2002highpressure}. Surface-area and pore-size descriptors are therefore
-useful structural measures, but they should not be interpreted as interchangeable
-or universally monotonic design variables \cite{thommes2015iupac}.
+Computational screening has made that coupling visible at a much larger scale.
+Hypothetical-MOF studies associated methane capacity with pore-size distributions,
+surface area, void fraction, and density \cite{wilmer2012screening,fernandez2013qspr};
+computation-ready experimental collections recovered related trends across reported
+structures \cite{chung2014core}; and later searches extended the design space to
+hundreds of thousands or more candidate frameworks \cite{lee2021trillions}.
+These approaches are indispensable for discovering high-performing regions of
+materials space, and modern computational chemistry provides a mature toolkit for
+combining geometric characterization with molecular adsorption simulations
+\cite{coudert2016computational}. Yet a database-wide correlation answers a
+different question from a matched structural comparison. Across a global library,
+composition, topology, density, and pore metrics can all change together, so a
+predictive descriptor need not identify what remains associated with adsorption when
+major recorded chemical and architectural differences are first held fixed.
 
-Large computational MOF collections make these relationships accessible at scale,
-but they also combine chemically and structurally different source populations.
-The known diversity of the MOF structural ecosystem means that database provenance
-can correlate with geometry, chemistry, and synthetic status
-\cite{moosavi2020ecosystem}. A database-wide geometry trend can therefore reflect
-source composition as well as a transferable structure--property relationship.
+That distinction is especially important because the geometric quantities commonly
+grouped under ``pore size'' describe different physical questions. Probe-accessible
+surface area measures the internal framework surface that can be reached by a
+finite-size probe, whereas accessible volume measures connected void space available
+to that probe \cite{duren2007surface,willems2012zeopp}. Zeo++-type diameter
+descriptors are different again: the largest included sphere characterizes the
+largest cavity, the largest free sphere characterizes the size of a probe that can
+traverse a connected pathway, and the largest included sphere along that pathway
+links cavity size to network accessibility \cite{willems2012zeopp}. These global
+geometric descriptors therefore do not collapse to one scalar ``bigger pore''
+coordinate, nor do they specify local adsorption energies. Pore-shape analysis
+likewise shows that geometrically distinct nanoporous classes can require different
+optimization strategies \cite{lee2017poregeometry}, while chemistry--topology
+studies demonstrate that even the benefit of a functional modification can depend on
+the underlying network \cite{anderson2018poretopology}.
 
-We address a complementary structure--property question:
-how does adsorption vary when recorded chemistry and broad framework architecture
-are held fixed while measured pore geometry changes? The analysis is deliberately
-organized as an outcome-blind cohort-construction problem. Chemistry is grouped
-first, architecture is then constrained using recorded topology and dimensionality,
-and only after these definitions are frozen are meaningful geometry contrasts and
-framework pairs constructed. Adsorption and process outcomes are excluded from
-every cohort-definition step.
+Adsorption thermodynamics adds a second reason to expect geometry to be
+state-dependent. At low loading, occupancy is disproportionately influenced by the
+strongest host--guest environments, including open metal sites and locally favorable
+confinement \cite{wu2009opensites,getman2012simreview}. Stronger binding is not
+automatically advantageous for storage, however, because gas retained at the
+delivery state reduces usable capacity; simulations of metal-substituted MOFs and
+heat-of-adsorption optimization both expose this trade-off
+\cite{rana2014metal,lee2014doe}. As loading rises, the amount and organization of
+accessible pore space, framework density, and adsorbate packing become increasingly
+important, so high-pressure capacity and deliverable capacity occupy coupled rather
+than monotonic regions of descriptor space
+\cite{peng2013methane,gomezgualdron2014limits,ahmed2024methaneML,song2026poreengineering}.
+A pore direction that is favorable at one state point therefore need not retain the
+same value at another.
 
-ARC--MOF provides a suitable test bed because it combines charged CIF structures,
-geometric descriptors, topology and chemistry-cluster assignments, and adsorption
-records at large scale \cite{burner2023arcmof,campana2009repeat}. The original
-ARC--MOF analysis already emphasized that geometric descriptors become especially
-important for uptake as adsorption approaches higher loading, whereas interaction
-and electrostatic terms become more influential at lower chemical potential
-\cite{burner2023arcmof}. Our question is therefore deliberately narrower than
-showing that geometry matters in a database-wide model: we test whether a
-high-loading geometry response persists when recorded chemistry and broad
-architecture are fixed before outcomes are inspected. The geometric
-descriptors are rooted in established high-throughput porous-material analysis
-methods \cite{willems2012zeopp}, while automated topology identification provides
-a reproducible coarse architectural label \cite{zoubritzky2022crystalnets}. Scale,
-however, does not itself provide controlled comparisons. Reused compositions,
-incomplete metadata, cluster-label limitations, topology differences, weak
-geometry changes, and outcome-informed pair construction can all create misleading
-support.
+The distinction between gravimetric and volumetric performance makes that coupling
+chemically and technologically consequential. A low-density framework can store a
+large amount per unit mass while offering a less exceptional amount per unit crystal
+or packed volume. Experimental methane studies have shown that crystallographic
+density can overstate what a powder bed realizes \cite{korman2020lowpressure}, and
+monolithic shaping can change the balance among pore preservation, bulk density, and
+volumetric working capacity \cite{connolly2019monolith}. Process objectives add a
+further layer: total uptake, working capacity, selectivity, regenerability, and
+separation performance are not interchangeable targets
+\cite{altintas2018co2database}. Consequently, a useful pore-geometry rule must state
+the adsorbate, loading window, uptake basis, and process objective rather than
+assigning one intrinsic sign to a structural descriptor.
 
-We therefore use explicit, auditable family definitions and freeze the geometry
-comparison before opening adsorption values. We first construct same-recorded-
-chemistry families and refine them by recorded topology and dimensionality. We then
-measure within-family geometry variation, freeze a 10\% pore-geometry threshold,
-and select one deterministic maximum-separation pair per family. Only after this
-catalogue is frozen do we designate a confirmatory adsorption endpoint and examine
-secondary gases, pressures, and process metrics.
+A final challenge is sampling. MOF databases are heterogeneous across metals,
+linkers, functional groups, topologies, pore geometries, and source collections, so
+a pooled trend can partly reflect which regions of design space are most heavily
+represented \cite{moosavi2020ecosystem}. ARC--MOF is particularly useful for a
+controlled test because it combines a large multi-source framework registry with
+charged CIFs, geometric descriptors, chemistry-cluster assignments, recorded
+topology and dimensionality, and adsorption/process outcomes
+\cite{burner2023arcmof}. Its pore-space descriptors follow established
+high-throughput geometric analysis \cite{willems2012zeopp}, and its recorded
+topology provides a reproducible coarse architectural label
+\cite{zoubritzky2022crystalnets}. REPEAT-derived charges are part of the underlying
+ARC--MOF simulation resource \cite{campana2009repeat}; they are not part of the
+matching key used here. The original ARC--MOF study showed that geometric
+information becomes increasingly informative toward higher loading
+\cite{burner2023arcmof}. What remains unresolved is whether a recurring
+geometry-associated response is still visible after major recorded chemistry and
+architecture differences are removed \emph{before} adsorption outcomes are inspected.
 
-The resulting comparisons reveal a reproducible but non-universal geometry-associated response.
-High-pressure methane uptake increases for most frozen pairs and the magnitude of
-the response rises strongly with geometry contrast. In contrast, lower-pressure
-responses are weaker and several CO$_2$ conditions show the opposite sign. The
-same framework pair can therefore move from unfavorable or neutral geometry
-response at low pressure to favorable response at high pressure. This
-pressure-activation behavior is common, depends strongly on the geometric
-descriptor that defines the contrast, and varies across topology classes.
+Here we address that question with an outcome-blind matched-family design.
+Frameworks are first grouped by scale-invariant whole-CIF elemental composition,
+metal-element composition, and ARC--MOF metal-, linker-, and
+functional-chemistry clusters; the resulting chemistry families are then refined by
+recorded topology and dimensionality. Only after those matches are fixed are pore
+contrasts evaluated, a 10\% geometry criterion frozen, and one deterministic pair
+selected per eligible family. The primary adsorption endpoint is then opened using
+the already-frozen pair identities and orientations. This design does not create a
+mechanical deformation experiment and does not establish atom-by-atom identity.
+Instead, it asks whether geometry-response patterns recur inside families matched on
+the recorded chemistry representation and broad network architecture. The resulting
+11,072 pairs support a regime-based picture: accessible-space and diameter changes
+occupy different adsorption-response classes; those classes remain visible under
+cleaner descriptor attribution, couple strongly to density, and change value with
+loading condition and process objective. The central design implication is therefore
+not to maximize a generic pore size, but to optimize a \emph{pore-geometry regime}
+for a specified adsorbate and operating task.
+
 
 \section{Results and Discussion}
 
-\subsection{Outcome-blind construction of the frozen geometry-pair cohort}
+\subsection{Outcome-blind matching defines a controlled geometry comparison}
 
-The cohort was constructed without reading adsorption or process outcomes. The
-ARC--MOF geometry registry contained 279,019 framework records, of which 242,363
-had corresponding charged CIF records. All targeted charged CIFs parsed
-successfully, with complete agreement between raw-CIF and parsed element sets.
-The parsed structures contained 239,970 single-metal and 2,393 mixed-metal records;
-oxidation-state information was not present and was therefore not inferred.
+The central design feature of the analysis is not the size of the database, but the
+order in which information is allowed to enter the comparison. Recorded chemistry
+was fixed first, recorded architecture second, pore geometry third, and adsorption
+outcomes only after the pair catalogue had been frozen. This outcome-blind sequence
+is summarized in \cref{fig:cohort}A and \SItab{1}, with the complete construction,
+threshold-support, and frozen-pair accounting in \SIsecs{1--4}. ARC--MOF contained 279,019
+registry records, of which 242,363 had corresponding charged CIFs that parsed
+successfully. Multi-member candidate families were then defined using
+scale-invariant whole-CIF elemental composition, scale-invariant metal-element
+composition, and ARC--MOF metal-, linker-, and functional-chemistry cluster
+assignments. Geometry, topology, dimensionality, geometric-cluster labels, partial
+charges, and every adsorption or process outcome were excluded from that chemistry
+key.
 
-Candidate same-recorded-chemistry families were defined from scale-invariant
-whole-CIF elemental composition, scale-invariant metal-element composition, and
-ARC--MOF metal-, linker-, and functional-chemistry cluster assignments. Geometry,
-topology, dimensionality, geometric-cluster labels, partial charges, and all
-adsorption/process outcomes were excluded from the chemistry signature. This
-produced 126,062 complete chemistry groups containing 154,150 frameworks, including
-20,278 multi-member chemistry families comprising 48,366 frameworks.
+The chemistry match is deliberately a representation-level control rather than a
+claim of atom-by-atom identity. Within those chemistry families, exact agreement in
+recorded topology and dimensionality was required to define broad architectural
+equivalence. Missing topology or dimensionality was treated as ambiguous rather
+than imputed, and no bond reconstruction or local coordination assignment was
+introduced. This refinement yielded 19,068 validated same-recorded-architecture
+groups containing 44,511 frameworks, of which 18,390 retained measurable variation
+in at least one carried-forward geometry descriptor (\SItab{2}--\SItab{3}). The
+resulting comparison therefore asks a narrower question than database-wide
+screening: whether adsorption-associated geometry patterns recur after major
+recorded chemical and network differences have already been removed.
 
-Architecture was refined only after chemistry families were frozen. Exact agreement
-in recorded topology and dimensionality yielded 19,068 validated same-recorded-
-architecture groups containing 44,511 frameworks. Only 27 source chemistry
-families split into more than one validated architecture. A further 1,406
-frameworks became architecture singletons and 2,449 were ambiguous because
-topology and/or dimensionality was missing. Of the validated architecture groups,
-18,390 groups containing 41,796 frameworks retained measurable variation in at
-least one geometry descriptor.
+A nonzero geometric difference would have admitted many nearly indistinguishable
+families, so threshold support was evaluated before outcome inspection across eight
+pore descriptors: ASA, AVA, AVAf, POAVA, POAVAf, $D_i$, $D_f$, and
+$D_{\mathrm{if}}$. Candidate thresholds of 5, 10, 20, and 30\% retained 14,739,
+11,072, 6,948, and 5,115 families, respectively
+(\cref{fig:cohort}B--C; \SItab{4}--\SItab{5}). The 10\% criterion was frozen for
+the primary catalogue, while 20 and 30\% were retained as stronger prespecified
+contrast tiers. The 10\% choice therefore reflects an outcome-blind support
+decision rather than a threshold selected to maximize an adsorption signal.
 
-Because any nonzero variation was too permissive for pair construction, we next
-performed an outcome-blind threshold census using eight pore descriptors: ASA,
-AVA, AVAf, POAVA, POAVAf, $D_i$, $D_f$, and $D_{\mathrm{if}}$. Candidate 5, 10,
-20, and 30\% thresholds retained 14,739, 11,072, 6,948, and 5,115 families,
-respectively. The empirical median of the strongest within-family pore span was
-12.8\%. Before pair construction or outcome access, 10\% was frozen as the working
-criterion; the 20 and 30\% cutoffs were retained as stronger prespecified
-sensitivity tiers.
+Within every 10\%-eligible family, all possible framework pairs were compared by
+the same symmetric relative-difference rule across the eight pore descriptors. The
+pair with the largest maximum descriptor difference was selected, followed by the
+frozen mean-difference and lexical-ID tie-breakers. One pair was retained per
+family, yielding exactly 11,072 matched pairs and 22,144 unique frameworks. The
+median maximum pair difference was 27.2\%, whereas the median mean difference over
+all eight descriptors was 12.8\%, showing that the selected comparisons are often
+multidimensional rather than clean one-variable perturbations
+(\cref{fig:cohort}E). AVA was the largest-contrast class for 3,933 pairs, followed
+by $D_f$ (2,211), ASA (2,036), and AVAf (1,580)
+(\cref{fig:cohort}D; \SItab{6}--\SItab{7}). The catalogue also spans multiple
+recorded topologies (\cref{fig:cohort}F), although pcu and fsc are the most
+represented. These support patterns are part of the evidential boundary of the
+study: the matched design controls recorded chemistry and broad architecture, but
+it does not create an artificial series in which only one pore variable changes.
 
-One primary geometry pair was then selected within each 10\%-eligible family by
-maximizing the largest symmetric relative difference across the eight pore
-descriptors, breaking ties by the mean eight-descriptor difference and then by
-framework identifier. This produced exactly 11,072 frozen primary pairs comprising
-22,144 unique frameworks. Their median maximum pore difference was 27.2\%, and the
-median mean difference across all eight descriptors was 12.8\%. AVA was the
-largest-contrast driver for 3,933 pairs, followed by $D_f$ (2,211), ASA (2,036),
-and AVAf (1,580).
+\mainfigure{Figure_1.pdf}{fig:cohort}
+  {Outcome-blind construction of the matched geometry cohort}
+  {(A) Cohort flow from the ARC--MOF registry to the frozen pair catalogue;
+   (B) maximum within-family pore span with the frozen 10\% threshold;
+   (C) family and framework support across the 5, 10, 20, and 30\% candidate
+   thresholds; (D) composition of the frozen catalogue by largest-contrast geometry
+   descriptor; (E) maximum versus mean pairwise geometry contrast; (F) topology
+   representation among the frozen pairs.}
+  {Chemistry and recorded architecture were fixed before geometry thresholding,
+   deterministic pair selection, or outcome access. The frozen 10\% criterion
+   retained 11,072 families and produced 11,072 matched pairs comprising 22,144
+   unique frameworks. Panels D--F describe the support and structural composition
+   of that already-frozen catalogue; no adsorption or process outcome enters cohort
+   construction.}
 
-\mainfigure{Figure_1.pdf}
-  {Outcome-blind construction and geometry support of the frozen pair cohort}
-  {Panels: (A) cohort funnel; (B) distribution of maximum within-family pore span;
-   (C) support across candidate thresholds; (D) geometry driver of each selected
-   pair; (E) maximum versus mean selected-pair geometry difference; (F) topology
-   representation in the frozen pair catalogue.}
-  {The analysis was frozen before adsorption outcomes were opened. Starting from
-   279,019 ARC--MOF records, chemistry and architecture refinement yielded 44,511
-   frameworks in 19,068 validated architecture groups. A 10\% pore-geometry
-   threshold retained 11,072 eligible families and 26,146 frameworks. One
-   deterministic maximum-separation pair was then selected per family, yielding
-   11,072 frozen pairs. Panels B--F summarize the empirical support used to define
-   this comparison without reference to adsorption performance.}
+For readers outside computational porous-material screening, the descriptor names
+in \cref{fig:cohort} and the later response figures are translated into physical
+questions in \cref{tab:descriptor-translation}. ASA and the volume descriptors are
+probe-based global properties of the crystallographic void space, while the
+Zeo++ diameter descriptors quantify cavity and connected-passage length scales.
+Geometric accessible surface area is not identical to an experimental BET surface
+area, although the two can agree closely for suitable microporous MOFs; both are
+different again from a local adsorption-energy landscape
+\cite{duren2007surface,walton2007bet,willems2012zeopp,thommes2015iupac}.
+This distinction is important because the analysis below tests whether different
+\emph{modes} of pore geometry carry different adsorption responses, not whether one
+generic ``pore size'' variable should be maximized.
 
-\subsection{High-pressure methane adsorption responds strongly to geometry}
+\begin{table}[H]
+\centering
+\small
+\caption{Physical interpretation of the pore-geometry descriptor families used in
+the matched analysis. Probe-accessible geometric surface area and its distinction
+from adsorption-derived BET area follow established MOF characterization work
+\cite{duren2007surface,walton2007bet}; the $D_i$, $D_f$, and
+$D_{\mathrm{if}}$ definitions follow the Zeo++ sphere-based pore formalism
+\cite{willems2012zeopp}. ASA and the volume descriptors are probe-based global
+properties of the crystallographic void space. Density is shown for structural
+context but was not included in the frozen eight-descriptor geometry threshold.}
+\label{tab:descriptor-translation}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.17\linewidth}
+                              >{\raggedright\arraybackslash}p{0.27\linewidth}
+                              >{\raggedright\arraybackslash}X
+                              >{\raggedright\arraybackslash}p{0.24\linewidth}}
+\toprule
+Descriptor family & Geometric question & Chemistry-facing interpretation &
+Interpretive boundary \\
+\midrule
+ASA &
+What internal framework surface can a finite probe reach? &
+Probe-accessible interfacial area available to an adsorbate-sized probe; changing
+ASA can alter the amount of accessible framework--guest interface. &
+A global geometric area, not a count of adsorption sites, an experimental BET area,
+or a binding-energy measure. \\
+\addlinespace
+AVA / AVAf &
+How much connected void space is accessible to the probe? &
+Accessible volume and its fractional form describe the amount of probe-connected
+pore space available within the crystal. &
+Not equivalent to a characteristic pore diameter or to usable process working
+capacity. \\
+\addlinespace
+POAVA / POAVAf &
+How much probe-occupiable accessible volume is represented? &
+An alternative global volume description that accounts for pore space occupiable
+by a finite probe, reported in absolute/fractional source forms. &
+Still a global void-space metric; it does not localize where adsorption occurs. \\
+\addlinespace
+$D_i$, $D_f$, $D_{\mathrm{if}}$ &
+How large are the cavity and connected passage scales? &
+$D_i$ is the largest included-sphere diameter, $D_f$ the largest free-sphere
+diameter that can traverse a connected pathway, and $D_{\mathrm{if}}$ the largest
+included sphere along that free-sphere path. &
+Characteristic geometric length scales; they are not diffusion coefficients and do
+not identify a unique experimental bottleneck. \\
+\addlinespace
+Crystal density &
+How much framework mass occupies a crystallographic volume? &
+A coupled structural context that links gravimetric and crystallographic volumetric
+performance. &
+Excluded from the frozen geometry-threshold key and not treated as an independent
+causal knob. \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
-After the pair catalogue was frozen and audited, outcome-table schemas and
-condition coverage were inspected without reading outcome values. All 11,072
-frozen pairs were represented at the candidate adsorption conditions. CH$_4$
-uptake at 298 K and 65 bar, expressed in \si{\milli\mole\per\gram}, was then frozen
-as the confirmatory endpoint before outcome values were opened. Each pair was
-oriented from the framework with the lower value of its already-frozen driver
-descriptor to the framework with the higher value, and the primary pair effect was
-defined as
+
+\subsection{High-pressure methane separates accessible-space and diameter regimes}
+
+The frozen high-pressure methane endpoint reveals a population-level preference for
+the geometry-high member, but the more important result is that the sign and
+magnitude depend strongly on \emph{which kind of geometry changed}. At 298 K and
+65 bar, all 11,072 frozen pairs had complete CH$_4$ uptake values
+(\cref{fig:primary}A--B; \SItab{8}; full primary reporting in \SIsec{5}). With the pre-existing geometry-low
+$\rightarrow$ geometry-high orientation, the family-level effect was
 \[
-\Delta q = q_{\mathrm{geometry\mbox{-}high}}-
-           q_{\mathrm{geometry\mbox{-}low}}.
+\Delta q =
+q_{\mathrm{geometry\mbox{-}high}}-
+q_{\mathrm{geometry\mbox{-}low}},
 \]
+and the median was \SI{0.5836}{\milli\mole\per\gram}. The
+10,000-replicate family-bootstrap 95\% interval was
+\SIrange{0.5546}{0.6149}{\milli\mole\per\gram}, and 70.5\% of pairs had
+$\Delta q>0$. The corresponding mean,
+\SI{2.427}{\milli\mole\per\gram}, is much larger than the median, indicating a
+positively skewed distribution rather than a uniform shift of every matched family.
 
-All 11,072 pairs had complete primary outcome values. The median geometry-associated
-change was \SI{0.5836}{\milli\mole\per\gram}; a 10,000-replicate nonparametric
-family bootstrap gave a 95\% interval of
-\SIrange{0.5546}{0.6149}{\milli\mole\per\gram}. The mean change was
-\SI{2.427}{\milli\mole\per\gram}, and 70.5\% of pairs had $\Delta q>0$.
-The median signed symmetric relative effect was 4.90\%.
+The response also strengthened systematically across the two stronger,
+prespecified geometry-contrast tiers. The $\geq20\%$ subset
+($n=6,948$) had a median of
+\SI{1.698}{\milli\mole\per\gram} and was 78.3\% positive, while the
+$\geq30\%$ subset ($n=5,115$) reached
+\SI{3.164}{\milli\mole\per\gram} and 85.2\% positive
+(\cref{fig:primary}C). The descriptive contrast bins in
+\cref{fig:primary}E show the same ordering without redefining the frozen
+thresholds. Geometry magnitude therefore contains information beyond the binary
+10\% eligibility rule: larger matched pore contrasts are associated with larger
+high-pressure methane differences. Because the bins are descriptive and the pairs
+remain observational matches, this trend is evidence of response structure rather
+than a mechanical dose--response experiment.
 
-The response strengthened markedly when the prespecified geometry contrast was
-made more stringent. The $\geq20\%$ tier contained 6,948 pairs and had a median
-$\Delta q$ of \SI{1.698}{\milli\mole\per\gram}, with 78.3\% positive. The
-$\geq30\%$ tier contained 5,115 pairs and had a median $\Delta q$ of
-\SI{3.164}{\milli\mole\per\gram}, with 85.2\% positive. The binned relationship
-between maximum geometry difference and median adsorption response likewise rose
-sharply at the largest geometry contrasts.
+The decisive separation appears when the same primary endpoint is resolved by
+largest-contrast geometry class (\cref{fig:primary}D; \SItab{9}). ASA-labelled
+pairs had a median $\Delta q$ of
+\SI{2.996}{\milli\mole\per\gram} and were 92.9\% positive, while AVA-labelled
+pairs had a median of \SI{1.220}{\milli\mole\per\gram} and were 84.2\%
+positive. AVAf and the two pore-occupiable-volume classes were also positive on
+median, although POAVA and POAVAf contain much smaller populations and should not
+be given the same evidential weight as ASA or AVA. In contrast, the three
+diameter-labelled classes all had slightly negative medians:
+$-0.146$, $-0.135$, and $-0.128$
+\si{\milli\mole\per\gram} for $D_f$, $D_i$, and $D_{\mathrm{if}}$,
+respectively. The pooled positive median is therefore not a universal
+``geometry-high'' effect. It is the aggregate of distinct pore-space regimes with
+different response directions.
 
-The effect depended strongly on which pore descriptor defined the selected
-contrast. ASA-driven pairs had a median $\Delta q$ of
-\SI{2.996}{\milli\mole\per\gram} and were 92.9\% positive; AVA-driven pairs had a
-median of \SI{1.220}{\milli\mole\per\gram} and were 84.2\% positive. In contrast,
-pairs driven by $D_f$, $D_i$, and $D_{\mathrm{if}}$ had slightly negative median
-changes ($-0.146$, $-0.135$, and $-0.128$ \si{\milli\mole\per\gram},
-respectively). Thus the primary result is not equivalent to a universal
-``larger-pore-is-better'' rule; the direction and magnitude depend on the type and
-size of geometry change.
+This split has a straightforward chemistry-facing interpretation, provided it is
+kept at the level supported by the descriptors. Accessible surface area asks how
+much internal framework interface can be reached by an adsorbate-sized probe,
+whereas accessible volume asks how much connected void space is available to that
+probe \cite{duren2007surface,walton2007bet}. The sphere-based diameter descriptors
+ask a different question: how large the cavity and connected passage scales are
+\cite{willems2012zeopp}. A framework can therefore acquire a wider characteristic
+passage without gaining the same amount of accessible internal surface or
+probe-connected void volume, and the reverse is also possible. The three
+descriptor families are correlated by crystal architecture, but they are not
+different units for one scalar pore-size coordinate.
 
-\mainfigure{Figure_2.pdf}
-  {Primary high-pressure methane response within frozen geometry pairs}
-  {Panels: (A) geometry-low versus geometry-high CH$_4$ uptake; (B) bootstrap
-   distribution of the frozen primary median effect; (C) prespecified 10, 20, and
-   30\% geometry-contrast tiers; (D) median response by geometry driver; (E)
-   geometry-separation strength versus median response; (F) primary response in
-   the most represented topology contexts.}
-  {The confirmatory endpoint was CH$_4$ uptake at 298 K and 65 bar in
-   \si{\milli\mole\per\gram}, frozen before outcome values were read. Across all
-   11,072 pairs, the median geometry-high minus geometry-low response was
-   \SI{0.584}{\milli\mole\per\gram} (95\% bootstrap CI:
-   \SIrange{0.555}{0.615}{\milli\mole\per\gram}); 70.5\% of pairs were positive.
-   Stronger geometry-contrast tiers produced progressively larger and more
-   frequently positive responses, while driver-specific results revealed marked
-   heterogeneity.}
+That distinction is consistent with earlier methane-storage work. Global screening
+studies have repeatedly found that favorable performance occupies combinations of
+surface area, pore volume or void fraction, pore size, adsorption energy, and
+density rather than the maximum of any one descriptor
+\cite{wilmer2012screening,fernandez2013qspr,gomezgualdron2014limits,
+getman2012simreview}. Pore-shape analyses likewise show that geometrically distinct
+nanoporous classes can require different optimization strategies
+\cite{lee2017poregeometry}, while experimental pore engineering has demonstrated
+that modifying pore geometry can materially alter methane deliverable capacity
+\cite{liang2017poregeometry}. The matched-family result adds a different form of
+evidence: after major recorded chemistry and broad network architecture are fixed
+before outcome inspection, accessible-space-labelled pairs remain strongly
+favorable while diameter-labelled populations sit near or below zero.
 
-\subsection{Geometry effects depend on pressure, adsorbate, and process objective}
+The physical picture should not be overextended. ASA does not count adsorption
+sites, AVA does not measure binding strength, and a diameter does not identify a
+unique transport bottleneck. At 65 bar, a larger inventory of accessible pore
+space is plausibly relevant because substantial pore filling has occurred, but the
+present database descriptors do not decompose local host--guest energies or
+adsorbate packing. The appropriate conclusion from \cref{fig:primary} is therefore
+not that surface area or volume ``causes'' the high-pressure response. It is that
+the favorable matched-pair population is concentrated in accessible-space regimes,
+whereas increasing a characteristic diameter alone is not a reliable design rule.
 
-After completion of the confirmatory analysis, the remaining adsorption and process
-outcomes were opened as prespecified secondary analyses while keeping pair
-membership and orientation fixed. The clearest recurring pattern was pressure
-dependence. In methane storage, the median CH$_4$ response was essentially zero at
-5.8 bar ($-0.0047$ \si{\milli\mole\per\gram}; 49.5\% positive) but positive at
-65 bar (\SI{0.5836}{\milli\mole\per\gram}; 70.5\% positive). The same pattern
-appeared in other CH$_4$ contexts: landfill-gas CH$_4$ shifted from
-$-0.0004$ at 0.01 bar to \SI{0.0628}{\milli\mole\per\gram} at 4.4 bar, while
-natural-gas-purification CH$_4$ shifted from
-$-0.0288$ at 0.9 bar to \SI{0.1933}{\milli\mole\per\gram} at 9 bar.
+\mainfigure{Figure_2.pdf}{fig:primary}
+  {High-pressure methane response across matched geometry pairs}
+  {(A) Pair-level geometry-low versus geometry-high CH$_4$ uptake with the identity
+   line; (B) 10,000 family-bootstrap medians and the primary 95\% interval;
+   (C) prespecified 10, 20, and 30\% geometry-contrast tiers; (D) median response by
+   largest-contrast geometry class; (E) descriptive response trend across increasing
+   frozen pair contrast; (F) median response in the most represented topology
+   contexts.}
+  {At 298 K and 65 bar, the median matched-pair methane response is
+   \SI{0.584}{\milli\mole\per\gram} (95\% family-bootstrap interval
+   \SIrange{0.555}{0.615}{\milli\mole\per\gram}), with 70.5\% positive pairs.
+   The response strengthens with the prespecified contrast tiers, while the
+   class-resolved panel separates strongly favorable accessible-space contrasts
+   from the slightly negative diameter-dominated medians. The topology panel is
+   descriptive context and does not identify a unique favorable architecture.}
 
-CO$_2$ behaved differently at low and moderate pressures. Median responses were
-negative for landfill CO$_2$ at 0.26 and 3.2 bar, natural-gas-purification CO$_2$
-at 0.1 and 1 bar, and post-combustion CO$_2$ at 0.015 and 0.15 bar. The strongest
-pressure reversal occurred for pre-combustion CO$_2$: the median response was
-$-0.1561$ \si{\milli\mole\per\gram} at 0.4 bar, with 33.2\% positive pairs, but
-increased to \SI{0.5486}{\milli\mole\per\gram} at 16 bar, with 66.9\% positive.
-N$_2$ and H$_2$ showed smaller positive median responses and are summarized in the
-Supporting Information.
 
-The pressure-dependent adsorption pattern propagated unevenly to process metrics.
-Median methane-storage working capacity increased by
-\SI{0.467}{\milli\mole\per\gram}, with 72.3\% of pairs positive, and
-pre-combustion working capacity increased by
-\SI{0.660}{\milli\mole\per\gram}, with 69.2\% positive. Landfill,
-natural-gas-purification, and post-combustion working-capacity medians were close to
-zero or negative. Selectivity, however, decreased in all four separation contexts
-with available values: median changes were $-0.363$ for landfill gas, $-0.638$ for
-natural-gas purification, $-4.456$ for post-combustion, and $-4.705$ for
-pre-combustion. Geometry changes that improve high-loading capacity can therefore
-degrade separation selectivity, emphasizing that the relevant geometry direction
-depends on the process objective.
+\subsection{Cleaner attribution and uptake-basis checks establish a coupled geometry regime}
 
-\mainfigure{Figure_3.pdf}
-  {Pressure, adsorbate, and process dependence of geometry-associated responses}
-  {Panels: (A) CH$_4$ pressure dependence; (B) CO$_2$ pressure dependence; (C)
-   process working-capacity change; (D) process selectivity change.}
-  {Secondary analyses use the same frozen pair identities and geometry-low to
-   geometry-high orientation as the confirmatory endpoint. CH$_4$ responses become
-   more positive at higher pressure, whereas several low-pressure CO$_2$ conditions
-   are negative. Process consequences are correspondingly mixed: methane-storage
-   and pre-combustion working capacities increase on median, while selectivity
-   decreases across the four separation contexts. N$_2$/H$_2$ responses and
-   additional process metrics are reported in the Supporting Information.}
+The accessible-space/diameter separation would be less informative if it vanished
+as soon as correlated pore changes were examined more strictly, or if it arose
+only because uptake was expressed per unit framework mass. The post-freeze H2 and
+H3 analyses test these two boundaries without changing the frozen pair catalogue,
+orientation, 10\% threshold, primary endpoint, or estimand; their complete
+definitions and numerical summaries are given in \SIsecs{16--17}. Together they show
+that the relevant physical object is not an isolated scalar descriptor, but a
+coupled pore-space regime whose high-pressure response also depends strongly on
+framework density.
 
-\subsection{Pressure activation is common and depends on geometry driver and topology}
+The first boundary is descriptor covariance. The eight pairwise pore differences
+are substantially correlated (\SIfig{4}B), and the multiplicity analysis shows that
+many frozen pairs exceed 10\% in several descriptors simultaneously
+(\SIfig{4}D). This is chemically unsurprising in a reticular solid: changing linker
+length, framework expansion, interpenetration or network realization can alter
+surface-to-volume ratio, void accessibility, and characteristic length scales at
+the same time. The stored largest-contrast descriptor is therefore an attribution
+label for the dominant observed difference, not proof that the remaining seven
+geometric dimensions were held fixed.
 
-To test whether the high-pressure response represented the same pair ordering across
-conditions, we compared the frozen 65-bar CH$_4$ effect with all 17 remaining
-\si{\milli\mole\per\gram} adsorption endpoints. Concordance with the primary
-response varied strongly by condition. Spearman correlations were 0.816 for
-pre-combustion H$_2$ at 0.6 bar, 0.777 for pre-combustion CO$_2$ at 16 bar, 0.746
-for post-combustion N$_2$ at 0.75 bar, 0.640 for natural-gas-purification CH$_4$
-at 9 bar, and 0.585 for landfill CH$_4$ at 4.4 bar.
-In contrast, low-pressure CO$_2$ endpoints were negatively correlated with the
-primary response, with Spearman coefficients of approximately $-0.28$ to $-0.32$.
+Within that limitation, cleaner dominance filtering preserves the central
+class-specific contrast. Pooling all classes, minimum top-1/top-2 ratios of 1.10,
+1.25, and 1.50 retain 4,603, 2,866, and 1,715 pairs and reduce the pooled median to
+\SI{0.414}{\milli\mole\per\gram},
+\SI{0.187}{\milli\mole\per\gram}, and
+\SI{0.038}{\milli\mole\per\gram}, respectively
+(\SIfig{4}A; \SItab{26}). Read alone, that attenuation could be mistaken for loss
+of the geometry-class signal. The descriptor-resolved subsets show otherwise
+(\SIfig{4}C; \SItab{27}). ASA remains strongly favorable even at a top-1/top-2
+ratio of at least 1.50 ($n=311$; median
+\SI{1.070}{\milli\mole\per\gram}; 90.7\% positive), while AVA remains strongly
+positive at 1.25 ($n=379$; median
+\SI{2.273}{\milli\mole\per\gram}; 98.2\% positive). $D_f$ remains slightly
+negative at 1.50 ($n=1,265$; median
+\SI{-0.087}{\milli\mole\per\gram}; 43.6\% positive). Moreover, those 1,265
+$D_f$-labelled pairs constitute nearly three quarters of the 1,715 pairs retained
+by the strictest pooled criterion. The near-zero pooled median is therefore partly
+a population-composition shift toward the slightly unfavorable $D_f$ class, not a
+uniform collapse of descriptor-specific behavior.
 
-Direct low-to-high pressure comparisons showed that sign reversals were common and
-asymmetric. For methane storage, 26.8\% of pairs changed from negative at 5.8 bar
-to positive at 65 bar, whereas only 5.8\% changed from positive to negative.
-Negative-to-positive transitions were similarly common for landfill CH$_4$
-(26.6\%) and natural-gas-purification CH$_4$ (26.8\%). Pre-combustion CO$_2$
-showed the strongest pressure activation: 43.5\% of pairs changed from negative at
-0.4 bar to positive at 16 bar, compared with 9.8\% changing in the opposite
-direction.
+The class-removal analysis reaches a complementary conclusion
+(\SItab{17}--\SItab{18}). Removing ASA- and AVA-labelled pairs leaves 5,103
+primary-tier pairs with a median of only
+\SI{0.0185}{\milli\mole\per\gram}; 51.0\% are positive and the descriptive
+bootstrap interval crosses zero. Yet the same non-ASA/AVA population recovers
+positive medians of \SI{0.168}{\milli\mole\per\gram} and
+\SI{0.718}{\milli\mole\per\gram} in the prespecified $\geq20\%$ and
+$\geq30\%$ subsets. Thus geometry \emph{mode} and geometry \emph{magnitude} are
+separate pieces of the response: accessible-space changes dominate the pooled
+10\% signal, while sufficiently large changes outside ASA/AVA can still be
+favorable.
 
-We therefore summarized each frozen pair across nine lower-pressure and nine
-higher-pressure adsorption endpoints. A pair was classified as majority positive
-within a regime when more than half of its observed endpoint responses were
-positive. Four response archetypes emerged: 3,618 pairs (32.7\%) were positive in
-both regimes; 3,100 (28.0\%) were pressure-activated, becoming majority positive
-only at higher pressure; 687 (6.2\%) were pressure-suppressed; and 3,667 (33.1\%)
-were negative in both regimes. Across individual pairs, the median fraction of
-positive endpoints increased from 44.4\% at low pressure to 55.6\% at high
+The second boundary is uptake basis and framework density. Re-expressing the same
+frozen 65-bar pair comparison on the source volumetric basis preserves a positive
+population response: the median is $+3.797$ v/v, 60.9\% of pairs are positive, and
+the family-bootstrap interval is 3.438--4.185
+(\SIfig{5}A--B; \SItab{28}). This rules out the narrow interpretation that the
+primary sign is created solely by dividing uptake by framework mass. It does not,
+however, make density irrelevant. Signed density change is strongly anticorrelated
+with the gravimetric response (Spearman $\rho=-0.772$) and remains negatively
+associated with the volumetric response ($\rho=-0.325$)
+(\SIfig{5}C; \SItab{29}--\SItab{30}). Geometry expansion and density change are
+therefore part of the same structural reorganization in many matched pairs.
+
+The descriptor split remains visible after this normalization
+(\SIfig{5}D; \SItab{31}). ASA/AVA-labelled pairs have a volumetric median of
+$+11.37$ v/v and are 72.9\% positive, whereas the remaining classes have a
+slightly negative volumetric median of $-0.715$ v/v and are 46.8\% positive. The
+high-pressure result is consequently neither a pure gravimetric artifact nor a
+density-independent effect. It is concentrated in a regime where accessible pore
+space and framework mass density change together.
+
+That coupling is well aligned with the broader methane-storage literature. High
+surface area and pore volume can favor gravimetric storage, while crystal and bulk
+density determine how much of that advantage survives on a volumetric basis
+\cite{peng2013methane,gandara2014al,korman2020lowpressure,
+connolly2019monolith}. Recent pore-engineering work likewise identifies a
+nonmonotonic balance among porosity, pore volume, and framework density rather than
+a benefit from maximizing any one variable \cite{song2026poreengineering}. The
+matched-family analysis sharpens this point because density is not introduced as a
+post-hoc predictor: it emerges as a structural quantity strongly coupled to the
+already-frozen geometry direction. Regressing it away by default would therefore
+risk removing part of the same physical change that the matched comparison is
+designed to characterize.
+
+The volumetric check also has a strict applicability boundary. ARC--MOF v/v is a
+crystallographic/database representation; it is not a packed-bed, pellet, monolith,
+or tank-level storage measurement. Experimental powders can have bulk packing
+densities far below their crystallographic density, and shaping can change the
+trade-off among porosity, density, and volumetric working capacity
+\cite{korman2020lowpressure,connolly2019monolith}. The H3 result therefore supports
+a materials-level statement---the positive accessible-space regime survives a
+change of uptake basis---rather than a device-performance claim.
+
+Taken together, \SIfig{4} and \SIfig{5} change the interpretation of
+\cref{fig:primary}. The largest-contrast label is noncausal because pore
+descriptors co-vary, but the accessible-space/diameter separation persists when
+the dominant contrast is made cleaner. The positive population sign also survives
+volumetric normalization, but its magnitude is inseparable from density changes in
+many families. The defensible design object is therefore a \emph{coupled geometry
+regime}: the type and magnitude of accessible pore-space change, together with the
+density context in which that change occurs, rather than an isolated scalar pore
+descriptor.
+
+Topology provides a final context rather than an alternative explanation.
+Removing both pcu and fsc retains 2,191 pairs with a median response of
+\SI{0.295}{\milli\mole\per\gram}, 64.6\% positive, and a descriptive 95\%
+family-bootstrap interval of
+\SIrange{0.249}{0.351}{\milli\mole\per\gram} (\SItab{16}--\SItab{17}).
+The positive sign is therefore not generated solely by the two most represented
+topologies. At the same time, topology constrains pore connectivity and the
+geometric ways in which reticular building blocks can be arranged, so it remains
+part of the structural context rather than a nuisance category to be discarded.
+
+\subsection{Operating condition re-orders the same geometry directions}
+
+A pore-geometry direction that is favorable at one state point does not carry an
+intrinsic sign across adsorption conditions. This is visible directly in the
+redesigned discrete-endpoint comparison in \cref{fig:pressure}A--B and the complete
+secondary atlas in \SItab{10}; the adsorption, process, concordance, transition,
+and archetype evidence is documented in \SIsecs{6--10}. For methane storage, the median response is
+essentially neutral at 5.8 bar
+($-0.0047$ \si{\milli\mole\per\gram}; 49.5\% positive) but becomes
+\SI{0.5836}{\milli\mole\per\gram} at 65 bar (70.5\% positive). The same direction
+appears in two other CH$_4$ contexts: landfill-gas methane changes from
+$-0.0004$ \si{\milli\mole\per\gram} at 0.01 bar to
+\SI{0.0628}{\milli\mole\per\gram} at 4.4 bar, and natural-gas-purification
+methane changes from $-0.0288$ at 0.9 bar to
+\SI{0.1933}{\milli\mole\per\gram} at 9 bar. The secondary N$_2$ and H$_2$
+comparisons show smaller positive shifts across their available endpoints
+(\SIfig{1}), reinforcing that the magnitude of the geometry-associated response is
+guest- and state-point-specific rather than a generic consequence of pair
+orientation.
+
+CO$_2$ makes the state dependence even more explicit. Landfill,
+natural-gas-purification, and post-combustion CO$_2$ remain negative on median at
+both stored pressure endpoints, whereas pre-combustion CO$_2$ changes from
+\SI{-0.1561}{\milli\mole\per\gram} at 0.4 bar (33.2\% positive) to
+\SI{0.5486}{\milli\mole\per\gram} at 16 bar (66.9\% positive)
+(\cref{fig:pressure}B). The connecting segments in the figure are therefore best
+read literally: they link two available database conditions. They are not
+isotherms, fitted trajectories, or evidence for a continuously resolved transition
 pressure.
 
-Archetype composition depended strongly on the geometry driver. Among ASA-driven
-pairs, 57.4\% were positive in both regimes and 34.9\% were pressure-activated,
-leaving only 5.2\% negative in both. AVA-driven pairs were especially enriched in
-the pressure-activated class (40.4\%). In contrast, more than half of the pairs
-driven by $D_f$, $D_i$, or $D_{\mathrm{if}}$ were negative in both regimes.
-Topology also modulated pressure activation: among well-supported topology classes,
-fsc showed a larger pressure-activated fraction than pcu, nbo, or sra. The
-geometry--adsorption relationship is therefore transferable only conditionally;
-both the operating regime and the type of geometric perturbation determine whether
-a favorable response emerges.
+This re-ordering is physically consistent with established adsorption chemistry.
+At low loading, occupancy is disproportionately influenced by the most favorable
+host--guest environments. Open-metal-site MOFs provide a direct experimental
+example: neutron diffraction and adsorption measurements identify strong methane
+binding at coordinatively unsaturated metal sites \cite{wu2009opensites}. Stronger
+binding is not universally beneficial, however. Methane retained at the delivery
+state reduces usable storage, and both metal-substitution and heat-of-adsorption
+studies show that increasing interaction strength can become unfavorable under a
+pressure-swing objective \cite{rana2014metal,lee2014doe}. At higher loading,
+available pore inventory, packing, and density become progressively more important,
+which is consistent with high-pressure screening and pore-engineering studies
+\cite{gomezgualdron2014limits,liang2017poregeometry,
+song2026poreengineering,getman2012simreview}. The present analysis does not decompose those
+energetic and packing contributions microscopically; it shows that the \emph{same
+frozen structural comparisons} change population-level sign and magnitude when the
+adsorbate state point changes.
 
-\mainfigure{Figure_4.pdf}
-  {Pressure-response archetypes and geometry-driver heterogeneity}
-  {Panels: (A) pair-level fraction of positive adsorption endpoints at low versus
-   high pressure; (B) prevalence of the four response archetypes; (C) archetype
-   composition by frozen geometry driver; (D) pressure-activated fraction across
-   well-supported topology classes.}
-  {Each frozen pair was summarized across nine lower-pressure and nine
-   higher-pressure \si{\milli\mole\per\gram} adsorption endpoints. Pressure
-   activation was substantially more common than pressure suppression (28.0 versus
-   6.2\% of pairs). ASA- and AVA-driven pairs were enriched in favorable and
-   pressure-activated responses, whereas diameter-driven pairs were more often
-   negative in both regimes. Panel D retains topology classes represented by at
-   least 100 frozen pairs and compares their pressure-activated fraction with the
-   28.0\% population rate.}
+The process consequences make that state dependence more consequential than uptake
+alone. Methane-storage working capacity increases by a median
+\SI{0.467}{\milli\mole\per\gram} (72.3\% positive), and pre-combustion working
+capacity by \SI{0.660}{\milli\mole\per\gram} (69.2\% positive)
+(\cref{fig:pressure}C; \SItab{11}). Landfill, natural-gas-purification, and
+post-combustion working-capacity medians are instead close to zero or negative.
+Even more strikingly, selectivity decreases on median in all four separation
+contexts with available values: $-0.363$ for landfill gas, $-0.638$ for
+natural-gas purification, $-4.456$ for post-combustion, and $-4.705$ for
+pre-combustion (\cref{fig:pressure}D). The AFM--SSP comparison in \SIfig{2}
+provides the same warning from a different pair of process metrics: performance
+objectives need not move together.
 
+This divergence is chemically sensible. Working capacity rewards uptake that can
+be added and subsequently released over the operating window, whereas selectivity
+depends on differential affinity between mixture components. Experimental methane
+studies show that high total uptake and high usable capacity are not synonymous
+\cite{gandara2014al,li2014dynamic}, and large-scale separation screening likewise
+finds different structural optima for selectivity, working capacity,
+regenerability, and composite separation metrics \cite{altintas2018co2database}.
+Chemistry--topology studies further show that the value of a functional
+modification can depend on the network in which it is expressed
+\cite{anderson2018poretopology}. The negative selectivity medians in
+\cref{fig:pressure}D should therefore not be interpreted as a contradiction of the
+high-pressure methane result. They demonstrate that \emph{capacity benefit and
+separation benefit are different materials questions}.
 
-\subsection{The primary effect is topology-robust but concentrated in accessible-area and volume changes}
-
-We finally tested whether the confirmatory high-pressure CH$_4$ result was carried
-by the dominant topology classes or by particular geometry-driver populations.
-These analyses were secondary robustness tests and preserved the frozen pair
-catalogue, orientation, primary endpoint, and estimand (Supporting Information,
-Tables~S17--S18).
-
-The pooled result was not dependent on the two dominant topology classes. Removing
-pcu alone retained 6,410 pairs and reduced the median $\Delta q$ from
-\SI{0.584}{\milli\mole\per\gram} to
-\SI{0.478}{\milli\mole\per\gram}, while removal of fsc had essentially no effect
-(\SI{0.584}{\milli\mole\per\gram}). More stringently, simultaneous removal of pcu
-and fsc retained only 2,191 pairs yet still produced a positive median response of
-\SI{0.295}{\milli\mole\per\gram}, with 64.6\% of pairs positive. A descriptive
-10,000-replicate family bootstrap gave a 95\% interval of
-\SIrange{0.249}{0.351}{\milli\mole\per\gram}. Thus, although pcu and fsc contain
-most frozen pairs, they do not by themselves create the positive primary result.
-
-Driver removal gave a different answer. Excluding AVA-driven pairs reduced the
-median response to \SI{0.312}{\milli\mole\per\gram}, and excluding ASA-driven pairs
-reduced it to \SI{0.364}{\milli\mole\per\gram}. Simultaneously excluding both ASA
-and AVA retained 5,103 pairs but reduced the median to only
-\SI{0.0185}{\milli\mole\per\gram}; 51.0\% of pairs were positive and the
-descriptive bootstrap interval crossed zero
-(\SIrange{-0.0080}{0.0415}{\milli\mole\per\gram}). Conversely, removing
-$D_f$-driven pairs increased the pooled median to
-\SI{0.981}{\milli\mole\per\gram}, consistent with the slightly negative
-$D_f$-specific response observed in the primary driver analysis.
-
-The near-zero 10\% result outside ASA/AVA should not be interpreted as evidence
-that all other geometry changes are irrelevant. Within the non-ASA/AVA population,
-the prespecified stronger-contrast tiers recovered progressively positive
-responses: the $\geq20\%$ tier retained 2,384 pairs with median
-$\Delta q=\SI{0.168}{\milli\mole\per\gram}$ and 56.0\% positive, while the
-$\geq30\%$ tier retained 1,353 pairs with median
-$\Delta q=\SI{0.718}{\milli\mole\per\gram}$ and 65.3\% positive. The robustness
-analysis therefore sharpens the main conclusion: high-pressure methane uptake is
-not generically improved by any increase in pore geometry. The strongest and most
-consistent favorable response is associated with accessible surface-area and
-accessible-volume changes, while sufficiently large changes in other pore
-descriptors can still produce a positive high-pressure response.
+\mainfigure{Figure_3.pdf}{fig:pressure}
+  {Operating condition changes the direction and process value of the matched
+   geometry response}
+  {(A) Discrete lower- and higher-pressure CH$_4$ endpoints for methane storage,
+   landfill gas, and natural-gas purification; (B) corresponding CO$_2$ endpoints
+   for the four separation contexts; (C) median working-capacity change;
+   (D) median selectivity change. The complete adsorption and process summaries are
+   reported in \SItab{10} and \SItab{11}, with secondary N$_2$/H$_2$ and AFM--SSP
+   views in \SIfig{1} and \SIfig{2}.}
+  {The same frozen pairs can be neutral or unfavorable at lower loading and
+   favorable at higher loading, while the process consequence depends on the
+   objective being optimized. Methane-storage and pre-combustion working capacities
+   increase on median, whereas selectivity decreases in all four separation
+   contexts with available values. The connecting segments in A and B join only
+   the stored discrete pressure endpoints and do not define a continuous crossover
+   pressure.}
 
 
+\subsection{Pressure activation is asymmetric and geometry-class dependent}
 
-\subsection{Database provenance does not create the primary signal, but experimental transfer remains weakly sampled}
+Cross-condition concordance shows that the 65-bar methane response is not simply a
+scaled version of every other adsorption endpoint. Several higher-loading
+conditions correlate positively with the primary effect---for example,
+$\rho=0.777$ for pre-combustion CO$_2$ at 16 bar and $\rho=0.640$ for
+natural-gas-purification CH$_4$ at 9 bar---whereas several low-pressure CO$_2$
+conditions correlate negatively ($\rho\approx-0.28$ to $-0.32$)
+(\SIfig{3}; \SItab{12}). Rank correlation and sign agreement answer different
+questions, but both show that operating condition reorganizes the pair-level
+response rather than merely changing its scale.
 
-Because ARC--MOF combines structures from multiple source databases, we performed a
-final provenance stress test using the source prefix encoded in each frozen
-framework identifier \cite{burner2023arcmof}. No pair, orientation, threshold,
-endpoint, or estimand was changed. Of the 11,072 frozen pairs, 10,844 (97.9\%)
-joined frameworks from the same source database. These same-source pairs retained a
-median primary response of \SI{0.564}{\milli\mole\per\gram}, close to the full
-cohort value. Cross-source pairs were uncommon (228 pairs) and showed much larger
-responses; because they represent only 2.1\% of the cohort and may differ
-systematically in geometry generation and source construction, their magnitude is
-not interpreted as a causal provenance effect.
+The low-to-high sign transitions make that asymmetry intuitive
+(\SItab{13}). For methane storage, 26.8\% of pairs move from negative at 5.8 bar
+to positive at 65 bar, compared with only 5.8\% in the opposite direction.
+Landfill and natural-gas-purification CH$_4$ show similar negative-to-positive
+fractions of 26.6 and 26.8\%, respectively. Pre-combustion CO$_2$ is the most
+pronounced example: 43.5\% of pairs switch from negative at 0.4 bar to positive at
+16 bar, whereas 9.8\% switch from positive to negative. These are comparisons
+between designated discrete endpoints, not kinetic switching events or
+framework-transition measurements.
 
-The cohort was overwhelmingly hypothetical: 10,981 pairs (99.2\%) connected two
-hypothetical frameworks, compared with only 82 experimental--experimental pairs and
-9 mixed hypothetical--experimental pairs. The hypothetical--hypothetical population
-closely reproduced the full result (median
-\SI{0.585}{\milli\mole\per\gram}; 70.4\% positive). The small
-experimental--experimental subset was directionally consistent (median
-\SI{0.355}{\milli\mole\per\gram}; 78.0\% positive), but its size is too small to
-support a strong claim of experimental transferability.
+The pair-level summary in \cref{fig:archetypes}A converts this condition dependence
+into four deterministic majority-sign regimes. The 50\% boundaries separate
+positive-both, pressure-activated, pressure-suppressed, and negative-both pairs.
+Among all 11,072 frozen pairs, 3,618 (32.7\%) are positive in both regimes, 3,100
+(28.0\%) are pressure activated, 687 (6.2\%) are pressure suppressed, and 3,667
+(33.1\%) are negative in both (\cref{fig:archetypes}B; \SItab{14}). Pressure
+activation is therefore approximately 4.5 times as common as pressure suppression,
+and the median fraction of positive endpoints rises from 44.4\% at lower pressure
+to 55.6\% at higher pressure. This population asymmetry is one of the clearest
+signatures that the geometry response is state-dependent rather than a fixed
+descriptor property.
 
-No single major source database was necessary for the positive primary result.
-DB0 touched 8,261 frozen pairs; after all DB0-containing pairs were removed, the
-remaining 2,811 pairs had a median response of
-\SI{8.721}{\milli\mole\per\gram} and 84.0\% were positive. Removing DB5, which
-touched 2,002 pairs, retained 9,070 pairs with a median response of
-\SI{0.308}{\milli\mole\per\gram} and 64.3\% positive. Removing DB6, DB13, or DB1
-likewise left positive median responses. These leave-source-out differences show
-that effect magnitude varies substantially across source populations, but they
-rule out the simpler explanation that the pooled sign is created by one dominant
-database.
+Crucially, the archetypes are not distributed randomly across geometry modes
+(\cref{fig:archetypes}C; \SItab{15}). ASA-labelled pairs are strongly enriched in
+favorable behavior: 57.4\% are positive in both regimes and another 34.9\% are
+pressure activated. AVA-labelled pairs are especially enriched in pressure
+activation (40.4\%). In contrast, more than half of the $D_f$-, $D_i$-, and
+$D_{\mathrm{if}}$-labelled populations remain negative in both regimes. This is
+the pressure-domain counterpart of \cref{fig:primary}D: accessible-space and
+diameter contrasts are not only different at the single 65-bar endpoint; they
+occupy different \emph{response-regime compositions} across the wider endpoint
+inventory.
 
-The ASA/AVA result was similarly not concentrated in one source. Among 5,969
-ASA- or AVA-driven pairs, the median primary response was
-\SI{1.717}{\milli\mole\per\gram} and 87.2\% were positive. Removing DB0 retained
-1,641 ASA/AVA pairs with a median response of
-\SI{10.098}{\milli\mole\per\gram} and 96.8\% positive; removing DB5 retained
-4,513 pairs with a median response of
-\SI{0.984}{\milli\mole\per\gram} and 83.3\% positive. Thus, the favorable
-accessible-area/accessible-volume signal is not an artifact of the two largest
-source contributions. The large between-source differences are nonetheless an
-important applicability boundary rather than evidence that source identity itself
-causes the adsorption response.
+Topology changes those frequencies but does not replace the geometry-class picture.
+Among topology classes represented by at least 100 frozen pairs, fsc has a higher
+pressure-activated fraction than pcu, nbo, or sra
+(\cref{fig:archetypes}D; \SItab{16}). Yet pressure activation occurs across
+multiple topologies, and removing the two dominant pcu/fsc classes does not remove
+the positive primary sign (\SItab{17}). The evidence is therefore better described
+as topology-modulated geometry response than as a single topology mechanism.
+Topology constrains connectivity and the geometrical ways in which nodes and
+linkers fill three-dimensional space, but the data do not identify one network as
+the universal origin of pressure activation.
+
+\mainfigure{Figure_4.pdf}{fig:archetypes}
+  {Pressure-response archetypes expose geometry-class heterogeneity}
+  {(A) Pair-level fraction of positive lower- versus higher-pressure endpoints, with
+   the 50\% majority-sign boundaries defining four response regions; (B) overall
+   prevalence of the four archetypes; (C) archetype composition by largest-contrast
+   geometry class; (D) pressure-activated fraction for topology classes represented
+   by at least 100 frozen pairs. Numerical archetype, class, and topology summaries
+   are reported in \SItab{14}--\SItab{16}.}
+  {Pressure activation is substantially more common than pressure suppression
+   (28.0 versus 6.2\% of pairs; approximately 4.5-fold). ASA- and AVA-labelled
+   pairs are enriched in positive-both and pressure-activated regimes, whereas
+   diameter-dominated pairs more often remain negative across both pressure groups.
+   Topology modulates prevalence but does not define a unique favorable
+   architecture or a causal activation mechanism.}
 
 
-\subsection{Post-freeze checks clarify descriptor attribution and uptake-basis robustness}
+\subsection{Representative crystal structures translate descriptor regimes into
+crystal-space intuition}
 
-Additional submission-stage analyses were performed without changing the frozen
-11,072-pair cohort, pair orientation, geometry threshold, confirmatory endpoint,
-or primary estimand. First, we tested how strongly the largest pairwise geometry
-difference dominated the second-largest simultaneous descriptor change. Requiring
-a top-1/top-2 geometry-difference ratio of at least 1.10 retained 4,603 pairs and
-a positive median primary response of \SI{0.414}{\milli\mole\per\gram}; requiring
-ratios of at least 1.25 and 1.50 retained 2,866 and 1,715 pairs, with median
-responses of \SI{0.187}{\milli\mole\per\gram} and
-\SI{0.038}{\milli\mole\per\gram}, respectively. The corresponding positive-pair
-fractions fell from 66.3\% to 60.2\% and 53.1\%. Thus, the descriptor stored as the
-frozen pair ``driver'' should be read as the descriptor with the largest observed
-geometry contrast, not as an isolated causal perturbation. The strongest pooled
-responses commonly occur when several pore descriptors change together.
+The statistical descriptor classes become chemically more interpretable when the
+underlying framework records are viewed as matched structures rather than as rows
+in a table. Six frozen pairs were therefore selected deterministically from
+predeclared geometry and response strata for structural visualization
+(\cref{fig:structures}; complete definitions and provenance in \SItab{33} and
+\SIsec{19}).
+Selection was mutually exclusive across panels, did not maximize adsorption
+effect, and did not use visual appeal. The 12 CIFs were extracted with checksums and
+rendered using a common convention within each pair. Figure 5 is consequently not
+a gallery of unusually attractive structures; it is a crystallographic
+translation of six predeclared population regimes.
 
-Second, the positive 65-bar CH$_4$ response persisted across uptake bases. The
-frozen \si{\milli\mole\per\gram} result was reproduced exactly (median
-\SI{0.584}{\milli\mole\per\gram}; 70.5\% positive), while the volumetric response
-had a median change of 3.797 v/v units with 60.9\% positive pairs and a family-bootstrap
-95\% interval of 3.438--4.185. The wt\% representation was likewise positive
-(median 0.934 wt\%; 70.5\% positive). Because wt\% is a monotonic mass-basis
-conversion for fixed CH$_4$, the volumetric comparison is the more informative
-robustness check: density-related normalization reduces pair-level sign consistency
-but does not reverse the population-level result.
+\mainfigurewide{Figure5_Structural_Panel.pdf}{fig:structures}
+  {Representative matched structures across geometry-response regimes}
+  {(A) Broad accessible-space contrast: pcu, pressure activated and ordered by ASA,
+   with multiple accessibility descriptors changing together; (B) AVA-led
+   accessible-space contrast: fsc, pressure activated; (C) ASA--diameter mismatch:
+   fsc, positive in both pressure regimes; (D) diameter counterexample: pcu,
+   negative in both regimes and ordered by $D_f$; (E) pressure-suppressed diameter:
+   pcu, with co-dominant $D_i$/$D_{\mathrm{if}}$ changes; (F)
+   experimental-source anchor: dia, positive in both regimes, with co-dominant
+   AVA/AVAf. Full case definitions and source metrics are given in \SItab{33}.}
+  {Each panel places the frozen geometry-low and geometry-high structures side by
+   side and uses a local inset only for crystallographic context. Panels A--C anchor
+   favorable accessible-space regimes, whereas D and E show that increasing a
+   characteristic pore diameter does not guarantee a favorable adsorption response.
+   Panel F supplies an experimental-source crystallographic record, not experimental
+   validation of the simulated adsorption response. The boxed regions are not
+   adsorption-site or unique-bottleneck assignments, and the global descriptors can
+   co-vary within every pair.}
 
-Finally, same-source effects were strongly heterogeneous. Among source populations
-with at least 100 same-source pairs, DB0 showed a median primary response of
-\SI{0.342}{\milli\mole\per\gram} (65.3\% positive), DB5
-\SI{10.437}{\milli\mole\per\gram} (99.4\% positive), DB6
-\SI{-0.244}{\milli\mole\per\gram} (34.2\% positive), and DB13
-\SI{0.466}{\milli\mole\per\gram} (70.2\% positive). These source populations also
-differ sharply in geometry regime: the median maximum pair difference was 0.958
-for DB5 but 0.180 for DB6, while ASA/AVA-driven pairs comprised 72.2\% and 8.0\%
-of those populations, respectively. Source identity is therefore confounded with
-geometry magnitude and descriptor composition; these strata define applicability
-rather than a causal source effect.
+Panels A--C show three chemically distinct ways in which a pair can enter the
+favorable accessible-space population. Panel A is the most dramatic but also the
+least isolated: its frozen ordering label is ASA, yet several accessibility
+descriptors move from an inaccessible/zero state to substantial nonzero values.
+The correct visual interpretation is therefore a \emph{broad accessible-space
+opening}, not an ASA-only perturbation. Its large positive
+65-bar response (\SI{9.10}{\milli\mole\per\gram}) is consistent with the
+population enrichment of accessible-space classes, but the structure cannot assign
+that response to one surface element or local site. The descriptor-correlation and
+multiplicity analyses in \SIfig{4} are essential context for reading this panel.
 
-\subsection{Design implications and limits of transferability}
+Panel B occupies a related but less extreme region: AVA is the largest contrast,
+the pair is pressure activated, and multiple pore descriptors increase together.
+It visualizes a volume-led accessible-space change rather than a clean AVA
+experiment. Panel C is more chemically revealing. ASA increases from 180.313 to
+353.390 in the stored source units, while AVA is essentially unchanged
+(268.519 to 267.599) and $D_f$ decreases from 8.495 to 5.961~\AA. The favorable
+\SI{2.67}{\milli\mole\per\gram} response therefore accompanies \emph{more
+accessible internal surface without a parallel increase in accessible volume or
+characteristic free-sphere diameter}. This single structural example does not
+establish mechanism, but it makes the central descriptor distinction tangible:
+surface accessibility, connected void volume, and characteristic diameter encode
+different geometrical aspects of a pore network.
 
-The combined results support a set of bounded geometry-design rules rather than a
-single universal pore-size rule. First, pairs whose largest observed geometry contrast was accessible area or accessible
-volume were strongly enriched in positive high-pressure methane responses, and
-removal of both labels collapsed the pooled 10\% effect to near zero. The practical implication is not simply that ``larger pores'' are favorable,
-but that pairs classified by accessible-surface or accessible-volume contrast are
-strongly enriched in favorable high-pressure responses. Because several geometry
-descriptors often change together, this classification is an attribution label rather
-than evidence that one descriptor alone causes the uptake difference.
+Panels D and E supply the complementary structural counter-regimes. In D, $D_f$
+increases from approximately 9.51 to 11.51~\AA\ while crystal density is essentially
+unchanged, yet the 65-bar methane response is
+\SI{-0.460}{\milli\mole\per\gram} and the pair remains negative in both pressure
+regimes. In E, $D_i$ and $D_{\mathrm{if}}$ increase together
+($D_i\approx8.89\rightarrow10.72$~\AA), density again changes negligibly, and the
+pair is pressure suppressed with a primary response of
+\SI{-0.188}{\milli\mole\per\gram}. These cases are particularly useful because
+they separate the intuitive idea of a wider passage/cavity from the idea of a more
+favorable adsorption environment. Experimental methane work provides a parallel
+warning: deliberately filling pore space and reducing pore size in an IRMOF-8
+family improved volumetric uptake and deliverable capacity by changing both
+confinement and adsorption interactions \cite{tran2015porefilling}, while targeted
+mesopore engineering can be beneficial in a different high-pressure regime
+\cite{liang2017poregeometry}. The chemically meaningful lesson is therefore not
+``small pores are better'' or ``large pores are better'', but that the
+\emph{organization of usable pore space relative to the adsorption state point}
+matters.
 
-Second, the usefulness of a geometry change depends strongly on loading regime.
-This is physically consistent with the increasing importance of pore filling and
-confined-phase thermodynamics at high loading \cite{myers2002highpressure}, but the
-present analysis does not decompose those contributions into a unique microscopic
-mechanism.
-Across the nine paired low/high-pressure adsorption series, the median fraction of
-positive responses increased from 44.4\% at low pressure to 55.6\% at high
-pressure, and pressure-activated pairs were approximately 4.5 times as common as
-pressure-suppressed pairs. The strongest example was pre-combustion CO$_2$, for
-which 43.5\% of frozen pairs changed from a negative low-pressure response to a
-positive high-pressure response. Geometry should therefore be interpreted in
-relation to the thermodynamic regime in which pore filling occurs rather than as a
-condition-independent material attribute.
+Panel F plays a different role. Its dia pair comes from an
+experimental-source structural collection, has an AVA-led/co-dominant accessible
+space contrast, and shows only a small positive primary response
+(\SI{0.083}{\milli\mole\per\gram}). Its inclusion is valuable precisely because it
+does not maximize effect size: it anchors the visualization in crystallographic
+records associated with experimental-source structures. The adsorption values,
+however, remain simulated ARC--MOF outcomes. Panel F is therefore evidence of
+structural provenance, not experimental adsorption validation.
 
-Third, sufficiently large geometry changes can matter even outside the dominant
-ASA/AVA classes. Once ASA- and AVA-driven pairs were removed, the 10\% population
-showed almost no median response, but the prespecified 20 and 30\% contrast tiers
-recovered progressively positive effects. This indicates a distinction between
-geometry \emph{type} and geometry \emph{magnitude}: accessible-area and
-accessible-volume changes are favorable at moderate contrasts, whereas other pore
-changes require larger structural separation before a systematic high-pressure
-response emerges.
+Taken as a whole, \cref{fig:structures} connects the statistical result to a
+chemistry-facing picture without raising the evidential level. A pore network can
+change its surface-to-volume character, accessible void inventory, and
+characteristic passage dimensions in different proportions. Reticular chemistry
+makes such coupled changes natural because changing building-block dimensions,
+interpenetration, or network realization can reorganize several geometric
+properties at once \cite{furukawa2013chemistry,ji2020porechemistry}. The Figure 5
+insets help the reader see representative pore/channel environments, but they are
+not maps of adsorption density, measured apertures, or local energetic minima.
+Their purpose is to show why the global descriptor families in
+\cref{tab:descriptor-translation} and \cref{fig:primary} should not be collapsed
+into one visual notion of ``pore size''.
 
-Fourth, adsorption-capacity gains cannot be assumed to improve process
-performance. Methane-storage and pre-combustion working capacities increased on
-median, but selectivity decreased in every separation context with available
-values. The geometry direction favored by a high-loading uptake objective can
-therefore oppose the direction favored by a separation-selectivity objective.
-Geometry optimization should consequently be framed against the intended process
-metric rather than against uptake alone.
 
-Finally, the positive high-pressure result is not restricted to the dominant
-topologies. Simultaneous removal of pcu and fsc retained a clearly positive
-primary response, although the median magnitude decreased. Topology therefore
-modulates the prevalence of favorable and pressure-activated responses but does
-not define a single privileged architecture in which the effect exists. This
-supports transfer of the qualitative high-pressure result beyond the two largest
-topology classes while preserving the need for topology-specific expectations.
+\subsection{Source heterogeneity defines an applicability boundary, not a mechanism}
 
-Several observed counterexamples are essential to these rules: low-pressure
-CO$_2$ responses can oppose the high-pressure CH$_4$ response, diameter-driven
-pairs have slightly negative primary medians, and selectivity can decrease while
-working capacity increases. These results directly reject a universal
-``larger-pore-is-better'' interpretation.
+ARC--MOF combines several source collections that sample chemical and geometric
+design space unevenly. Such heterogeneity can, in principle, make a pooled trend
+depend on whichever source occupies the most favorable part of that space
+\cite{chung2014core,moosavi2020ecosystem}. Broad provenance and the post-freeze
+same-source analysis are documented in \SIsecs{12 and 18}. The leave-source-out results address
+that possibility at the level the data permit: removing each major source in turn
+retains a positive primary median, and the ASA/AVA population remains positive
+after removal of DB0 or DB5 (\SItab{20}--\SItab{21}). No single major source is
+therefore required for the positive population sign.
 
-These rules deliberately stop short of causal or atomistic interpretation. The
-matched families control recorded composition, chemistry-cluster assignments,
-topology, and dimensionality, but they do not constitute controlled mechanical
-deformations of one experimentally realized crystal. Likewise, the frozen driver
-descriptor identifies the largest measured geometric separation within a pair; it
-does not prove that this descriptor alone causes the adsorption difference.
-Accordingly, the central claim of this work is conditional: within tightly matched
-recorded MOF families, geometry-associated adsorption differences are reproducible
-and often substantial, but their direction depends on the form and magnitude of
-the geometry change, the adsorbate and pressure regime, and the process objective.
-The source-provenance analysis further shows that this conclusion is not created by
-one dominant ARC--MOF database, while also making clear that the present evidence
-is primarily evidence within hypothetical structure space rather than an
-experimental validation set.
+Source-specific effect size nevertheless varies strongly, and \SIfig{6} shows why
+the variation should be interpreted as sampled-space heterogeneity rather than a
+database-source mechanism. Among same-source populations with at least 100 pairs,
+DB5 has a median primary response of
+\SI{10.437}{\milli\mole\per\gram} and 99.4\% positive pairs, whereas DB6 has a
+median of \SI{-0.244}{\milli\mole\per\gram} and 34.2\% positive
+(\SItab{32}). Those populations differ simultaneously in geometry magnitude and
+class composition: the median maximum pair contrast is 0.958 for DB5 and 0.180 for
+DB6, while ASA/AVA-labelled pairs constitute 72.2\% and 8.0\%, respectively.
+Source identity is therefore entangled with the structural regimes being sampled.
+It is useful as a provenance/applicability label, but not as an explanatory causal
+variable.
+
+The more restrictive generalization boundary is experimental coverage
+(\SItab{19}). Of the 11,072 frozen pairs, 10,981 (99.2\%) are
+hypothetical--hypothetical, 82 are experimental--experimental, and 9 are mixed.
+The experimental--experimental subset is directionally consistent with the
+primary response (median \SI{0.355}{\milli\mole\per\gram}; 78.0\% positive), but
+its small size cannot support broad experimental transferability. The present
+evidence is therefore strongest as a statement about recurrent geometry-response
+regimes within the sampled ARC--MOF structure space. Experimental testing of
+purposefully chosen matched families remains the next route to determining how
+far those regimes generalize to synthesized, activated materials.
+
+
+\subsection{A regime-specific design rule emerges from the matched families}
+
+The combined evidence in
+\cref{fig:primary,fig:pressure,fig:archetypes,fig:structures} rejects a
+one-dimensional pore-maximization rule. A compact claim--evidence--boundary map is
+provided in \SItab{22}. At the primary high-pressure methane
+condition, accessible-area and accessible-volume classes are strongly enriched in
+favorable responses; the distinction from diameter classes survives cleaner
+descriptor dominance (\SIfig{4}) and remains visible after volumetric normalization
+(\SIfig{5}). The same structural direction can then move toward or away from
+favorable behavior as the adsorbate, pressure window, and process metric change.
+Figure 5 makes that statistical result crystallographically intuitive: ``geometry''
+is not one degree of freedom.
+
+A useful design description therefore needs at least five coordinates. The first is
+\emph{geometry mode}: accessible surface, accessible volume, and characteristic
+diameter answer different structural questions. The second is \emph{geometry
+magnitude}: the 20 and 30\% prespecified contrast tiers show that larger matched
+changes can matter even outside the ASA/AVA population. The third is
+\emph{structural coupling}: pore descriptors co-vary and the high-pressure response
+is strongly linked to crystal-density change. The fourth is the \emph{state point}:
+low- and high-loading endpoints do not preserve the same sign landscape. The fifth
+is the \emph{objective}: total uptake, working capacity, selectivity, and other
+process metrics reward different combinations of adsorption and release.
+
+This five-coordinate view reconciles several strands of methane-storage literature.
+Large-scale screening has long placed good methane performance in particular
+combinations of void fraction, surface area, pore size, adsorption energy, and
+density \cite{wilmer2012screening,fernandez2013qspr,
+gomezgualdron2014limits}. Pore-shape analyses show that different geometric classes
+can require different optimization strategies \cite{lee2017poregeometry};
+experiments demonstrate that both targeted pore enlargement
+\cite{liang2017poregeometry,song2026poreengineering} and deliberate pore filling
+\cite{tran2015porefilling} can be beneficial in different structural and operating
+contexts. Density and shaping further determine how gravimetric promise translates
+toward volumetric performance
+\cite{peng2013methane,korman2020lowpressure,connolly2019monolith}. The matched
+families add a complementary evidential layer: these distinctions recur after major
+recorded chemistry and broad architecture have been fixed before the primary
+outcome is inspected.
+
+The resulting design rule is deliberately conditional:
+
+\begin{quote}
+\emph{Optimize a pore-geometry regime for a specified adsorbate, loading window,
+density context, and process objective; do not maximize one scalar pore descriptor
+in isolation.}
+\end{quote}
+
+For the present matched population, accessible-space expansion is the dominant
+favorable regime for high-pressure methane capacity. That statement does not imply
+that every ASA/AVA increase is favorable, that diameter should be minimized, or
+that one can independently tune these descriptors in a real synthesis. It means
+that, under the recorded chemistry/architecture controls and within the sampled
+structure space, the recurring response is organized by geometry mode and operating
+context more strongly than by a universal ``larger-pore'' direction.
 
 
 \subsection{Scope and limitations}
 
-The analysis inherits the scope and assumptions of the underlying ARC--MOF
-simulation resource \cite{burner2023arcmof}. The reported adsorption responses are
-equilibrium simulation outcomes for recorded framework structures; they do not
-measure synthesis yield, activation success, defect populations, phase purity,
-mechanical stability, framework breathing, or kinetic transport. The underlying
-molecular simulations use classical interaction models and assigned partial
-charges, so force-field and charge-model uncertainty are not propagated through
-the matched-pair estimates. The geometry descriptors likewise summarize pore
-accessibility and size but do not uniquely specify local adsorption-site energetics.
+The strength of the matched-family design is also the source of its principal
+boundary: it controls a recorded representation, not every microscopic chemical
+degree of freedom. Whole-CIF elemental composition, metal-element composition,
+ARC--MOF chemistry-cluster assignments, recorded topology, and dimensionality are
+held fixed, but no bond graph, oxidation state, linker identity, node identity, or
+local coordination environment is reconstructed. The matched pairs are therefore
+not controlled mechanical deformations of a single crystal, and the
+largest-contrast descriptor remains an attribution label within correlated pore
+changes rather than a causal perturbation.
 
-The pressure analysis is based on the discrete pressure conditions available in the
-ARC--MOF tables. Terms such as ``pressure activated'' therefore describe a
-repeatable change in sign prevalence between the designated lower- and
-higher-pressure endpoints; they do not identify a continuous thermodynamic
-transition pressure. Similarly, process metrics are derived equilibrium-screening
-quantities and should not be interpreted as complete process simulations.
+The adsorption evidence inherits the scope of ARC--MOF
+\cite{burner2023arcmof}. The reported values are equilibrium simulation outcomes
+for recorded structures; they do not include synthesis probability, activation
+success, defects, phase mixtures, structural breathing not represented by the
+record, kinetic transport, or long-term stability. Classical interaction models and
+assigned charges introduce force-field and electrostatic uncertainty that is not
+propagated through the family bootstrap. The database-specific limitations and full
+interpretive boundary are documented in \SIsecs{20 and 22}, with the reproducibility
+audit in \SIsec{21}.
 
-Database composition is an additional limitation. Although leave-source-out tests
-show that no major ARC--MOF source is required for the positive high-pressure
-response, 99.2\% of the frozen pairs connect two hypothetical frameworks. The
-experimental--experimental subset contains only 82 pairs. Consequently, the
-database-wide and source-robust conclusions are strongest as statements about the
-sampled ARC--MOF structure space, while experimental generalization requires
-targeted validation in synthesized, activated, and structurally characterized
-families.
+Operating-condition conclusions are similarly bounded by the available data grid.
+``Pressure activated'' and ``pressure suppressed'' classify changes in majority
+sign between designated lower- and higher-pressure endpoint sets; they do not
+identify a continuously resolved crossover pressure or a kinetic pressure-induced
+transition. The process metrics are equilibrium screening quantities rather than
+complete cyclic-process simulations. Likewise, the v/v robustness result is a
+crystallographic/database uptake-basis check, not packed-bed, pellet, monolith, or
+tank-level deliverable performance.
+
+Finally, transferability to experiment remains the largest open question. Because
+99.2\% of the frozen pairs are hypothetical--hypothetical, Figure 5F and the small
+experimental--experimental subset provide provenance context rather than validation.
+The most informative experimental follow-up would be a deliberately chosen set of
+chemistry- and architecture-matched frameworks spanning accessible-space and
+diameter regimes, measured at multiple loading conditions and reported on both
+gravimetric and physically relevant volumetric bases. Such a study would test the
+regime picture directly without changing the evidential status of the present
+computational result.
 
 \section{Methods}
 
-\subsection{Data sources, registry construction, and identifier harmonisation}
+\subsection{Data resources, identifier harmonisation, and structural parsing}
 
-The analysis uses the ARC--MOF framework inventory, geometric descriptors,
-dimensionality assignments, topology and chemistry-cluster tables, charged CIF
-archive, RAC descriptors, adsorption records, and process tables
+The analysis used the ARC--MOF framework registry, charged CIF archive, geometric
+descriptors, topology and dimensionality assignments, RAC/chemistry-cluster tables,
+adsorption records, and process tables
 \cite{burner2023arcmof,willems2012zeopp,janet2017rac}. A canonical framework
-registry was constructed from the ARC--MOF subset of the geometric-property table.
-Source identifiers were normalized by explicit deterministic rules rather than row
-position. Each auxiliary source was joined through the canonical framework
-identifier, with duplicate keys, normalization collisions, unmatched identifiers,
-coverage, and schema requirements audited explicitly.
+registry was constructed before matching. Source identifiers were normalized by
+explicit deterministic rules rather than row order, and auxiliary sources were
+joined through the canonical identifier. Duplicate keys, normalization collisions,
+unmatched identifiers, source coverage, and required schemas were audited before
+the corresponding stage was treated as complete.
 
-\subsection{Charged-CIF chemistry extraction}
+Charged CIFs were parsed with pymatgen \cite{ong2013pymatgen} without primitive-cell
+reduction. The extraction recorded formula and elemental composition, normalized
+element fractions, metal-element composition, site count, cell volume and density,
+disorder/partial-occupancy information, oxidation-state evidence where explicitly
+present, and raw charge-tag metadata. Metal classification referred only to
+chemical element class and did not assert framework-node membership. Oxidation
+state, framework-connected linker identity, local coordination, bonds, and nodes
+were not inferred from the CIFs.
 
-The charged CIF archive was streamed without extraction. For each registry
-framework with CIF coverage, CIF bytes were associated with the canonical
-framework identifier and hashed for provenance. Structures were parsed with
-pymatgen \cite{ong2013pymatgen} without primitive-cell reduction. The extraction
-recorded formula and elemental composition, normalized element fractions,
-metal-element composition, site count, cell volume and density,
-disorder/partial-occupancy flags, oxidation-state evidence, and raw charge-tag
-metadata. Metal classification refers only to element class and does not assert
-framework-node membership. No bonds, framework-connected linkers, or nodes were
-inferred.
+\subsection{Recorded-chemistry and architecture matching}
 
-\subsection{Candidate same-recorded-chemistry families}
+The recorded-chemistry signature contained five components: scale-invariant
+whole-CIF elemental composition, scale-invariant metal-element composition, and the
+ARC--MOF metal-, linker-, and functional-chemistry cluster assignments. Eligibility
+required a successful and internally consistent CIF parse, an ordered structure,
+at least one metal element, complete RAC evidence, and valid nonnegative
+chemistry-cluster labels. Negative cluster assignments were treated as unique and
+were never grouped. Mixed-metal structures were retained only when normalized
+whole-CIF composition, metal-element composition, and all three chemistry-cluster
+assignments matched. Geometry, topology, dimensionality, geometric-cluster
+identity, partial charges, adsorption outcomes, and process outcomes were excluded
+from the chemistry signature.
 
-The chemistry signature comprised scale-invariant whole-CIF elemental composition,
-scale-invariant metal-element composition, and ARC--MOF metal-, linker-, and
-functional-chemistry cluster assignments. Eligibility required a successful and
-internally consistent CIF parse, one ordered structure, at least one metal element,
-complete RAC evidence, and valid nonnegative chemistry-cluster labels. Negative
-cluster assignments were treated as unique and were never grouped. Mixed-metal
-structures were retained only when normalized whole-CIF and metal-element
-compositions and all three chemistry-cluster assignments matched. Topology,
-dimensionality, geometric-cluster identity, measured geometry, partial charges, and
-adsorption/process outcomes were excluded from the chemistry signature.
-
-\subsection{Same-recorded-architecture refinement}
-
-Architecture was refined after chemistry families were frozen. The architecture key
-consisted of chemistry-family identifier, recorded topology, and recorded
+Architecture was refined only after chemistry families were fixed. The architecture
+key consisted of chemistry-family identifier, recorded topology, and recorded
 dimensionality. Missing topology or dimensionality was treated as ambiguous rather
-than imputed. No CIFs were reparsed, no bonds were inferred, and no
-local-environment algorithm was used. Measured geometry did not enter the
-architecture key. Recorded topology was treated as a practical coarse network label
-consistent with automated topological-identification practice
-\cite{zoubritzky2022crystalnets}.
+than imputed, and measured geometry did not enter the architecture key. No CIF was
+reparsed to infer a replacement network label. Recorded topology was therefore used
+as a practical coarse architectural descriptor rather than as proof of complete
+atom-by-atom structural identity \cite{zoubritzky2022crystalnets}.
 
-\subsection{Geometry variation, threshold selection, and pair construction}
+\subsection{Geometry threshold and deterministic pair construction}
 
-For each validated architecture group, geometry was described using unit-cell
-volume, density, ASA, AVA, AVAf, POAVA, POAVAf, $D_i$, $D_f$, and
-$D_{\mathrm{if}}$. Scientific thresholding used only the eight pore descriptors,
-excluding unit-cell volume and density. For descriptor $x$, the family fractional
-span was
+Ten structural quantities were retained descriptively: unit-cell volume, density,
+ASA, AVA, AVAf, POAVA, POAVAf, $D_i$, $D_f$, and $D_{\mathrm{if}}$.
+Scientific thresholding used only the eight pore descriptors, excluding unit-cell
+volume and density. For descriptor $x$, the within-family fractional span was
 \[
 \Delta_{\mathrm{rel}}(x)=
 \frac{x_{\max}-x_{\min}}
 {\max\left(|x_{\min}|,|x_{\max}|\right)}.
 \]
 Candidate thresholds of 5, 10, 20, and 30\% were evaluated without reading
-adsorption/process outcomes. The 10\% threshold was frozen before pair construction;
-20 and 30\% were retained as stronger-contrast sensitivity tiers.
+adsorption or process outcomes. The 10\% threshold was frozen as the primary
+geometry criterion before pair construction; the 20 and 30\% thresholds were
+retained as stronger-contrast sensitivity tiers.
 
-Within each 10\%-eligible family, all unordered framework pairs were enumerated.
+Within each 10\%-eligible family, every unordered framework pair was enumerated.
 For pore descriptor $k$, the pairwise relative difference was
 \[
 d_k(i,j)=
@@ -712,247 +1074,206 @@ d_k(i,j)=
 with zero assigned when both values were zero. The selected pair maximized
 $D_{\max}(i,j)=\max_k d_k(i,j)$. Ties were resolved by the larger mean
 eight-descriptor difference and then lexicographically by framework identifier.
-Exactly one pair was retained per family. The descriptor attaining $D_{\max}$ was
-stored as the frozen pair driver and later used to orient the pair from lower to
-higher driver-descriptor value.
+Exactly one pair was frozen per eligible family. The descriptor attaining
+$D_{\max}$ was retained as the pair's largest-contrast geometry label and later
+used to orient the pair from its lower to its higher descriptor value. No outcome
+entered pair selection or orientation.
 
-\subsection{Outcome inventory and confirmatory endpoint freezing}
+\subsection{Outcome inventory, primary endpoint, and uncertainty}
 
-Before outcome values were read, the adsorption/process schemas and framework
-coverage were inventoried using only identifier and condition metadata. The nine
-adsorption tables contained two pressure conditions each and covered all 22,144
-frozen pair members at nearly all conditions. The process table covered 22,080
-frozen members, corresponding to 11,008 complete pairs per process.
-
-The confirmatory endpoint was frozen as CH$_4$ uptake at 298 K and 65 bar in
-\si{\milli\mole\per\gram}. The pair orientation was the already-frozen
-driver-low to driver-high direction. No imputation was permitted; a pair
-contributed only if both members had observed values. The primary pair effect was
+Before adsorption values were inspected, outcome schemas and framework coverage
+were inventoried using identifier and condition metadata only. The confirmatory
+endpoint was then frozen as CH$_4$ uptake at 298 K and 65 bar in
+\si{\milli\mole\per\gram}. A pair contributed only if both members had observed
+values; no imputation was used. The primary signed effect was
 \[
-\Delta q=q_{\mathrm{high}}-q_{\mathrm{low}}.
+\Delta q=q_{\mathrm{high}}-q_{\mathrm{low}},
 \]
-The primary population estimator was the median $\Delta q$ across frozen families.
-No minimum ``practically meaningful'' uptake difference was prespecified; the
-confirmatory target was the magnitude and sign of the family-level median under
-the frozen endpoint and pair definition. Uncertainty was estimated with a
-nonparametric percentile bootstrap that resampled whole frozen families 10,000
-times using a fixed random seed of 17. This bootstrap quantifies variation across
-matched families; it does not propagate the per-framework Monte Carlo sampling
-uncertainty reported by the source simulations. The 20 and 30\% geometry tiers were
-prespecified sensitivity populations.
+where high and low refer to the already-frozen orientation of the pair-specific
+largest-contrast geometry label. The population estimator was the median
+$\Delta q$ across frozen families. Uncertainty was estimated by nonparametric
+percentile bootstrap, resampling whole matched families 10,000 times with fixed
+seed 17. This interval quantifies variation across matched families and does not
+propagate the per-framework Monte Carlo sampling uncertainty of the source
+simulations.
 
-Supporting same-endpoint summaries included the mean signed difference, fraction
-of positive pairs, signed symmetric relative effect,
+Supporting same-endpoint summaries included the mean signed difference,
+positive-pair fraction, and signed symmetric relative effect,
 \[
 r_{\mathrm{sym}}=
 \frac{2(q_{\mathrm{high}}-q_{\mathrm{low}})}
 {|q_{\mathrm{high}}|+|q_{\mathrm{low}}|},
 \]
-with zero assigned when both uptakes were zero, and the log uptake ratio where both
-values were strictly positive.
+with zero assigned when both values were zero. The 20 and 30\% geometry tiers were
+prespecified sensitivity populations. No minimum practically meaningful uptake
+difference was prespecified.
 
-\subsection{Secondary adsorption and process analyses}
+\subsection{Secondary adsorption, process, and cross-condition analyses}
 
-After completion and audit of the confirmatory analysis, the remaining adsorption
-and process outcomes were treated as secondary/exploratory. Pair identities,
-orientation, geometry threshold, and primary endpoint were not changed.
-Adsorption endpoints included \si{\milli\mole\per\gram}, v/v, wt\%, heat of
-adsorption, and mixture selectivity where available. Process endpoints included
-uptake, working capacity, selectivity, purity, SSP, and AFM. For every secondary
-endpoint the signed effect was calculated using the same frozen direction,
-$\Delta=y_{\mathrm{high}}-y_{\mathrm{low}}$, together with the symmetric relative
-effect. These analyses were descriptive/exploratory rather than a family of
-confirmatory null-hypothesis tests; no multiplicity-adjusted significance testing
-was used, and no secondary endpoint was promoted to confirmatory status after value
-inspection. The complete audited secondary summaries are reported in the
-Supporting Information rather than only the subsets used in main-text figures.
+After completion and audit of the primary analysis, the remaining adsorption and
+process outcomes were treated as secondary or exploratory while preserving pair
+membership and orientation. Adsorption endpoints included
+\si{\milli\mole\per\gram}, v/v, wt\%, heat of adsorption, and mixture selectivity
+where available. Process endpoints included uptake, working capacity, selectivity,
+purity, SSP, and AFM. For every secondary endpoint the signed effect used the same
+frozen direction, $\Delta=y_{\mathrm{high}}-y_{\mathrm{low}}$. These analyses
+were descriptive rather than a family of confirmatory hypothesis tests; no
+secondary endpoint was promoted to confirmatory status after value inspection and
+no multiplicity-adjusted significance claim was made.
 
-\subsection{Cross-condition concordance and response archetypes}
+For cross-condition analysis, the 18 \si{\milli\mole\per\gram} adsorption
+endpoints were assembled into one pair-level effect matrix. Each endpoint was
+compared with the primary 65-bar CH$_4$ response by Spearman correlation, sign
+agreement, and positive fraction. Within each source/guest series, the lower- and
+higher-pressure endpoints were also compared directly. Across the nine lower- and
+nine higher-pressure endpoints, a pair was defined as majority positive within a
+regime when strictly more than half of its observed effects were positive. Four
+deterministic response archetypes were then assigned: positive in both regimes,
+pressure activated, pressure suppressed, and negative in both. Geometry-class- and
+topology-specific archetype frequencies were computed without redefining pair
+membership.
 
-For cross-condition analysis, the 18 \si{\milli\mole\per\gram} adsorption endpoints
-were arranged as one pair-level effect matrix. Each endpoint was compared with the
-primary 65-bar CH$_4$ response using Spearman correlation, sign agreement, positive
-fraction, and directional sign-transition frequencies. Within each source/guest
-series, the lower-pressure endpoint was compared directly with its higher-pressure
-counterpart.
+\subsection{Robustness, provenance, and structural case selection}
 
-The nine lower-pressure and nine higher-pressure endpoints were then summarized per
-frozen pair. A pair was ``majority positive'' within a regime when strictly more
-than half of its observed endpoint effects were positive. Four deterministic
-archetypes were defined: positive in both regimes; pressure-activated (not majority
-positive at low pressure but majority positive at high pressure);
-pressure-suppressed (the reverse); and negative in both regimes. The activation
-score was the high-pressure positive fraction minus the low-pressure positive
-fraction. Driver- and topology-specific archetype frequencies were calculated
-without redefining pair membership.
+Topology- and largest-contrast-class removal analyses preserved the frozen pair
+catalogue, orientation, endpoint, and estimand. Geometry-attribution stability
+ranked the eight pairwise pore-descriptor differences within every frozen pair and
+compared the largest with the second largest. Top-1/top-2 dominance cuts of 1.10,
+1.25, and 1.50 were applied without reselecting pairs, and summaries were examined
+both pooled and by largest-contrast geometry class.
 
-
-\subsection{Database-provenance robustness}
+Uptake-basis robustness first required exact reproduction of the frozen
+\si{\milli\mole\per\gram} pair effects and then evaluated the same orientation
+using the source v/v and wt\% fields. Density-effect correlations, density-quintile
+summaries, and ASA/AVA versus non-ASA/AVA volumetric summaries were treated as
+descriptive robustness checks, not as new matching variables or confirmatory
+estimands. Density was therefore not retrospectively added to the matching key or
+regressed away after outcome inspection.
 
 ARC--MOF source provenance was recovered from the \texttt{DBx-} prefix encoded in
-each frozen framework identifier, following the source mapping reported for the
-database \cite{burner2023arcmof}. DB12 and DB14 were treated as experimental-source
-collections, whereas DB0, DB1, DB2, DB3, DB4, DB5, DB6, DB7, DB8, DB10, DB13,
-and DB15 were treated as hypothetical/computationally generated sources. Each
-frozen pair was classified as same-source or cross-source and as
-hypothetical--hypothetical, experimental--experimental, or mixed provenance.
+framework identifiers following the source mapping of the database
+\cite{burner2023arcmof}. Each frozen pair was classified as same-source or
+cross-source and by hypothetical/experimental source category. For source
+populations represented in at least 100 frozen pairs, leave-one-source-out and
+same-source summaries were used as descriptive applicability tests. Source labels
+were not interpreted causally because database provenance is correlated with
+structure-generation protocol, chemical space, and geometry distributions.
 
-For each source represented in at least 100 frozen pairs, a leave-one-source-out
-stress test removed every pair for which either member came from that source and
-recomputed the frozen primary summaries without changing pair definitions or
-orientation. The same analysis was repeated within the ASA/AVA-driven population
-because the preceding robustness analysis identified those driver classes as the
-main contributors to the pooled 10\% response. These analyses were descriptive
-robustness tests; source labels were not interpreted as causal variables because
-database provenance is correlated with structure-generation protocol, chemical
-space, and geometry distributions.
-
-
-\subsection{Post-freeze submission robustness and structural case selection}
-
-Three additional robustness analyses were performed after the frozen confirmatory
-and secondary workflow had been completed. None changed pair membership, pair
-orientation, geometry thresholds, endpoint definitions, or estimands. Geometry-attribution
-stability ranked the eight frozen pairwise descriptor differences within each pair
-and compared the largest difference with the second largest. Prespecified dominance
-cuts of 1.10, 1.25, and 1.50 were applied to the top-1/top-2 ratio, and the frozen
-primary CH$_4$ summaries were recomputed within each retained subset.
-
-Uptake-basis robustness re-linked the same frozen pairs to the 298 K, 65 bar methane
-records and first required exact reproduction of the frozen \si{\milli\mole\per\gram}
-pair effects. The same orientation was then used for the v/v and wt\% fields, with
-family-level medians, positive fractions, and 10,000-replicate percentile bootstrap
-intervals calculated on each basis. Density-stratified summaries were treated as
-descriptive checks rather than new confirmatory estimands.
-
-Source-stratified analysis was restricted to same-source frozen pairs and reported
-source populations with at least 100 pairs. For each source, the primary response,
-maximum geometry-contrast distribution, and ASA/AVA composition were summarized
-together so that source heterogeneity was not interpreted without its accompanying
-geometry-space differences.
-
-Six structural examples were selected deterministically from the already-frozen
-pair catalogue for visualization only: pressure-activated ASA, pressure-activated
-AVA, positive-both accessible-space, negative-both diameter, pressure-suppressed,
-and experimental-source strata. Selection targeted representative cases within each
-predeclared stratum rather than the largest adsorption effect, and no pair was used
-for more than one panel. The 12 corresponding CIFs were extracted with SHA256
-checksums for downstream rendering; these examples do not alter the population-level
-analysis.
+Six structural examples were selected deterministically from predeclared
+response/geometry strata only after the population analyses were frozen. No pair
+was reused across panels. The corresponding 12 CIFs were extracted with SHA256
+checksums for visualization; these examples do not alter or supplement the
+population-level estimands.
 
 \subsection{Audit and reproducibility}
 
-Every completed stage wrote a manifest and deterministic framework-, group-, pair-,
-or endpoint-level tables. Independent audit scripts reconstructed target sets,
-grouping keys, group sizes, exclusions, source hashes, threshold flags, pair
-optimality, outcome linkage, bootstrap results, secondary effect arithmetic,
-cross-condition matrices, archetype assignments, dominant-context stress tests,
-and database-provenance labels and leave-source-out summaries. The final audits confirmed
-that chemistry and architecture definitions were fixed before geometry
-thresholding, pair membership was fixed before outcome access, the confirmatory
-endpoint was frozen before reading values, and all later secondary analyses
-preserved these choices.
+Every completed stage produced deterministic framework-, family-, pair-, or
+endpoint-level tables together with provenance manifests. Independent audit scripts
+reconstructed grouping keys, exclusions, threshold flags, pair optimality, outcome
+linkage, bootstrap summaries, cross-condition matrices, archetype assignments,
+robustness subsets, source labels, and selected structural cases. The audit verified
+the temporal ordering central to the design: chemistry and architecture were fixed
+before geometry thresholding; pair membership and orientation were fixed before
+outcome access; the primary endpoint was frozen before its values were inspected;
+and all later analyses preserved those choices. Full procedural detail, closure
+tables, and secondary results are reported in the Supporting Information. The
+claim--evidence map is \SItab{22}; the complete secondary adsorption and process
+closures are \SItab{23}--\SItab{24}; and the source/code map is \SItab{25}
+(\SIsecs{13--15 and 21}).
 
 \section{Conclusions}
 
-Outcome-blind matching provides a large controlled comparison set for separating
-geometry-associated adsorption changes from simultaneous changes in recorded
-chemistry and broad architecture. From 279,019 ARC--MOF records, the workflow
-ultimately produced 11,072 frozen geometry pairs comprising 22,144 unique
-frameworks. At the prespecified high-pressure methane endpoint, moving from the lower to
-the higher value of the frozen pair-specific largest-contrast geometry descriptor was associated with a
-median uptake increase of
-\SI{0.584}{\milli\mole\per\gram}, with a narrow family-bootstrap interval and
-70.5\% of pairs positive. Stronger geometry contrasts produced substantially larger
-and more consistently positive responses.
+By constructing 11,072 outcome-blind matched MOF pairs, this study asks a controlled
+question that conventional database-wide screening does not: what pore-geometry
+response remains after major recorded chemistry and broad architectural differences
+are fixed before the primary adsorption values are inspected? At 298 K and 65 bar,
+the answer is a clear positive population response for methane, with a median
+$\Delta q$ of \SI{0.584}{\milli\mole\per\gram} and 70.5\% positive pairs, but the
+average conceals strong structural heterogeneity.
 
-The favorable high-pressure response is robust to topology composition but not
-universal across geometry classes. Simultaneous removal of pcu and fsc left only
-2,191 pairs yet retained a clearly positive median response of
-\SI{0.295}{\milli\mole\per\gram}. In contrast, removal of ASA- and AVA-driven pairs
-reduced the 10\% primary-tier response to near zero. This identifies ASA/AVA-labelled contrasts as the pair classes most strongly
-enriched in the pooled high-pressure methane response, without assigning an isolated
-causal role to either descriptor. Other geometry classes are not uniformly
-inactive, however: among non-ASA/AVA pairs, the $\geq30\%$ contrast tier still
-showed a median increase of \SI{0.718}{\milli\mole\per\gram} and 65.3\% positive
-pairs.
+The decisive result is not simply that ``geometry matters''. Accessible-surface-area
+and accessible-volume regimes are strongly favorable, whereas diameter-dominated
+regimes have slightly negative medians at the primary 10\% tier. That separation
+survives cleaner top-1/top-2 attribution filters, showing that it is not erased when
+the largest geometry contrast is more clearly distinguished from the other pore
+descriptors. At the same time, the pooled response outside ASA/AVA approaches zero
+at 10\% but becomes increasingly favorable at the 20 and 30\% contrast tiers, so
+geometry mode and geometry magnitude must be considered separately.
 
-Operating condition remains equally important. Low-pressure CH$_4$ responses were
-weak, several low-pressure CO$_2$ conditions were unfavorable, and selectivity
-often decreased even when high-loading capacity improved. Across the full set of
-low/high-pressure adsorption comparisons, pressure activation was approximately
-4.5 times as common as pressure suppression. The resulting design picture is
-therefore conditional: ASA/AVA-labelled contrasts are most consistently associated
-with favorable high-pressure uptake in this cohort, sufficiently large contrasts in
-other geometry classes can also be favorable, and capacity gains cannot be assumed
-to translate into better separation metrics.
+The uptake-basis and pressure analyses add two further boundaries to any design
+rule. The positive population sign survives on a volumetric basis, but the strong
+coupling between density change and gravimetric response shows that pore space and
+framework density are not independent scalar knobs. Across operating conditions,
+pressure activation is about 4.5 times more common than pressure suppression, and
+the same frozen pair can shift from neutral or unfavorable at low loading to
+favorable at higher loading. Capacity gains can also oppose selectivity. These
+findings align with prior evidence that methane storage is governed by coupled
+porosity, density, binding, and operating-window effects
+\cite{gomezgualdron2014limits,korman2020lowpressure,song2026poreengineering}, but
+show that the same regime dependence persists inside chemistry- and architecture-
+matched families.
 
-Submission-stage checks further show that the positive high-pressure response survives volumetric
-normalization, whereas increasingly isolated single-descriptor contrasts show a much weaker pooled
-response. This reinforces a multidimensional pore-change interpretation rather than a causal
-single-descriptor rule. Source-stratified effects are likewise heterogeneous because ARC--MOF
-source populations occupy different geometry regimes.
-
-These results support a practical interpretation of pore geometry as an
-operating-condition-dependent design variable rather than a single monotonic
-descriptor. The positive primary sign survives removal of each major ARC--MOF
-source, and the ASA/AVA signal is likewise not confined to DB0 or DB5. At the same
-time, the cohort is overwhelmingly hypothetical, so this source robustness should
-not be confused with experimental validation. The family definitions remain
-representation-level controls rather than proof of atom-by-atom structural
-identity, and the observed contrasts should therefore be interpreted as
-geometry-associated differences within tightly matched recorded families rather
-than causal deformation experiments.
+We therefore propose a bounded materials-design view: pore geometry in MOFs should
+be treated as a multidimensional, operating-condition-dependent regime defined by
+geometry mode, geometry magnitude, coupled density context, and process objective,
+rather than as a scalar property to maximize. The matched-family design strengthens
+the evidential basis for that statement, but it does not convert association into a
+causal deformation experiment. The chemistry representation is not atom-by-atom
+identity, the largest-contrast descriptor is not an isolated causal variable, and
+99.2\% of the frozen pairs are hypothetical--hypothetical. The next decisive test is
+therefore targeted experimental validation in synthesized, activated, structurally
+characterized matched families spanning the accessible-space and diameter regimes
+identified here.
 
 \section*{Reproducibility}
 
-The complete analysis has been organized as a coauthor handover repository at
-\url{https://github.com/alimardani76/isochemical_mof}. The repository contains the
-stage-by-stage analysis scripts, independent audit scripts, frozen result tables,
-figure-production source code, final figures, manuscript and Supporting Information
-source, a software-environment lock, and file-level provenance manifests. The
-workflow is intended to be rerun sequentially: each analytical stage writes
-deterministic outputs and is followed by an independent reconstruction audit before
-the next stage is treated as complete.
+The complete analysis is organized in the public publication and reproducibility
+repository at \url{https://github.com/alimardani76/isochemical_mof}. The repository
+contains stage-by-stage analysis and audit scripts, frozen result tables,
+figure-production code, manuscript and Supporting Information source, environment
+information, and provenance manifests. Historical path-dependent scripts are
+accompanied by repository reproduction instructions; post-freeze submission-stage
+scripts accept explicit project/output paths.
 
-The reported results depend on frozen analytical definitions that should not be
-changed silently during reproduction: the recorded-chemistry key, recorded
-topology/dimensionality refinement, the 10\% primary geometry threshold, the
-deterministic one-pair-per-family rule, pair orientation, the confirmatory
-CH$_4$ endpoint at 298 K and 65 bar, the median family-level estimand, and the
-10,000-replicate bootstrap with seed 17. The repository-level
-\texttt{HANDOVER.md} documents these decisions, the final scientific results,
-known limitations, and the required downstream reruns if any frozen step is
-modified.
+The frozen definitions required to reproduce the reported analysis include the
+recorded-chemistry key, recorded topology/dimensionality refinement, 10\% primary
+geometry threshold, deterministic one-pair-per-family rule, pair orientation,
+CH$_4$ endpoint at 298 K and 65 bar, median family-level estimand, and the
+10,000-replicate bootstrap with seed 17. These choices should not be modified
+silently when regenerating figures or downstream summaries.
 
-Original ARC--MOF source data are not duplicated in the code repository. The
-analysis used ARC--MOF release v7 (Zenodo record 16802743), including the charged
-CIF archive and the topology, dimensionality, geometry, RAC/cluster, adsorption,
-and process tables described in the Supporting Information. Exact required source
-filenames, local source hashes, repository file hashes, and any large result files
-kept outside ordinary Git tracking are recorded under
-\texttt{data\_manifest/} and \texttt{provenance/}. Figures are regenerated from
-the frozen result tables using the plotting scripts in the repository and are not
-manually edited analytical outputs.
+Original ARC--MOF source data are not duplicated in the publication repository.
+The analysis used ARC--MOF release v7, available from Zenodo at
+\url{https://doi.org/10.5281/zenodo.16802743} \cite{burner2025arcmofdata},
+including the charged CIF archive and the topology, dimensionality, geometry,
+RAC/cluster, adsorption, and process tables described in the Supporting
+Information. The complete source-to-output/code map is reported in \SItab{25},
+and the final audit trail is summarized in \SIsec{21}. Required source filenames,
+local hashes, repository hashes, and large-file inventories are recorded under
+\texttt{data\_manifest/} and \texttt{provenance/}.
 
-\section*{Data and Code Availability}
+\section*{Data availability}
 
-ARC--MOF source data remain available through the cited ARC--MOF release and are
-subject to the original source-data terms. The Project 17 coauthor repository at
-\url{https://github.com/alimardani76/isochemical_mof} contains the analysis and
-audit code, compact reproducibility results, plotting source, final figures,
-manuscript/SI source, environment information, raw-data inventory, and SHA256
-provenance records. Files that are impractical for ordinary Git hosting are listed
-explicitly in the repository manifest and can be distributed separately through a
-release archive, Zenodo, institutional storage, or Git LFS as appropriate. A
-permanent public archival release can be created once the coauthors agree the
-manuscript version and data/code release terms.
+This study analysed publicly available ARC--MOF data from release v7, Zenodo DOI
+\url{https://doi.org/10.5281/zenodo.16802743}
+\cite{burner2025arcmofdata}. The upstream charged CIF archive and associated
+topology, dimensionality, geometric-property, RAC/chemistry-cluster, adsorption,
+and process tables are not redistributed in this repository and remain subject
+to the terms of the source release.
 
-% REQUIRED BEFORE SUBMISSION:
-% Add agreed CRediT author contributions.
-% Add the authors' verified competing-interests statement.
-% Add acknowledgements/funding/computing statement if applicable.
-% These items are intentionally not invented here.
+The frozen processed outputs required to verify the reported results, together
+with the analysis and independent-audit scripts, figure-generation code,
+source-data inventories and hashes, environment information, manuscript and SI
+source, and provenance records, are publicly available at
+\url{https://github.com/alimardani76/isochemical_mof}
+\cite{alimardaniabaei2026repository}. The scientific analysis and
+publication-figure checkpoint used for this manuscript pass is the immutable Git
+commit \texttt{88ec751e570c0519bc8f503732ccd74fc02f5f73}, available at
+\url{https://github.com/alimardani76/isochemical_mof/commit/88ec751e570c0519bc8f503732ccd74fc02f5f73}.
+The Supporting Information provides the complete claim--evidence and source/code
+maps (Tables S22--S25) and the audit trail. No separate DOI has been minted for
+the study repository at this checkpoint; the public Git commit above uniquely
+identifies the version used here.
 
 \clearpage
 \bibliographystyle{unsrtnat}
