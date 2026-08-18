@@ -1,55 +1,47 @@
 # Manuscript source
 
-This directory contains the publication-facing LaTeX sources for **Matched MOF Families Reveal Regime-Dependent Pore-Geometry Effects on Adsorption**.
-
-## Canonical files
-
-- `main.tex` — main manuscript
-- `SI.tex` — Supporting Information
-- `Project17_References.bib` — current verified bibliography checkpoint
-- `Project17_SI_closure_tables.tex` — generated complete-result closure tables
-
-The closure-table file is generated evidence and should not be manually edited to change numerical results.
+This directory contains the publication-facing source for **Matched MOF Families Reveal Regime-Dependent Pore-Geometry Effects on Adsorption**.
 
 ## Current checkpoint
 
-The repository copies of `main.tex`, `SI.tex`, `Project17_References.bib`, and `Project17_SI_closure_tables.tex` are synchronized to the current 2026-08-17 Overleaf checkpoint used for the publication-finalization workflow. The manuscript integrates redesigned Figures 1–4, the structural Figure 5, SI Figures S1–S6, the chemistry-facing descriptor table, and complete main-to-SI evidence navigation. The main text calls every SI Figure S1–S6 and Table S1–S33.
+As of **2026-08-18**, this directory is synchronized to the **Materials Horizons G2 candidate**.
 
-The scientific analysis remains frozen. Repository/manuscript editing at this stage is publication communication and packaging, not analytical reopening.
+- `main.tex` — PASS G1 Communication-level editorial compression, PASS B-final literature/self-citation integration, and the 156-word New Concepts paragraph added in PASS G2.
+- `SI.tex` — audited Supporting Information with the full S1–S33 table set, Figures S1–S6, post-freeze robustness sections, structural-case ledger, limitations, and audit trail.
+- `Project17_References.bib` — final PASS B reference checkpoint: 40 entries, all used in the main manuscript, with no duplicate DOI/title entries in the local forensic audit.
+- `Project17_SI_closure_tables.tex` — generated closure evidence; scientific values are not manually edited.
+- `submission/` — Materials Horizons-facing New Concepts statement, cover letter, title audit, submission checklist, positioning memo, and graphical-abstract/TOC brief.
 
-## Figure files
+## Scientific contract
 
-The Overleaf/release bundle places publication PDFs in a sibling `figures/` directory next to `main.tex`/`SI.tex`. The repository treats generated quantitative artwork as reproducible build/release products. Regenerate Figures 1–4 and S1–S6 with `figures/redesign/`; Figure 5 follows the separate structural workflow documented in `figures/source/` and `submission_upgrade/`.
-
-Exact publication-artifact hashes are recorded in `../PUBLICATION_ARTIFACTS.md`.
+The journal-facing passes do **not** alter the frozen scientific design. Pair membership/orientation, chemistry and architecture keys, the 10/20/30% geometry criteria, the CH4 298 K / 65 bar primary endpoint, family-median estimand, 10,000-replicate bootstrap with seed 17, post-freeze H2/H3/H6 definitions, and Figure 5 structural cases remain frozen.
 
 ## Compile
 
-With the current publication figure bundle present:
+The working sources use:
 
-```bash
-pdflatex main.tex
-bibtex8 main
-pdflatex main.tex
-pdflatex main.tex
-
-pdflatex SI.tex
-bibtex8 SI
-pdflatex SI.tex
-pdflatex SI.tex
+```latex
+\bibliography{Project17_References}
 ```
 
-The source contains figure fallbacks so the LaTeX can still be syntax-checked if a binary figure is absent, but that placeholder build is not the publication PDF.
+and the SI includes:
 
-## Release-level items still open
+```latex
+\input{Project17_SI_closure_tables.tex}
+```
 
-The manuscript source contains no submission TODO placeholder. The remaining items require verified author/owner decisions rather than scientific rewriting:
+The complete publication figure bundle is maintained separately from generated build products. For final submission, compile the native LaTeX sources with the exact publication figures and include the resulting manuscript/SI PDFs in the submission bundle.
 
-- final CRediT author contributions;
-- competing-interests declaration;
-- funding / acknowledgements / computing-resource statement;
-- repository license;
-- final tagged submission release and, if chosen, DOI-bearing archive;
-- replacement of the interim Git checkpoint in the Data Availability statement with the final release identifier at submission.
+## Remaining pre-submission items
 
-See `PASS_F_AUTHOR_CONFIRMATION.md` and `../PUBLICATION_STATUS.md`.
+These require author/owner confirmation or the final PASS H release process:
+
+1. CRediT / author-contribution statement;
+2. competing-interests declaration;
+3. funding / acknowledgements / computing-resource statement;
+4. repository license;
+5. final tagged submission release and DOI-bearing archive if approved;
+6. replacement of the interim Git identifier in Data Availability with the final released version;
+7. final Materials Horizons template/portal proof and submission ZIP.
+
+Do not invent or infer author attestations to close these items.
