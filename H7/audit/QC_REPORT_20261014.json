@@ -1,0 +1,119 @@
+{
+  "release_date": "2026-10-14",
+  "status": "FIGURE_ONLY_REGENERATED; ORIGINAL_SCIENCE_UNMODIFIED",
+  "source_checksums_verified": 27,
+  "original_results_unchanged": [
+    "pair_local_feature_changes.parquet",
+    "coverage_summary.csv",
+    "shap_feature_importance.csv",
+    "topology_grouped_model_comparison.csv",
+    "model_comparison.csv",
+    "cv_fold_metrics.csv",
+    "fingerprint_qc.csv",
+    "incremental_value_bootstrap.csv",
+    "framework_local_fingerprints.parquet",
+    "local_feature_coverage.csv",
+    "cv_predictions.csv",
+    "run_manifest.json"
+  ],
+  "original_analysis_source_unchanged": true,
+  "source_repository_archive": "isochemical_mof-main.zip",
+  "repo_frozen_inputs_sha256_match": {
+    "pairs": {
+      "path": "results/step2/03_geometry_pairs/primary_geometry_pairs.parquet",
+      "sha256": "83d4d6f4d937b6d6c57cdea43121748450d27f1af76016d0232ce8e3f006bb75",
+      "match": true
+    },
+    "effects": {
+      "path": "results/step3/04_primary_ch4_analysis/primary_ch4_pair_effects.parquet",
+      "sha256": "8a4b24e3c4a741f7935efc229c67646b96ba9e7d2c8d0cb5bc840c6869e0403f",
+      "match": true
+    },
+    "geometry": {
+      "path": "results/step2/01_geometry_variation/geometry_variation_frameworks.parquet",
+      "sha256": "49032c10f3039c9a35b3f2f78f0f0d12e616dd9e8b75415a66e21d963d0f99ca",
+      "match": true
+    }
+  },
+  "frozen_pairs": 11072,
+  "H7_model_pairs": 11065,
+  "frameworks_requested": 22144,
+  "frameworks_fingerprinted": 22137,
+  "unique_predictions_per_split": 11065,
+  "metric_rows_recomputed_from_saved_predictions": 30,
+  "fold_sizes": {
+    "random_5fold": [
+      2213,
+      2213,
+      2213,
+      2213,
+      2213
+    ],
+    "topology_grouped_5fold": [
+      4659,
+      4219,
+      1051,
+      653,
+      483
+    ]
+  },
+  "model_summaries": {
+    "random_5fold_combined": {
+      "spearman_mean": 0.8666159317519562,
+      "mae_mean": 0.6452595095935914,
+      "r2_mean": 0.9540283989539893
+    },
+    "random_5fold_geometry": {
+      "spearman_mean": 0.8639458603535445,
+      "mae_mean": 0.6723723444555406,
+      "r2_mean": 0.948468955837205
+    },
+    "random_5fold_local": {
+      "spearman_mean": 0.6542758571210204,
+      "mae_mean": 1.0924268502718484,
+      "r2_mean": 0.8339095642399361
+    },
+    "topology_grouped_5fold_combined": {
+      "spearman_mean": 0.7372313190387308,
+      "mae_mean": 0.8329673355121706,
+      "r2_mean": 0.7699196348046831
+    },
+    "topology_grouped_5fold_geometry": {
+      "spearman_mean": 0.748970249156576,
+      "mae_mean": 0.8356906449142821,
+      "r2_mean": 0.7726170997373705
+    },
+    "topology_grouped_5fold_local": {
+      "spearman_mean": 0.3257142519952451,
+      "mae_mean": 1.3476086002375274,
+      "r2_mean": 0.21542387723251774
+    }
+  },
+  "random_fold_spearman_increment": [
+    0.0020284717462741853,
+    0.0037679235051943927,
+    0.002035122864815664,
+    0.002509619924229267,
+    0.003009218951543602
+  ],
+  "topology_holdout_fold_spearman_increment": [
+    -0.004658173683130817,
+    -0.002888582498748793,
+    -0.030978964706539047,
+    -0.005709347586001612,
+    -0.014459582114805025
+  ],
+  "local_feature_count": 19,
+  "local_feature_missingness_percent": {
+    "dlocal_mean_tetrahedral_character": 85.46,
+    "dlocal_mean_square_planar_character": 85.46,
+    "dlocal_mean_octahedral_character": 93.0
+  },
+  "not_tested": [
+    "full CIF/CrystalNN refingerprinting",
+    "end-to-end LightGBM refitting",
+    "remote branch availability",
+    "final journal readiness",
+    "exact environment reconstruction"
+  ]
+}

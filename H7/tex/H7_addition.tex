@@ -1,0 +1,99 @@
+% Load in the preamble; place the two commands at the indicated manuscript locations.
+% \HSevenResults: after the Figure 5 structural-example subsection.
+% \HSevenMethods: immediately before Audit and reproducibility.
+\newcommand{\HSevenResults}{%
+\subsection{Local structural context adds little transferable rank information}
+
+The structural examples motivate a further question: can local atomic information
+explain differences in response beyond those captured by global pore descriptors?
+We addressed this after the pair catalogue was frozen, using the same high-minus-low
+orientation and primary CH$_4$ endpoint. Lightweight CrystalNN-derived descriptors
+summarized metal coordination, neighbour chemistry, bond-length variation, local
+order parameters and atomic-degree statistics. Fingerprinting succeeded for 22,137
+of 22,144 structures, leaving 11,065 pairs for an identical comparison of global
+geometry, local descriptors and their combination (\cref{fig:local-context}A--B).
+These models predict the within-pair uptake difference; they neither redefine the
+matching nor replace the primary population estimator.
+
+Under random five-fold cross-validation, mean Spearman correlation increased from
+0.8639 for geometry alone to 0.8666 for the combined representation, while mean
+absolute error decreased from \SI{0.6724}{\milli\mole\per\gram} to
+\SI{0.6453}{\milli\mole\per\gram}, a 4.0\% reduction. Both measures improved
+in each random fold. The local-only model was less predictive, with mean Spearman
+correlation 0.6543. The added rank information was therefore small relative to that
+already available from the eight pore descriptors and density.
+
+Holding out entire topology groups changed the comparison. Mean Spearman
+correlation was 0.7490 for geometry alone, 0.3257 for local descriptors, and 0.7372
+for their combination. The combined model had lower correlation in all five
+topology-held-out folds (\cref{fig:local-context}D). Mean absolute error changed
+only slightly, from \SI{0.8357}{\milli\mole\per\gram} to
+\SI{0.8330}{\milli\mole\per\gram}. Thus, the small random-CV improvement did
+not translate into improved rank prediction across held-out topologies.
+
+\mainfigure{Figure_6.pdf}{fig:local-context}
+  {Incremental predictive information from local structural context}
+  {(A) Frozen-pair feature differences; (B) geometry-only, local-only and combined
+   models; (C) held-out feature attribution; (D) within-fold incremental rank performance.}
+  {\HSevenCaption}
+
+Held-out SHAP attribution was dominated by density and pore descriptors
+(\cref{fig:local-context}C). Raw metal count was the highest-ranked local input,
+but its dependence on unit-cell representation prevents interpreting that
+attribution as a coordination mechanism. Moreover, tetrahedral and square-planar
+feature differences were unavailable for 85.5\% of usable pairs, and octahedral
+differences for 93.0\%; these values were imputed within training folds. The
+implemented metal--metal distance summary also excludes periodic copies of the
+same metal site. These representation limitations bound the conclusion: the
+implemented local fingerprint provides little additional transferable rank
+information for this endpoint, but the analysis does not establish that local
+coordination in general is uninformative. SHAP describes model use rather than
+causal adsorption mechanisms.
+
+
+}
+
+\newcommand{\HSevenMethods}{%
+\subsection{Post-freeze local structural descriptors and model comparison}
+
+The local-context analysis retained all 11,072 frozen pairs, the 10\% eligibility
+criterion, pair orientation, response archetypes and primary endpoint. Pymatgen's
+CrystalNN neighbour finder was applied to each required CIF with unweighted
+coordination numbers, \texttt{cation\_anion=False}, distance cutoffs (0.5, 1.0),
+electronegativity weight 1.5, porous adjustment enabled, and a
+\SI{4.5}{\angstrom} search cutoff. No oxidation states were assigned. The
+19 local inputs comprised metal count and fraction; mean and standard deviation
+of metal coordination number and metal--neighbour distance; mean per-metal
+bond-length coefficient of variation; O-, N- and S-neighbour fractions; mean
+absolute metal--neighbour electronegativity difference; mean tetrahedral,
+square-planar and octahedral order parameters where returned; atomic-degree mean,
+standard deviation and coefficient of variation; and mean and standard deviation
+of nearest distances between distinct metal-site indices. Bond-length variation
+was not treated as a complete measure of angular distortion.
+
+Each descriptor was converted to a high-minus-low difference. Three fixed LightGBM
+regressors used nine global inputs (eight pore descriptors plus density), 19 local
+inputs, or their 28-input union. The models used an absolute-error objective,
+400 trees, learning rate 0.035, at most 24 leaves and depth 6, a minimum of 40
+samples per leaf, feature-sampling fraction 0.85, L1/L2 penalties 0.10/0.50, and
+seed 17, without hyperparameter search or outcome-based neighbour tuning. All
+models used the same 11,065 pairs with successful fingerprints for both members.
+A predefined minimum coverage of 90\% at both framework and pair levels was
+exceeded; seven structures failed because Voronoi neighbours could not be found.
+No pairs were rematched or replaced.
+
+Evaluation used shuffled five-fold cross-validation (seed 17) and five-fold
+GroupKFold with recorded topology as the grouping variable. No framework appears
+in more than one frozen pair. Grouped test folds contained 4,659, 4,219, 1,051,
+653 and 483 pairs, respectively; the first four corresponded to pcu, fsc, nbo and
+sra, while the last combined the remaining 45 topologies. Missing feature values
+were imputed by training-fold medians, with zero used only when an entire training
+column was missing. Spearman correlation, mean absolute error and $R^2$ were
+computed on held-out pairs and summarized by arithmetic means and standard
+deviations across folds. TreeSHAP contributions were computed on held-out pairs
+using LightGBM's contribution output. The supplementary saved pair-bootstrap
+distribution uses 2,000 resamples of pooled out-of-fold predictions; it is a
+different statistic from mean fold Spearman and does not quantify uncertainty
+over newly sampled topology groups.
+
+}
