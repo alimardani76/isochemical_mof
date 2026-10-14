@@ -1,0 +1,67 @@
+{
+  "script": "20_local_coordination_context.py",
+  "completed_at_utc": "2026-09-08T23:35:47.201155+00:00",
+  "post_freeze": true,
+  "frozen_pair_count_expected": 11072,
+  "frozen_pair_membership_modified": false,
+  "pair_orientation_modified": false,
+  "geometry_threshold_modified": false,
+  "primary_endpoint_modified": false,
+  "primary_endpoint": "CH4 298 K 65 bar; delta_q_mmol_g = geometry-high minus geometry-low",
+  "random_seed": 17,
+  "cv_folds": 5,
+  "bootstrap_reps": 2000,
+  "coverage_gate": {
+    "framework": 0.9,
+    "pair": 0.9
+  },
+  "crystalnn": {
+    "weighted_cn": false,
+    "cation_anion": false,
+    "distance_cutoffs": [
+      0.5,
+      1.0
+    ],
+    "x_diff_weight": 1.5,
+    "porous_adjustment": true,
+    "search_cutoff": 4.5
+  },
+  "lightgbm": {
+    "objective": "regression_l1",
+    "n_estimators": 400,
+    "learning_rate": 0.035,
+    "num_leaves": 24,
+    "max_depth": 6,
+    "min_child_samples": 40,
+    "subsample": 0.85,
+    "colsample_bytree": 0.85,
+    "reg_alpha": 0.1,
+    "reg_lambda": 0.5,
+    "deterministic": true
+  },
+  "input_sha256": {
+    "pairs": "83d4d6f4d937b6d6c57cdea43121748450d27f1af76016d0232ce8e3f006bb75",
+    "effects": "8a4b24e3c4a741f7935efc229c67646b96ba9e7d2c8d0cb5bc840c6869e0403f",
+    "geometry": "49032c10f3039c9a35b3f2f78f0f0d12e616dd9e8b75415a66e21d963d0f99ca"
+  },
+  "archive": "ARCMOF_20241004.tar.gz",
+  "frameworks_requested": 22144,
+  "frameworks_fingerprinted_successfully": 22137,
+  "pairs_in_common_model_subset": 11065,
+  "outputs": [
+    "coverage_summary.csv",
+    "cv_fold_metrics.csv",
+    "cv_predictions.csv",
+    "fingerprint_qc.csv",
+    "framework_local_fingerprints.parquet",
+    "incremental_value_bootstrap.csv",
+    "local_feature_coverage.csv",
+    "model_comparison.csv",
+    "pair_local_feature_changes.parquet",
+    "shap_feature_importance.csv",
+    "topology_grouped_model_comparison.csv"
+  ],
+  "figure": "figure/Figure_6.pdf",
+  "analysis_code": "code/20_local_coordination_context.py",
+  "plot_code": "figure/make_figure6.py"
+}
