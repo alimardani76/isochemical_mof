@@ -74,43 +74,28 @@ def main():
     gs = fig.add_gridspec(2, 2, left=.085, right=.982, top=.935, bottom=.148,
                           wspace=.36, hspace=.40, width_ratios=[1.03, 1.08], height_ratios=[0.98, 1.16])
 
-    # A: simplified schematic, closer to the clean first version
+    # A: clean original-style schematic; intentionally free of text cards.
     ax = fig.add_subplot(gs[0, 0])
     panel_label(ax, 'A', x=-0.115, y=1.095, fontsize=14.2)
     ax.set_title('Post-freeze local-environment comparison', loc='left', pad=15)
     ax.set(xlim=(0, 1), ylim=(0, 1))
     ax.axis('off')
-    ax.text(.02, .92, 'Frozen matched pair', fontsize=8.5, fontweight='bold', color=GRAY, ha='left')
+    ax.text(.06, .91, 'Frozen matched pair', fontsize=8.3, fontweight='bold', color=GRAY)
 
-    left_x, right_x, y0 = 0.20, 0.80, 0.62
-    motif(ax, left_x, y0, 'low', scale=0.94)
-    motif(ax, right_x, y0, 'high', scale=0.94)
-    ax.annotate('', xy=(0.61, y0), xytext=(0.39, y0),
-                arrowprops={'arrowstyle': '-|>', 'lw': 1.35, 'color': INK, 'mutation_scale': 15})
-    ax.text(0.50, 0.72, 'same chemistry\n+ recorded architecture', ha='center', va='bottom', fontsize=7.0, color=GRAY)
-    ax.text(0.50, 0.57, 'paired feature changes', ha='center', va='top', fontsize=7.0, color=GRAY)
-    ax.text(left_x, 0.48, 'Geometry-low', ha='center', va='center', fontsize=8.5, fontweight='bold')
-    ax.text(right_x, 0.48, 'Geometry-high', ha='center', va='center', fontsize=8.5, fontweight='bold')
-    ax.text(0.50, 0.36, r'$\Delta x = x_{\mathrm{high}} - x_{\mathrm{low}}$', ha='center', va='center', fontsize=11.0, fontweight='bold')
-
-    box_y, box_h, box_w = 0.12, 0.12, 0.39
-    ax.add_patch(FancyBboxPatch((0.07, box_y), box_w, box_h,
-                                boxstyle='round,pad=0.012,rounding_size=0.018',
-                                linewidth=0.8, edgecolor=MID, facecolor=LIGHT_GRAY, zorder=0))
-    ax.add_patch(FancyBboxPatch((0.54, box_y), box_w, box_h,
-                                boxstyle='round,pad=0.012,rounding_size=0.018',
-                                linewidth=0.8, edgecolor=MID, facecolor=LIGHT_GRAY, zorder=0))
-    ax.text(0.095, box_y + 0.082, 'Global representation', ha='left', va='top',
-            fontsize=7.8, fontweight='bold', color=BLUE)
-    ax.text(0.095, box_y + 0.032, '8 pore descriptors + density', ha='left', va='top', fontsize=6.8, color=GRAY)
-    ax.text(0.565, box_y + 0.082, 'Local representation', ha='left', va='top',
-            fontsize=7.8, fontweight='bold', color=GREEN)
-    ax.text(0.565, box_y + 0.032, '19 metal-centred local features', ha='left', va='top', fontsize=6.8, color=GRAY)
-
-    ax.text(.50, 0.055, r'Target: $\Delta q$, CH$_4$ uptake at 298 K and 65 bar',
-            ha='center', va='center', fontsize=7.7, fontweight='bold')
-    ax.text(.50, 0.008, 'Conceptual schematic only  ·  final H7 comparison cohort: n = 11,065 pairs',
-            ha='center', va='bottom', fontsize=6.75, color=GRAY)
+    motif(ax, .255, .655, 'low', scale=.95)
+    motif(ax, .750, .655, 'high', scale=.95)
+    ax.annotate('', xy=(.585, .655), xytext=(.43, .655),
+                arrowprops={'arrowstyle': '-|>', 'lw': 1.25, 'color': INK, 'mutation_scale': 13})
+    ax.text(.255, .450, 'Geometry-low', ha='center', fontsize=8.3, fontweight='bold')
+    ax.text(.750, .450, 'Geometry-high', ha='center', fontsize=8.3, fontweight='bold')
+    ax.text(.5, .342, r'$\Delta x = x_{\mathrm{high}}-x_{\mathrm{low}}$',
+            ha='center', fontsize=10.6, fontweight='bold')
+    ax.text(.5, .232, '8 pore descriptors + density   |   19 local features',
+            ha='center', fontsize=7.7)
+    ax.text(.5, .128, r'Target: $\Delta q$, CH$_4$ (298 K, 65 bar)',
+            ha='center', fontsize=8.0)
+    ax.text(.5, .020, 'Conceptual metal-neighbor sketches  |  n = 11,065 pairs',
+            ha='center', fontsize=6.7, color=GRAY)
 
     # B: held-out predictive performance
     ax = fig.add_subplot(gs[0, 1])
